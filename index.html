@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, user-scalable=yes"/>
     <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700;800&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -560,9 +560,270 @@
     .wheel {
       animation: fadeIn 0.8s ease-out 0.2s backwards;
     }
+
+    /* ========== MOBILE ADAPTATION ========== */
+    @media (max-width: 768px) {
+      .app {
+        padding: 12px 8px;
+        gap: 10px;
+      }
+
+      header {
+        padding: 12px 14px;
+      }
+
+      .brand h1 {
+        font-size: 16px;
+      }
+
+      .brand .sub {
+        font-size: 11px;
+      }
+
+      .controls {
+        padding: 12px 14px;
+      }
+
+      .row {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .field {
+        min-width: unset;
+        width: 100%;
+      }
+
+      .field.small {
+        min-width: unset;
+      }
+
+      .segmented {
+        flex-direction: column;
+      }
+
+      .segmented button {
+        min-width: unset;
+        width: 100%;
+      }
+
+      .tiles {
+        flex-direction: column;
+      }
+
+      .tile {
+        min-width: unset;
+        width: 100%;
+      }
+
+      .weight {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 12px;
+      }
+
+      input[type="range"] {
+        width: 100%;
+      }
+
+      .num {
+        width: 100%;
+        text-align: center;
+        font-size: 18px;
+        padding: 12px;
+      }
+
+      .main {
+        grid-template-columns: 1fr;
+        gap: 10px;
+      }
+
+      .card {
+        padding: 12px 14px;
+      }
+
+      .wheel-wrap {
+        min-height: 380px;
+        padding: 10px;
+      }
+
+      .wheel {
+        width: min(380px, 100%);
+      }
+
+      .pointer {
+        top: 8px;
+        border-left: 10px solid transparent;
+        border-right: 10px solid transparent;
+        border-bottom: 18px solid var(--sandoz-dark-blue);
+      }
+
+      .center-badge {
+        font-size: 12px;
+        padding: 6px 10px;
+      }
+
+      .center-badge .pill {
+        font-size: 11px;
+        padding: 3px 6px;
+      }
+
+      .result h3 {
+        font-size: 16px;
+      }
+
+      .result .big {
+        font-size: 32px;
+      }
+
+      .result .line {
+        font-size: 13px;
+      }
+
+      .chips {
+        justify-content: flex-start;
+      }
+
+      .chip {
+        flex: 1;
+        min-width: 80px;
+      }
+
+      /* Модальное окно на мобильном */
+      .modal {
+        max-width: 95%;
+        padding: 18px;
+        max-height: 90vh;
+      }
+
+      .modal h3 {
+        font-size: 18px !important;
+      }
+
+      /* Drawer на мобильном */
+      .drawer {
+        width: 100%;
+        max-width: 100%;
+      }
+
+      .drawer header {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+      }
+
+      .drawer header > div:last-child {
+        flex-direction: row;
+        justify-content: space-between;
+      }
+
+      /* Улучшаем отступы для кнопок */
+      .btn {
+        padding: 10px 14px;
+        font-size: 13px;
+      }
+
+      .icon-btn {
+        height: 34px;
+        width: 34px;
+      }
+
+      /* Таблица в drawer */
+      .drawer table {
+        font-size: 12px;
+      }
+
+      .drawer th,
+      .drawer td {
+        padding: 8px 6px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .app {
+        padding: 8px 6px;
+      }
+
+      header {
+        padding: 10px 12px;
+      }
+
+      .brand h1 {
+        font-size: 14px;
+      }
+
+      .controls {
+        padding: 10px 12px;
+      }
+
+      .card {
+        padding: 10px 12px;
+      }
+
+      .wheel-wrap {
+        min-height: 320px;
+      }
+
+      .wheel {
+        width: min(320px, 100%);
+      }
+
+      .result .big {
+        font-size: 28px;
+      }
+
+      .modal {
+        padding: 15px;
+      }
+
+      /* Уменьшаем шрифты в модалке */
+      .modal h4 {
+        font-size: 14px !important;
+      }
+
+      .modal p,
+      .modal li {
+        font-size: 12px !important;
+      }
+    }
+
+    /* Landscape orientation на телефонах */
+    @media (max-width: 768px) and (orientation: landscape) {
+      .wheel-wrap {
+        min-height: 280px;
+      }
+
+      .wheel {
+        width: min(280px, 100%);
+      }
+
+      .main {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    /* Улучшаем touch targets для мобильных */
+    @media (hover: none) and (pointer: coarse) {
+      .segmented button,
+      .tile,
+      .chip,
+      .btn,
+      .icon-btn {
+        min-height: 44px;
+      }
+
+      input[type="range"] {
+        height: 44px;
+        padding: 15px 0;
+      }
+
+      input[type="number"] {
+        min-height: 48px;
+      }
+    }
   </style>
 </head>
-<body>
+<body class="touch-device">
   <div class="toast" id="toast">Скопировано</div>
 
   <div class="modal-backdrop" id="modalBackdrop" role="dialog" aria-modal="true" aria-label="Информация">
