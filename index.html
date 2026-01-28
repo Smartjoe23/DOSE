@@ -232,7 +232,59 @@
     }
     input[type="range"]{
       width: 280px;
+      height: 12px;
       accent-color: var(--sandoz-blue);
+      -webkit-appearance: none;
+      appearance: none;
+      background: transparent;
+      cursor: pointer;
+    }
+    
+    input[type="range"]::-webkit-slider-track {
+      width: 100%;
+      height: 12px;
+      background: linear-gradient(to right, var(--sandoz-blue) 0%, var(--sandoz-light-blue) 100%);
+      border-radius: 6px;
+    }
+    
+    input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 28px;
+      height: 28px;
+      background: white;
+      border: 3px solid var(--sandoz-blue);
+      border-radius: 50%;
+      cursor: grab;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.2);
+      margin-top: -8px;
+    }
+    
+    input[type="range"]::-webkit-slider-thumb:active {
+      cursor: grabbing;
+      transform: scale(1.1);
+    }
+    
+    input[type="range"]::-moz-range-track {
+      width: 100%;
+      height: 12px;
+      background: linear-gradient(to right, var(--sandoz-blue) 0%, var(--sandoz-light-blue) 100%);
+      border-radius: 6px;
+    }
+    
+    input[type="range"]::-moz-range-thumb {
+      width: 28px;
+      height: 28px;
+      background: white;
+      border: 3px solid var(--sandoz-blue);
+      border-radius: 50%;
+      cursor: grab;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.2);
+    }
+    
+    input[type="range"]::-moz-range-thumb:active {
+      cursor: grabbing;
+      transform: scale(1.1);
     }
     .num{
       width: 110px;
@@ -562,6 +614,34 @@
     }
 
     /* ========== MOBILE ADAPTATION ========== */
+    
+    @media (max-width: 768px) {
+      input[type="range"] {
+        width: 100%;
+        height: 16px;
+      }
+      
+      input[type="range"]::-webkit-slider-track {
+        height: 16px;
+        border-radius: 8px;
+      }
+      
+      input[type="range"]::-webkit-slider-thumb {
+        width: 36px;
+        height: 36px;
+        margin-top: -10px;
+      }
+      
+      input[type="range"]::-moz-range-track {
+        height: 16px;
+        border-radius: 8px;
+      }
+      
+      input[type="range"]::-moz-range-thumb {
+        width: 36px;
+        height: 36px;
+      }
+    }
     @media (max-width: 768px) {
       .app {
         padding: 12px 8px;
@@ -851,6 +931,12 @@
       pointer-events: none;
       z-index: 10;
       box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      animation: pulse-hint 2s ease-in-out infinite;
+    }
+    
+    @keyframes pulse-hint {
+      0%, 100% { opacity: 0.8; transform: translateX(-50%) scale(1); }
+      50% { opacity: 1; transform: translateX(-50%) scale(1.05); }
     }
     
     @media (max-width: 768px) {
@@ -4520,12 +4606,13 @@
         endDrag();
       });
       
-      // Touch events
+      // Touch events - improved for mobile
       rotor.addEventListener('touchstart', function(e) {
         if (e.touches.length === 1) {
           const touch = e.touches[0];
           startDrag(touch.clientX, touch.clientY);
           e.preventDefault();
+          e.stopPropagation();
         }
       }, { passive: false });
       
@@ -4534,15 +4621,21 @@
           const touch = e.touches[0];
           doDrag(touch.clientX, touch.clientY);
           e.preventDefault();
+          e.stopPropagation();
         }
       }, { passive: false });
       
-      document.addEventListener('touchend', function() {
-        endDrag();
+      document.addEventListener('touchend', function(e) {
+        if (isDragging) {
+          endDrag();
+          e.preventDefault();
+        }
       });
       
-      document.addEventListener('touchcancel', function() {
-        endDrag();
+      document.addEventListener('touchcancel', function(e) {
+        if (isDragging) {
+          endDrag();
+        }
       });
       
       // Mouse wheel scroll
