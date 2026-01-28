@@ -4491,175 +4491,102 @@
     // ---------- Kickoff ----------
     renderAll();
 
-    // ========== WHEEL INTERACTION - циклическое вращение ==========
+    // ========== WHEEL INTERACTION - вся область активна ==========
     (function() {
       let isDragging = false;
       let lastAngle = 0;
       let accumulatedRotation = 0;
-      let initialized = false;
-
-      // Reset wheel state when variant/drug changes
-      function resetWheelState() {
-        initialized = false;
-        accumulatedRotation = 0;
-      }
       
-      // Expose reset function globally for calling from renderAll
-      window.resetWheelRotation = resetWheelState;
-
+      const wheelWrapEl = document.querySelector('.wheel-wrap');
+      if (!wheelWrapEl) return;
       
       function getMouseAngle(clientX, clientY) {
-        const wheelEl = rotor.closest('.wheel');
-        if (!wheelEl) return 0;
-        
-        const rect = wheelEl.getBoundingClientRect();
+        const rect = wheelWrapEl.getBoundingClientRect();
         const centerX = rect.left + rect.width / 2;
         const centerY = rect.top + rect.height / 2;
-        
         const dx = clientX - centerX;
         const dy = clientY - centerY;
-        
-        // Return angle in degrees (-180 to 180)
         return Math.atan2(dy, dx) * (180 / Math.PI);
       }
       
       function normalizeAngleDelta(delta) {
-        // Normalize delta to -180 to 180 range
         while (delta > 180) delta -= 360;
         while (delta < -180) delta += 360;
         return delta;
       }
       
       function rotationToWeight(totalRotation) {
-        // Циклическое преобразование: любой угол → вес в диапазоне
-        // Normalize to 0-360 for mapping
         let normalized = ((totalRotation % 360) + 360) % 360;
-        
-        // Map 360 degrees to weight range cyclically
         const weightRange = DISPLAY_MAX - DISPLAY_MIN;
         let weight = DISPLAY_MIN + (normalized / 360) * weightRange;
-        
-        // Round to integer
-        weight = Math.round(weight);
-        
-        // Clamp to valid range
-        return Math.max(DISPLAY_MIN, Math.min(DISPLAY_MAX, weight));
+        return Math.max(DISPLAY_MIN, Math.min(DISPLAY_MAX, Math.round(weight)));
       }
       
       function startDrag(clientX, clientY) {
         isDragging = true;
         lastAngle = getMouseAngle(clientX, clientY);
-        
-        // Initialize accumulated rotation from current transform
-        // Re-sync on each drag start to handle external changes (slider, regime change)
         const transform = rotor.style.transform || 'rotate(0deg)';
         const match = transform.match(/rotate\(([^)]+)deg\)/);
         accumulatedRotation = match ? parseFloat(match[1]) : 0;
-        initialized = true;
-        
+        wheelWrapEl.style.cursor = 'grabbing';
         rotor.style.cursor = 'grabbing';
       }
       
       function doDrag(clientX, clientY) {
         if (!isDragging) return;
-        
         const currentAngle = getMouseAngle(clientX, clientY);
-        let deltaAngle = currentAngle - lastAngle;
-        
-        // Normalize delta to handle crossing -180/180 boundary
-        deltaAngle = normalizeAngleDelta(deltaAngle);
-        
-        // Update accumulated rotation (can be any value, positive or negative)
+        let deltaAngle = normalizeAngleDelta(currentAngle - lastAngle);
         accumulatedRotation += deltaAngle;
-        
-        // Calculate new weight from total rotation
-        const newWeight = rotationToWeight(accumulatedRotation);
-        
-        // Update weight through existing function
-        setWeight(newWeight, "wheel");
-        
+        setWeight(rotationToWeight(accumulatedRotation), "wheel");
         lastAngle = currentAngle;
       }
       
       function endDrag() {
         if (isDragging) {
           isDragging = false;
+          wheelWrapEl.style.cursor = 'grab';
           rotor.style.cursor = 'grab';
         }
       }
       
-      // Mouse events
-      rotor.addEventListener('mousedown', function(e) {
-        startDrag(e.clientX, e.clientY);
-        e.preventDefault();
-      });
+      // Mouse
+      wheelWrapEl.addEventListener('mousedown', (e) => { startDrag(e.clientX, e.clientY); e.preventDefault(); });
+      document.addEventListener('mousemove', (e) => { if(isDragging) { doDrag(e.clientX, e.clientY); e.preventDefault(); } });
+      document.addEventListener('mouseup', endDrag);
       
-      document.addEventListener('mousemove', function(e) {
-        if (isDragging) {
-          doDrag(e.clientX, e.clientY);
+      // Touch
+      wheelWrapEl.addEventListener('touchstart', (e) => {
+        if (e.touches.length === 1) {
+          startDrag(e.touches[0].clientX, e.touches[0].clientY);
           e.preventDefault();
         }
-      });
-      
-      document.addEventListener('mouseup', function() {
-        endDrag();
-      });
-      
-      // Touch events - fixed for mobile
-      let touchMoveHandler = null;
-      let touchEndHandler = null;
-      
-      rotor.addEventListener('touchstart', function(e) {
-        if (e.touches.length !== 1) return;
-        
-        const touch = e.touches[0];
-        startDrag(touch.clientX, touch.clientY);
-        
-        // Create handlers with closure
-        touchMoveHandler = function(evt) {
-          if (evt.touches.length !== 1) return;
-          const t = evt.touches[0];
-          doDrag(t.clientX, t.clientY);
-          evt.preventDefault();
-        };
-        
-        touchEndHandler = function(evt) {
-          endDrag();
-          document.removeEventListener('touchmove', touchMoveHandler);
-          document.removeEventListener('touchend', touchEndHandler);
-          document.removeEventListener('touchcancel', touchEndHandler);
-        };
-        
-        document.addEventListener('touchmove', touchMoveHandler, { passive: false });
-        document.addEventListener('touchend', touchEndHandler);
-        document.addEventListener('touchcancel', touchEndHandler);
-        
-        e.preventDefault();
       }, { passive: false });
       
-      // Mouse wheel scroll
-      const wheelWrap = document.querySelector('.wheel-wrap');
-      if (wheelWrap) {
-        wheelWrap.addEventListener('wheel', function(e) {
+      wheelWrapEl.addEventListener('touchmove', (e) => {
+        if (isDragging && e.touches.length === 1) {
+          doDrag(e.touches[0].clientX, e.touches[0].clientY);
           e.preventDefault();
-          
-          // Small increment/decrement
-          const delta = e.deltaY > 0 ? -1 : 1;
-          const newWeight = Math.max(DISPLAY_MIN, Math.min(DISPLAY_MAX, state.weight_kg + delta));
-          
-          setWeight(newWeight, "wheel");
-        }, { passive: false });
-      }
+        }
+      }, { passive: false });
       
-      // Initial setup
+      wheelWrapEl.addEventListener('touchend', (e) => { endDrag(); if(isDragging) e.preventDefault(); });
+      wheelWrapEl.addEventListener('touchcancel', endDrag);
+      
+      // Wheel
+      wheelWrapEl.addEventListener('wheel', (e) => {
+        e.preventDefault();
+        const delta = e.deltaY > 0 ? -1 : 1;
+        setWeight(Math.max(DISPLAY_MIN, Math.min(DISPLAY_MAX, state.weight_kg + delta)), "wheel");
+      }, { passive: false });
+      
+      // Setup
+      wheelWrapEl.style.cursor = 'grab';
+      wheelWrapEl.style.touchAction = 'none';
+      wheelWrapEl.style.userSelect = 'none';
+      wheelWrapEl.style.webkitUserSelect = 'none';
       rotor.style.cursor = 'grab';
-      rotor.style.userSelect = 'none';
-      rotor.style.webkitUserSelect = 'none';
       rotor.style.touchAction = 'none';
-      rotor.style.webkitTouchCallout = 'none';
-      rotor.style.khtmlUserSelect = 'none';
-      rotor.style.mozUserSelect = 'none';
-      rotor.style.msUserSelect = 'none';
+      rotor.style.userSelect = 'none';
     })();
 
   })();
