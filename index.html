@@ -2,12 +2,23 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, user-scalable=yes"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes, viewport-fit=cover">
     <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700;800&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
   <title>Sandoz KZ | Доз-карта (Wheel)</title>
   <style>
+        /* Убираем задержку touch в мобильных браузерах */
+    * {
+      -webkit-tap-highlight-color: transparent;
+      -webkit-touch-callout: none;
+    }
+    
+    html {
+      touch-action: manipulation;
+      -ms-touch-action: manipulation;
+    }
+    
     :root{
       /* Typography */
       --font: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -4557,17 +4568,21 @@
       // Touch
       wheelWrapEl.addEventListener('touchstart', (e) => {
         if (e.touches.length === 1) {
+          // Немедленный отклик
           startDrag(e.touches[0].clientX, e.touches[0].clientY);
           e.preventDefault();
+          e.stopPropagation();
+          e.stopImmediatePropagation();
         }
-      }, { passive: false });
+      }, { passive: false, capture: true });
       
       wheelWrapEl.addEventListener('touchmove', (e) => {
         if (isDragging && e.touches.length === 1) {
           doDrag(e.touches[0].clientX, e.touches[0].clientY);
           e.preventDefault();
+          e.stopPropagation();
         }
-      }, { passive: false });
+      }, { passive: false, capture: true });
       
       wheelWrapEl.addEventListener('touchend', (e) => { endDrag(); if(isDragging) e.preventDefault(); });
       wheelWrapEl.addEventListener('touchcancel', endDrag);
@@ -4579,14 +4594,22 @@
         setWeight(Math.max(DISPLAY_MIN, Math.min(DISPLAY_MAX, state.weight_kg + delta)), "wheel");
       }, { passive: false });
       
-      // Setup
+      // Setup - максимальная отзывчивость для touch
       wheelWrapEl.style.cursor = 'grab';
       wheelWrapEl.style.touchAction = 'none';
       wheelWrapEl.style.userSelect = 'none';
       wheelWrapEl.style.webkitUserSelect = 'none';
+      wheelWrapEl.style.webkitTouchCallout = 'none';
+      wheelWrapEl.style.webkitTapHighlightColor = 'transparent';
+      
       rotor.style.cursor = 'grab';
       rotor.style.touchAction = 'none';
       rotor.style.userSelect = 'none';
+      rotor.style.webkitUserSelect = 'none';
+      rotor.style.webkitTouchCallout = 'none';
+      
+      // Убираем задержку 300ms для Telegram/iOS
+      wheelWrapEl.addEventListener('click', function() {}, false);
     })();
 
   })();
