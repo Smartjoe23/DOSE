@@ -4497,6 +4497,16 @@
       let lastAngle = 0;
       let accumulatedRotation = 0;
       let initialized = false;
+
+      // Reset wheel state when variant/drug changes
+      function resetWheelState() {
+        initialized = false;
+        accumulatedRotation = 0;
+      }
+      
+      // Expose reset function globally for calling from renderAll
+      window.resetWheelRotation = resetWheelState;
+
       
       function getMouseAngle(clientX, clientY) {
         const wheelEl = rotor.closest('.wheel');
@@ -4540,14 +4550,12 @@
         isDragging = true;
         lastAngle = getMouseAngle(clientX, clientY);
         
-        // Initialize accumulated rotation only once from current transform
-        if (!initialized) {
-          const transform = rotor.style.transform || 'rotate(0deg)';
-          const match = transform.match(/rotate\(([^)]+)deg\)/);
-          accumulatedRotation = match ? parseFloat(match[1]) : 0;
-          initialized = true;
-        }
-        // Otherwise keep the accumulated rotation value
+        // Initialize accumulated rotation from current transform
+        // Re-sync on each drag start to handle external changes (slider, regime change)
+        const transform = rotor.style.transform || 'rotate(0deg)';
+        const match = transform.match(/rotate\(([^)]+)deg\)/);
+        accumulatedRotation = match ? parseFloat(match[1]) : 0;
+        initialized = true;
         
         rotor.style.cursor = 'grabbing';
       }
