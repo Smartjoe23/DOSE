@@ -1,0 +1,1427 @@
+html_content = f"""<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Sandoz KZ | Dosing Wheel</title>
+  <style>
+    :root {{
+      /* Sandoz tokens (замени на официальные HEX из брендгайда, если нужно) */
+      --SANDOZ_GREEN: #00A651;
+      --SANDOZ_TEAL:  #00B3B8;
+      --SANDOZ_NAVY:  #0B2A4A;
+      --SANDOZ_YELLOW:#F5C400;
+      --SANDOZ_BG:    #F4F6F8;
+      --SANDOZ_TEXT:  #1D2B36;
+      --SANDOZ_MUTED: #60707F;
+      --SANDOZ_BORDER:#D9E1E8;
+      --SANDOZ_WHITE: #FFFFFF;
+      --ERROR: #C62828;
+
+      --radius: 220px; /* базовый размер колеса (адаптивно ниже) */
+      --cardShadow: 0 10px 30px rgba(11,42,74,0.10);
+    }}
+
+    * {{ box-sizing: border-box; }}
+    html, body {{ height: 100%; }}
+    body {{
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: var(--SANDOZ_BG);
+      color: var(--SANDOZ_TEXT);
+    }}
+
+    .app {{
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 16px;
+    }}
+
+    header {{
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 12px 14px;
+      background: var(--SANDOZ_WHITE);
+      border: 1px solid var(--SANDOZ_BORDER);
+      border-radius: 16px;
+      box-shadow: var(--cardShadow);
+    }}
+
+    .brand {{
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      line-height: 1.1;
+    }}
+    .brand .title {{
+      font-weight: 700;
+      color: var(--SANDOZ_NAVY);
+      font-size: 16px;
+    }}
+    .brand .subtitle {{
+      font-size: 12px;
+      color: var(--SANDOZ_MUTED);
+    }}
+
+    .infoBtn {{
+      border: 1px solid var(--SANDOZ_BORDER);
+      background: var(--SANDOZ_WHITE);
+      color: var(--SANDOZ_NAVY);
+      width: 36px;
+      height: 36px;
+      border-radius: 12px;
+      cursor: pointer;
+      font-weight: 700;
+    }}
+    .infoBtn:active {{ transform: translateY(1px); }}
+
+    .controls {{
+      margin-top: 14px;
+      background: var(--SANDOZ_WHITE);
+      border: 1px solid var(--SANDOZ_BORDER);
+      border-radius: 16px;
+      box-shadow: var(--cardShadow);
+      padding: 14px;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }}
+
+    .row {{
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+    }}
+
+    @media (min-width: 860px) {{
+      .controls {{
+        grid-template-columns: 1.1fr 1.5fr 1.2fr;
+        align-items: start;
+      }}
+      .controls .block:nth-child(1) {{ grid-column: 1 / 2; }}
+      .controls .block:nth-child(2) {{ grid-column: 2 / 3; }}
+      .controls .block:nth-child(3) {{ grid-column: 3 / 4; }}
+      .controls .block:nth-child(4) {{ grid-column: 1 / 4; }}
+      .row {{
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+        align-items: end;
+      }}
+    }}
+
+    .blockTitle {{
+      font-size: 12px;
+      color: var(--SANDOZ_MUTED);
+      margin-bottom: 6px;
+    }}
+
+    .segmented {{
+      display: flex;
+      background: var(--SANDOZ_BG);
+      border: 1px solid var(--SANDOZ_BORDER);
+      border-radius: 14px;
+      padding: 4px;
+      gap: 6px;
+      flex-wrap: wrap;
+    }}
+
+    .segmented button {{
+      flex: 1;
+      min-width: 120px;
+      padding: 10px 12px;
+      border-radius: 12px;
+      border: 1px solid transparent;
+      background: transparent;
+      color: var(--SANDOZ_NAVY);
+      cursor: pointer;
+      font-weight: 700;
+    }}
+    .segmented button.active {{
+      background: var(--SANDOZ_WHITE);
+      border-color: var(--SANDOZ_BORDER);
+      box-shadow: 0 8px 18px rgba(11,42,74,0.08);
+    }}
+
+    .tiles {{
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0,1fr));
+      gap: 10px;
+    }}
+    @media (min-width: 860px) {{
+      .tiles {{ grid-template-columns: repeat(3, minmax(0,1fr)); }}
+    }}
+
+    .tile {{
+      border: 1px solid var(--SANDOZ_BORDER);
+      background: var(--SANDOZ_WHITE);
+      border-radius: 14px;
+      padding: 10px 10px;
+      cursor: pointer;
+      transition: transform 120ms ease, box-shadow 120ms ease;
+      min-height: 52px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 2px;
+    }}
+    .tile:hover {{ box-shadow: 0 10px 22px rgba(11,42,74,0.10); }}
+    .tile:active {{ transform: translateY(1px); }}
+    .tile.active {{
+      border-color: rgba(0,166,81,0.45);
+      box-shadow: 0 12px 28px rgba(0,166,81,0.18);
+    }}
+    .tile .t1 {{
+      font-weight: 700;
+      color: var(--SANDOZ_NAVY);
+      font-size: 13px;
+    }}
+    .tile .t2 {{
+      color: var(--SANDOZ_MUTED);
+      font-size: 12px;
+    }}
+
+    .chips {{
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }}
+    .chip {{
+      border: 1px solid var(--SANDOZ_BORDER);
+      background: var(--SANDOZ_WHITE);
+      border-radius: 999px;
+      padding: 8px 10px;
+      cursor: pointer;
+      font-weight: 700;
+      color: var(--SANDOZ_NAVY);
+      font-size: 13px;
+    }}
+    .chip.active {{
+      background: rgba(0,166,81,0.10);
+      border-color: rgba(0,166,81,0.45);
+    }}
+    .chip:disabled {{
+      cursor: not-allowed;
+      opacity: 0.45;
+    }}
+
+    .weightBox {{
+      border: 1px solid var(--SANDOZ_BORDER);
+      background: var(--SANDOZ_WHITE);
+      border-radius: 14px;
+      padding: 10px;
+      display: grid;
+      gap: 8px;
+    }}
+    .weightRow {{
+      display: grid;
+      grid-template-columns: 1fr 120px;
+      gap: 10px;
+      align-items: center;
+    }}
+    .weightRow input[type="range"] {{
+      width: 100%;
+      accent-color: var(--SANDOZ_GREEN);
+    }}
+    .weightRow input[type="number"] {{
+      width: 100%;
+      padding: 10px 10px;
+      border: 1px solid var(--SANDOZ_BORDER);
+      border-radius: 12px;
+      font-weight: 700;
+      color: var(--SANDOZ_NAVY);
+      outline: none;
+    }}
+    .hint {{
+      font-size: 12px;
+      color: var(--SANDOZ_MUTED);
+      min-height: 16px;
+    }}
+    .hint.warn {{ color: #8A6B00; }}
+    .hint.error {{ color: var(--ERROR); }}
+
+    main {{
+      margin-top: 14px;
+      display: grid;
+      gap: 14px;
+      grid-template-columns: 1fr;
+      align-items: start;
+    }}
+    @media (min-width: 980px) {{
+      main {{
+        grid-template-columns: 1.05fr 0.95fr;
+      }}
+    }}
+
+    .panel {{
+      background: var(--SANDOZ_WHITE);
+      border: 1px solid var(--SANDOZ_BORDER);
+      border-radius: 16px;
+      box-shadow: var(--cardShadow);
+      overflow: hidden;
+    }}
+
+    .wheelWrap {{
+      position: relative;
+      padding: 14px;
+    }}
+    .wheelStage {{
+      width: min(100%, var(--radius));
+      aspect-ratio: 1 / 1;
+      margin: 0 auto;
+      position: relative;
+      display: grid;
+      place-items: center;
+    }}
+    @media (max-width: 420px) {{
+      :root {{ --radius: 300px; }}
+    }}
+    @media (min-width: 421px) and (max-width: 980px) {{
+      :root {{ --radius: 360px; }}
+    }}
+    @media (min-width: 981px) {{
+      :root {{ --radius: 460px; }}
+    }}
+
+    .pointer {{
+      position: absolute;
+      top: -6px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 0;
+      height: 0;
+      border-left: 10px solid transparent;
+      border-right: 10px solid transparent;
+      border-bottom: 18px solid var(--SANDOZ_NAVY);
+      filter: drop-shadow(0 6px 10px rgba(11,42,74,0.25));
+      z-index: 3;
+    }}
+
+    svg#wheelSvg {{
+      width: 100%;
+      height: 100%;
+      display: block;
+    }}
+
+    .doseWindows {{
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      z-index: 4;
+      pointer-events: none;
+      padding: 14px;
+    }}
+    .windowsGrid {{
+      display: grid;
+      gap: 10px;
+      width: min(92%, 280px);
+    }}
+    .window {{
+      background: rgba(255,255,255,0.92);
+      border: 1px solid var(--SANDOZ_BORDER);
+      border-radius: 14px;
+      box-shadow: 0 10px 24px rgba(11,42,74,0.12);
+      padding: 10px 12px;
+      display: grid;
+      gap: 2px;
+    }}
+    .window.active {{
+      border-color: rgba(0,166,81,0.55);
+      box-shadow: 0 14px 30px rgba(0,166,81,0.18);
+    }}
+    .window .wTop {{
+      font-size: 12px;
+      color: var(--SANDOZ_MUTED);
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+    }}
+    .window .wVal {{
+      font-size: 24px;
+      font-weight: 800;
+      color: var(--SANDOZ_NAVY);
+      letter-spacing: 0.2px;
+    }}
+    .window .wBottom {{
+      font-size: 12px;
+      color: var(--SANDOZ_MUTED);
+    }}
+
+    .resultWrap {{
+      padding: 14px;
+      display: grid;
+      gap: 12px;
+    }}
+    .resultTitle {{
+      display: grid;
+      gap: 4px;
+    }}
+    .resultTitle .h1 {{
+      font-size: 16px;
+      font-weight: 800;
+      color: var(--SANDOZ_NAVY);
+    }}
+    .resultTitle .h2 {{
+      font-size: 12px;
+      color: var(--SANDOZ_MUTED);
+    }}
+
+    .resultCard {{
+      border: 1px solid var(--SANDOZ_BORDER);
+      border-radius: 16px;
+      padding: 12px;
+      background: var(--SANDOZ_WHITE);
+      display: grid;
+      gap: 10px;
+    }}
+    .kv {{
+      display: grid;
+      gap: 2px;
+    }}
+    .kv .k {{
+      font-size: 12px;
+      color: var(--SANDOZ_MUTED);
+    }}
+    .kv .v {{
+      font-size: 20px;
+      font-weight: 900;
+      color: var(--SANDOZ_NAVY);
+    }}
+    .kv .v.small {{
+      font-size: 16px;
+      font-weight: 800;
+    }}
+
+    .actions {{
+      display: grid;
+      gap: 10px;
+      grid-template-columns: 1fr;
+    }}
+    @media (min-width: 520px) {{
+      .actions {{ grid-template-columns: 1fr 1fr; }}
+    }}
+
+    .btn {{
+      border: 1px solid var(--SANDOZ_BORDER);
+      background: var(--SANDOZ_WHITE);
+      border-radius: 14px;
+      padding: 12px 12px;
+      cursor: pointer;
+      font-weight: 800;
+      color: var(--SANDOZ_NAVY);
+    }}
+    .btn.primary {{
+      background: var(--SANDOZ_GREEN);
+      color: white;
+      border-color: rgba(0,0,0,0);
+      box-shadow: 0 12px 22px rgba(0,166,81,0.22);
+    }}
+    .btn:disabled {{
+      opacity: 0.45;
+      cursor: not-allowed;
+    }}
+    .toast {{
+      font-size: 12px;
+      color: var(--SANDOZ_MUTED);
+      min-height: 16px;
+    }}
+
+    /* Drawer */
+    .drawer {{
+      margin-top: 14px;
+      background: var(--SANDOZ_WHITE);
+      border: 1px solid var(--SANDOZ_BORDER);
+      border-radius: 16px;
+      box-shadow: var(--cardShadow);
+      overflow: hidden;
+      display: none;
+    }}
+    .drawer.open {{ display: block; }}
+    .drawerHeader {{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 14px;
+      border-bottom: 1px solid var(--SANDOZ_BORDER);
+      background: linear-gradient(180deg, rgba(0,179,184,0.10), rgba(0,0,0,0));
+    }}
+    .drawerHeader .left {{
+      display: grid;
+      gap: 2px;
+    }}
+    .drawerHeader .t1 {{
+      font-weight: 900;
+      color: var(--SANDOZ_NAVY);
+    }}
+    .drawerHeader .t2 {{
+      font-size: 12px;
+      color: var(--SANDOZ_MUTED);
+    }}
+    .drawerHeader .right {{
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }}
+    .miniBtn {{
+      border: 1px solid var(--SANDOZ_BORDER);
+      background: var(--SANDOZ_WHITE);
+      color: var(--SANDOZ_NAVY);
+      border-radius: 12px;
+      padding: 8px 10px;
+      cursor: pointer;
+      font-weight: 800;
+      font-size: 12px;
+    }}
+    .miniBtn.active {{
+      background: rgba(0,179,184,0.12);
+      border-color: rgba(0,179,184,0.30);
+    }}
+
+    .tableWrap {{
+      padding: 10px 14px 14px;
+      overflow: auto;
+      max-height: 360px;
+    }}
+    table {{
+      border-collapse: collapse;
+      width: 100%;
+      min-width: 520px;
+    }}
+    th, td {{
+      border-bottom: 1px solid var(--SANDOZ_BORDER);
+      text-align: left;
+      padding: 10px 10px;
+      font-size: 13px;
+    }}
+    th {{
+      position: sticky;
+      top: 0;
+      background: var(--SANDOZ_WHITE);
+      z-index: 1;
+      color: var(--SANDOZ_NAVY);
+      font-weight: 900;
+    }}
+    tr.activeRow td {{
+      background: rgba(0,166,81,0.10);
+    }}
+
+    /* Modal */
+    .modalBackdrop {{
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.35);
+      display: none;
+      z-index: 999;
+      padding: 18px;
+    }}
+    .modalBackdrop.open {{ display: grid; place-items: center; }}
+    .modal {{
+      width: min(640px, 100%);
+      background: var(--SANDOZ_WHITE);
+      border: 1px solid var(--SANDOZ_BORDER);
+      border-radius: 16px;
+      box-shadow: var(--cardShadow);
+      padding: 14px;
+    }}
+    .modal h3 {{
+      margin: 0 0 6px;
+      color: var(--SANDOZ_NAVY);
+    }}
+    .modal p {{
+      margin: 6px 0;
+      color: var(--SANDOZ_TEXT);
+      font-size: 13px;
+      line-height: 1.35;
+    }}
+    .modal .muted {{
+      color: var(--SANDOZ_MUTED);
+      font-size: 12px;
+    }}
+    .modal .closeRow {{
+      display: flex;
+      justify-content: flex-end;
+      margin-top: 10px;
+    }}
+  </style>
+</head>
+<body>
+  <div class="app">
+    <header>
+      <div class="brand">
+        <div class="title">Dosing Wheel (KZ)</div>
+        <div class="subtitle">По доз-картам · источник: таблица (single source of truth)</div>
+      </div>
+      <button class="infoBtn" id="infoBtn" title="Инфо">i</button>
+    </header>
+
+    <section class="controls panel" aria-label="Управление">
+      <div class="block">
+        <div class="blockTitle">1) Препарат</div>
+        <div class="segmented" id="productTabs" role="tablist" aria-label="Препараты"></div>
+      </div>
+
+      <div class="block">
+        <div class="blockTitle">2) Концентрация / форма</div>
+        <div class="tiles" id="variantTiles" aria-label="Формы"></div>
+      </div>
+
+      <div class="block">
+        <div class="blockTitle">3) Режим (мг/кг/сут) — если применимо</div>
+        <div class="chips" id="mgkgChips" aria-label="Режимы"></div>
+      </div>
+
+      <div class="block">
+        <div class="row">
+          <div>
+            <div class="blockTitle">4) Вес (кг)</div>
+            <div class="weightBox">
+              <div class="weightRow">
+                <input type="range" id="weightRange" min="2" max="45" step="1" value="10" aria-label="Вес ползунок">
+                <input type="number" id="weightNumber" min="2" max="45" step="1" value="10" aria-label="Вес ввод">
+              </div>
+              <div class="hint" id="weightHint"></div>
+            </div>
+          </div>
+
+          <div>
+            <div class="blockTitle">Диапазон формы</div>
+            <div class="weightBox">
+              <div class="kv">
+                <div class="k">Допустимо</div>
+                <div class="v small" id="weightRangeLabel">—</div>
+              </div>
+              <div class="hint" id="variantHint"></div>
+            </div>
+          </div>
+
+          <div>
+            <div class="blockTitle">Данные</div>
+            <div class="weightBox">
+              <div class="kv">
+                <div class="k">Источник</div>
+                <div class="v small">Таблица</div>
+              </div>
+              <div class="hint">Без “формульных” расчётов. Только по карте.</div>
+            </div>
+          </div>
+
+          <div>
+            <div class="blockTitle">Сервис</div>
+            <div class="weightBox">
+              <button class="btn" id="toggleDrawerBtn">Проверка по карте</button>
+              <div class="hint">Откроет список строк из таблицы.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <main>
+      <section class="panel wheelWrap" aria-label="Колесо">
+        <div class="wheelStage" id="wheelStage">
+          <div class="pointer" aria-hidden="true"></div>
+          <svg id="wheelSvg" viewBox="-200 -200 400 400" aria-label="Колесо доз"></svg>
+
+          <div class="doseWindows" aria-hidden="true">
+            <div class="windowsGrid" id="windowsGrid"></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel resultWrap" aria-label="Результат">
+        <div class="resultTitle">
+          <div class="h1" id="resultH1">Итог</div>
+          <div class="h2" id="resultH2">Выберите препарат → форму → вес</div>
+        </div>
+
+        <div class="resultCard" id="resultCard">
+          <div class="kv">
+            <div class="k">Разовая доза</div>
+            <div class="v" id="doseOnce">—</div>
+          </div>
+          <div class="kv">
+            <div class="k">Кратность</div>
+            <div class="v small" id="freq">—</div>
+          </div>
+          <div class="kv">
+            <div class="k">Суточно</div>
+            <div class="v small" id="daily">—</div>
+          </div>
+          <div class="kv" id="courseRow" style="display:none;">
+            <div class="k">Курс</div>
+            <div class="v small" id="course">—</div>
+          </div>
+        </div>
+
+        <div class="actions">
+          <button class="btn primary" id="copyBtn" disabled>Скопировать назначение</button>
+          <button class="btn" id="openDrawerBtn">Проверка по карте</button>
+        </div>
+        <div class="toast" id="toast"></div>
+
+        <div style="font-size:12px;color:var(--SANDOZ_MUTED);line-height:1.35;">
+          Для внутреннего использования. Проверяйте назначение согласно локальной инструкции/SmPC.
+        </div>
+      </section>
+    </main>
+
+    <section class="drawer" id="drawer" aria-label="Проверка по карте">
+      <div class="drawerHeader">
+        <div class="left">
+          <div class="t1">Проверка по карте</div>
+          <div class="t2" id="drawerSub">—</div>
+        </div>
+        <div class="right">
+          <button class="miniBtn active" id="nearBtn">Рядом</button>
+          <button class="miniBtn" id="allBtn">Все</button>
+          <button class="miniBtn" id="closeDrawerBtn">Закрыть</button>
+        </div>
+      </div>
+      <div class="tableWrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Вес</th>
+              <th id="thMgkg">мг/кг/сут</th>
+              <th>мл/приём</th>
+              <th>раз/сут</th>
+            </tr>
+          </thead>
+          <tbody id="tableBody"></tbody>
+        </table>
+      </div>
+    </section>
+  </div>
+
+  <div class="modalBackdrop" id="modalBackdrop" role="dialog" aria-modal="true" aria-label="Информация">
+    <div class="modal">
+      <h3>Информация</h3>
+      <p><b>Логика:</b> вес → (режим) → доза в мл. Инструмент берёт значения <b>только</b> из доз-карты (таблица), без пересчётов по формуле.</p>
+      <p class="muted">Если нужен официальный бренд-гайд по HEX/логотипам — замени CSS-переменные в <code>:root</code>.</p>
+      <div class="closeRow">
+        <button class="btn" id="closeModalBtn">Понятно</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+  const DATA = {data_json};
+
+  // ---------- utils ----------
+  const fmtMl = (n) => {{
+    if (n === null || n === undefined || Number.isNaN(Number(n))) return "—";
+    const s = (Math.round(Number(n) * 10) / 10).toString();
+    return s.replace('.', ',') + " мл";
+  }};
+  const fmtInt = (n) => (n === null || n === undefined) ? "—" : String(Math.round(Number(n)));
+  const clamp = (v, min, max) => Math.min(max, Math.max(min, v));
+  const roundKg = (v) => Math.round(Number(v));
+
+  const byId = (arr, key="id") => Object.fromEntries(arr.map(x => [x[key], x]));
+  const productsById = byId(DATA.products, "product_id");
+  const variantsById = byId(DATA.variants, "variant_id");
+
+  const variantsByProduct = DATA.variants.reduce((acc, v) => {{
+    (acc[v.product_id] ||= []).push(v);
+    return acc;
+  }}, {{}});
+
+  const doseRowsByVariant = DATA.dose_rows.reduce((acc, r) => {{
+    (acc[r.variant_id] ||= []).push(r);
+    return acc;
+  }}, {{}});
+
+  // ---------- wheel constants ----------
+  const MIN_RING = 2;
+  const MAX_RING = 45;
+  const RING_COUNT = (MAX_RING - MIN_RING + 1); // 44
+  const STEP_DEG = 360 / RING_COUNT;
+
+  function degToRad(deg) {{
+    return deg * Math.PI / 180;
+  }}
+
+  function buildWheelSvg() {{
+    const svg = document.getElementById("wheelSvg");
+    svg.innerHTML = "";
+
+    // Groups
+    const rot = document.createElementNS("http://www.w3.org/2000/svg", "g");
+    rot.setAttribute("id", "wheelRot");
+
+    // Background circle
+    const bg = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+    bg.setAttribute("cx", "0"); bg.setAttribute("cy", "0"); bg.setAttribute("r", "178");
+    bg.setAttribute("fill", "#ffffff");
+    bg.setAttribute("stroke", "rgba(217,225,232,1)");
+    bg.setAttribute("stroke-width", "2");
+    rot.appendChild(bg);
+
+    // Sectors (equal 120°)
+    const sectors = [
+      {{ id: "azidrat", label: "АЗИТРОМИЦИН", fill: "rgba(0,179,184,0.18)" }},
+      {{ id: "ospamox", label: "ОСПАМОКС", fill: "rgba(245,196,0,0.18)" }},
+      {{ id: "amoxiclav", label: "АМОКСИКЛАВ", fill: "rgba(0,166,81,0.18)" }},
+    ];
+
+    function arcPath(r, startDeg, endDeg) {{
+      const start = degToRad(startDeg);
+      const end = degToRad(endDeg);
+      const x1 = r * Math.cos(start);
+      const y1 = r * Math.sin(start);
+      const x2 = r * Math.cos(end);
+      const y2 = r * Math.sin(end);
+      const largeArc = (endDeg - startDeg) > 180 ? 1 : 0;
+      return `M 0 0 L ${{x1.toFixed(3)}} ${{y1.toFixed(3)}} A ${{r}} ${{r}} 0 ${{largeArc}} 1 ${{x2.toFixed(3)}} ${{y2.toFixed(3)}} Z`;
+    }}
+
+    const sectorGroup = document.createElementNS("http://www.w3.org/2000/svg", "g");
+    sectorGroup.setAttribute("id", "sectors");
+
+    // start at top (-90°) go clockwise
+    const starts = [-90, 30, 150];
+    sectors.forEach((s, i) => {{
+      const p = document.createElementNS("http://www.w3.org/2000/svg", "path");
+      p.setAttribute("d", arcPath(150, starts[i], starts[i] + 120));
+      p.setAttribute("fill", s.fill);
+      p.setAttribute("stroke", "rgba(217,225,232,1)");
+      p.setAttribute("stroke-width", "1");
+      p.setAttribute("data-sector", s.id);
+      sectorGroup.appendChild(p);
+
+      // label
+      const mid = starts[i] + 60;
+      const tx = 95 * Math.cos(degToRad(mid));
+      const ty = 95 * Math.sin(degToRad(mid));
+      const t = document.createElementNS("http://www.w3.org/2000/svg", "text");
+      t.setAttribute("x", tx.toFixed(2));
+      t.setAttribute("y", ty.toFixed(2));
+      t.setAttribute("text-anchor", "middle");
+      t.setAttribute("dominant-baseline", "middle");
+      t.setAttribute("fill", "rgba(11,42,74,0.75)");
+      t.setAttribute("font-size", "11");
+      t.setAttribute("font-weight", "700");
+      t.textContent = s.label;
+      sectorGroup.appendChild(t);
+    }});
+
+    rot.appendChild(sectorGroup);
+
+    // Outer ring ticks and labels
+    const ring = document.createElementNS("http://www.w3.org/2000/svg", "g");
+    ring.setAttribute("id", "ring");
+
+    const showEvery = (window.innerWidth < 420) ? 2 : 1;
+    for (let w = MIN_RING; w <= MAX_RING; w++) {{
+      const idx = w - MIN_RING;
+      const ang = -90 + idx * STEP_DEG; // degrees
+      const a = degToRad(ang);
+      const r1 = 165;
+      const r2 = 175;
+      const x1 = r1 * Math.cos(a);
+      const y1 = r1 * Math.sin(a);
+      const x2 = r2 * Math.cos(a);
+      const y2 = r2 * Math.sin(a);
+
+      const tick = document.createElementNS("http://www.w3.org/2000/svg", "line");
+      tick.setAttribute("x1", x1.toFixed(2));
+      tick.setAttribute("y1", y1.toFixed(2));
+      tick.setAttribute("x2", x2.toFixed(2));
+      tick.setAttribute("y2", y2.toFixed(2));
+      tick.setAttribute("stroke", "rgba(11,42,74,0.35)");
+      tick.setAttribute("stroke-width", (w % 5 === 0) ? "2" : "1");
+      ring.appendChild(tick);
+
+      if (w % showEvery === 0) {{
+        const rt = 190;
+        const xt = rt * Math.cos(a);
+        const yt = rt * Math.sin(a);
+
+        const text = document.createElementNS("http://www.w3.org/2000/svg", "text");
+        text.setAttribute("x", xt.toFixed(2));
+        text.setAttribute("y", yt.toFixed(2));
+        text.setAttribute("text-anchor", "middle");
+        text.setAttribute("dominant-baseline", "middle");
+        text.setAttribute("fill", "rgba(11,42,74,0.80)");
+        text.setAttribute("font-size", "10");
+        text.setAttribute("font-weight", "700");
+        text.textContent = String(w);
+        ring.appendChild(text);
+      }}
+    }}
+    rot.appendChild(ring);
+
+    // Center hub
+    const hub = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+    hub.setAttribute("cx","0"); hub.setAttribute("cy","0"); hub.setAttribute("r","40");
+    hub.setAttribute("fill","#ffffff");
+    hub.setAttribute("stroke","rgba(217,225,232,1)");
+    hub.setAttribute("stroke-width","2");
+    rot.appendChild(hub);
+
+    const hubText = document.createElementNS("http://www.w3.org/2000/svg", "text");
+    hubText.setAttribute("x","0"); hubText.setAttribute("y","0");
+    hubText.setAttribute("text-anchor","middle");
+    hubText.setAttribute("dominant-baseline","middle");
+    hubText.setAttribute("fill","rgba(11,42,74,0.75)");
+    hubText.setAttribute("font-size","12");
+    hubText.setAttribute("font-weight","900");
+    hubText.textContent = "SANDOZ";
+    rot.appendChild(hubText);
+
+    svg.appendChild(rot);
+  }}
+
+  function setWheelRotationForWeight(weightKg) {{
+    const idx = clamp(weightKg, MIN_RING, MAX_RING) - MIN_RING;
+    const angle = -(idx * STEP_DEG);
+    const rot = document.getElementById("wheelRot");
+    if (!rot) return;
+    rot.style.transition = "transform 360ms cubic-bezier(.2,.9,.2,1)";
+    rot.style.transformOrigin = "center";
+    rot.style.transform = `rotate(${{angle}}deg)`;
+  }}
+
+  function highlightSector(productId) {{
+    const svg = document.getElementById("wheelSvg");
+    const paths = svg.querySelectorAll('path[data-sector]');
+    paths.forEach(p => {{
+      const id = p.getAttribute("data-sector");
+      const isActive = id === productId;
+      p.setAttribute("fill", isActive ? "rgba(0,166,81,0.22)" : (id==="azidrat" ? "rgba(0,179,184,0.18)" : id==="ospamox" ? "rgba(245,196,0,0.18)" : "rgba(0,166,81,0.18)"));
+      p.setAttribute("stroke-width", isActive ? "2" : "1");
+      p.setAttribute("stroke", isActive ? "rgba(0,166,81,0.55)" : "rgba(217,225,232,1)");
+    }});
+  }}
+
+  // ---------- dose lookup ----------
+  function findDoseRow(variantId, weightKg, mgkgPerDayNullable) {{
+    const rows = doseRowsByVariant[variantId] || [];
+    let filtered = rows;
+    if (mgkgPerDayNullable !== null && mgkgPerDayNullable !== undefined) {{
+      filtered = rows.filter(r => Number(r.mgkg_per_day) === Number(mgkgPerDayNullable));
+    }}
+
+    const hits = filtered.filter(r => Number(r.weight_min_kg) <= weightKg && weightKg <= Number(r.weight_max_kg));
+    if (hits.length === 0) return null;
+    if (hits.length === 1) return hits[0];
+
+    // Prefer narrowest range (min==max)
+    hits.sort((a,b) => {{
+      const ra = Number(a.weight_max_kg) - Number(a.weight_min_kg);
+      const rb = Number(b.weight_max_kg) - Number(b.weight_min_kg);
+      return ra - rb;
+    }});
+    return hits[0];
+  }}
+
+  function availableMgkgForWeight(variant, weightKg) {{
+    if (!variant.mgkg_options || variant.mgkg_options.length === 0) return [];
+    return variant.mgkg_options.filter(m => !!findDoseRow(variant.variant_id, weightKg, m));
+  }}
+
+  // ---------- state ----------
+  const state = {{
+    productId: null,
+    variantId: null,
+    weightKg: 10,
+    mgkg: null,
+    drawerMode: "near" // near | all
+  }};
+
+  // ---------- DOM ----------
+  const productTabs = document.getElementById("productTabs");
+  const variantTiles = document.getElementById("variantTiles");
+  const mgkgChips = document.getElementById("mgkgChips");
+  const weightRange = document.getElementById("weightRange");
+  const weightNumber = document.getElementById("weightNumber");
+  const weightHint = document.getElementById("weightHint");
+  const variantHint = document.getElementById("variantHint");
+  const weightRangeLabel = document.getElementById("weightRangeLabel");
+
+  const windowsGrid = document.getElementById("windowsGrid");
+
+  const resultH1 = document.getElementById("resultH1");
+  const resultH2 = document.getElementById("resultH2");
+  const doseOnce = document.getElementById("doseOnce");
+  const freq = document.getElementById("freq");
+  const daily = document.getElementById("daily");
+  const courseRow = document.getElementById("courseRow");
+  const course = document.getElementById("course");
+  const copyBtn = document.getElementById("copyBtn");
+  const toast = document.getElementById("toast");
+
+  const drawer = document.getElementById("drawer");
+  const drawerSub = document.getElementById("drawerSub");
+  const tableBody = document.getElementById("tableBody");
+  const thMgkg = document.getElementById("thMgkg");
+
+  const toggleDrawerBtn = document.getElementById("toggleDrawerBtn");
+  const openDrawerBtn = document.getElementById("openDrawerBtn");
+  const closeDrawerBtn = document.getElementById("closeDrawerBtn");
+  const nearBtn = document.getElementById("nearBtn");
+  const allBtn = document.getElementById("allBtn");
+
+  // Modal
+  const modalBackdrop = document.getElementById("modalBackdrop");
+  document.getElementById("infoBtn").addEventListener("click", () => modalBackdrop.classList.add("open"));
+  document.getElementById("closeModalBtn").addEventListener("click", () => modalBackdrop.classList.remove("open"));
+  modalBackdrop.addEventListener("click", (e) => {{
+    if (e.target === modalBackdrop) modalBackdrop.classList.remove("open");
+  }});
+
+  function setToast(msg, isError=false) {{
+    toast.textContent = msg || "";
+    toast.style.color = isError ? "var(--ERROR)" : "var(--SANDOZ_MUTED)";
+    if (msg) {{
+      clearTimeout(setToast._t);
+      setToast._t = setTimeout(() => {{ toast.textContent = ""; }}, 2200);
+    }}
+  }}
+
+  function setHint(el, msg, kind="") {{
+    el.textContent = msg || "";
+    el.className = "hint" + (kind ? " " + kind : "");
+  }}
+
+  // ---------- render ----------
+  function renderProductTabs() {{
+    const order = ["azidrat","ospamox","amoxiclav"]; // визуально как на карте
+    productTabs.innerHTML = "";
+    order.forEach(pid => {{
+      const p = productsById[pid];
+      const btn = document.createElement("button");
+      btn.type = "button";
+      btn.textContent = p.brand_ru;
+      btn.className = (state.productId === pid) ? "active" : "";
+      btn.setAttribute("role","tab");
+      btn.addEventListener("click", () => {{
+        setProduct(pid);
+      }});
+      productTabs.appendChild(btn);
+    }});
+  }}
+
+  function renderVariantTiles() {{
+    const list = variantsByProduct[state.productId] || [];
+    variantTiles.innerHTML = "";
+    list.forEach(v => {{
+      const tile = document.createElement("button");
+      tile.type = "button";
+      tile.className = "tile" + (state.variantId === v.variant_id ? " active" : "");
+      tile.innerHTML = `<div class="t1">${{v.strength_label_ru}}</div>
+                        <div class="t2">${{(v.dose_basis==="mgkg_per_day" ? (v.freq_per_day + " раза/сут") : (v.freq_per_day + " раз/сут"))}}</div>`;
+      tile.addEventListener("click", () => {{
+        setVariant(v.variant_id);
+      }});
+      variantTiles.appendChild(tile);
+    }});
+  }}
+
+  function renderMgkgChips() {{
+    const variant = variantsById[state.variantId];
+    mgkgChips.innerHTML = "";
+    if (!variant || !variant.mgkg_options || variant.mgkg_options.length === 0) {{
+      const span = document.createElement("div");
+      span.style.color = "var(--SANDOZ_MUTED)";
+      span.style.fontSize = "13px";
+      span.textContent = "—";
+      mgkgChips.appendChild(span);
+      return;
+    }}
+
+    const avail = new Set(availableMgkgForWeight(variant, state.weightKg));
+    variant.mgkg_options.forEach(m => {{
+      const b = document.createElement("button");
+      b.type = "button";
+      b.className = "chip" + (Number(state.mgkg) === Number(m) ? " active" : "");
+      b.textContent = String(m).replace('.0','') + " мг/кг/сут";
+      const ok = avail.has(m);
+      b.disabled = !ok;
+      b.title = ok ? "" : "Нет по карте для этого веса";
+      b.addEventListener("click", () => {{
+        state.mgkg = m;
+        renderMgkgChips();
+        updateAll();
+      }});
+      mgkgChips.appendChild(b);
+    }});
+  }}
+
+  function setWeightControls(minW, maxW) {{
+    weightRange.min = String(minW);
+    weightRange.max = String(maxW);
+    weightNumber.min = String(minW);
+    weightNumber.max = String(maxW);
+    weightRangeLabel.textContent = `${{minW}}–${{maxW}} кг`;
+  }}
+
+  function renderWindows() {{
+    const variant = variantsById[state.variantId];
+    windowsGrid.innerHTML = "";
+    if (!variant) return;
+
+    if (!variant.mgkg_options || variant.mgkg_options.length === 0) {{
+      // single window for fixed_by_weight
+      const row = findDoseRow(state.variantId, state.weightKg, null);
+      const w = document.createElement("div");
+      w.className = "window active";
+      const val = row ? fmtMl(row.dose_ml) : "—";
+      w.innerHTML = `<div class="wTop"><span>${{variant.strength_label_ru}}</span><span>${{variant.freq_per_day}} раз/сут</span></div>
+                     <div class="wVal">${{val}}</div>
+                     <div class="wBottom">${{variant.therapy_days ? ("Курс: " + variant.therapy_days + " дня") : ""}}</div>`;
+      windowsGrid.appendChild(w);
+      return;
+    }}
+
+    // show all mgkg windows (even if not available -> muted), but only those present in options
+    const avail = new Set(availableMgkgForWeight(variant, state.weightKg));
+    variant.mgkg_options.forEach(m => {{
+      const row = findDoseRow(state.variantId, state.weightKg, m);
+      const w = document.createElement("div");
+      const isActive = Number(state.mgkg) === Number(m);
+      w.className = "window" + (isActive ? " active" : "");
+      const val = row ? fmtMl(row.dose_ml) : "—";
+      const bottom = `${{variant.freq_per_day}} раза/сут`;
+      const topRight = avail.has(m) ? "" : "нет";
+      w.style.opacity = avail.has(m) ? "1" : "0.55";
+      w.innerHTML = `<div class="wTop"><span>${{String(m).replace('.0','')}} мг/кг/сут</span><span>${{topRight}}</span></div>
+                     <div class="wVal">${{val}}</div>
+                     <div class="wBottom">${{bottom}}</div>`;
+      windowsGrid.appendChild(w);
+    }});
+  }}
+
+  function renderResult() {{
+    const product = productsById[state.productId];
+    const variant = variantsById[state.variantId];
+    if (!product || !variant) return;
+
+    resultH1.textContent = "Итог";
+    resultH2.textContent = `${{product.brand_ru}} · ${{variant.strength_label_ru}} · вес ${{state.weightKg}} кг`;
+
+    const row = findDoseRow(state.variantId, state.weightKg, (variant.mgkg_options && variant.mgkg_options.length > 0) ? state.mgkg : null);
+
+    if (!row) {{
+      doseOnce.textContent = "—";
+      freq.textContent = "—";
+      daily.textContent = "—";
+      courseRow.style.display = "none";
+      copyBtn.disabled = true;
+      setHint(variantHint, "Нет дозы по карте для этого веса/режима", "error");
+      return;
+    }}
+
+    setHint(variantHint, "", "");
+    const once = Number(row.dose_ml);
+    const f = Number(row.freq_per_day ?? variant.freq_per_day);
+    const dailyMl = once * f;
+
+    doseOnce.textContent = fmtMl(once);
+    freq.textContent = `${{f}} ${{f === 1 ? "раз/сут" : "раза/сут"}}`;
+    daily.textContent = fmtMl(dailyMl).replace(" мл", "") + " мл/сут";
+
+    if (variant.therapy_days) {{
+      courseRow.style.display = "";
+      course.textContent = `${{variant.therapy_days}} дня`;
+    }} else {{
+      courseRow.style.display = "none";
+    }}
+
+    copyBtn.disabled = false;
+  }}
+
+  function renderDrawer() {{
+    const product = productsById[state.productId];
+    const variant = variantsById[state.variantId];
+    if (!product || !variant) return;
+
+    drawerSub.textContent = `${{product.brand_ru}} · ${{variant.strength_label_ru}} · вес ${{state.weightKg}} кг`;
+    const rows = (doseRowsByVariant[state.variantId] || []).slice();
+
+    const showMgkgCol = (variant.mgkg_options && variant.mgkg_options.length > 0);
+    thMgkg.style.display = showMgkgCol ? "" : "none";
+
+    // sort by weight_min then mgkg
+    rows.sort((a,b) => {{
+      const wa = Number(a.weight_min_kg) - Number(b.weight_min_kg);
+      if (wa !== 0) return wa;
+      const ma = (a.mgkg_per_day === null || a.mgkg_per_day === undefined) ? -1 : Number(a.mgkg_per_day);
+      const mb = (b.mgkg_per_day === null || b.mgkg_per_day === undefined) ? -1 : Number(b.mgkg_per_day);
+      return ma - mb;
+    }});
+
+    let filtered = rows;
+    if (state.drawerMode === "near") {{
+      const lo = state.weightKg - 5;
+      const hi = state.weightKg + 5;
+      filtered = rows.filter(r => {{
+        const wmin = Number(r.weight_min_kg);
+        const wmax = Number(r.weight_max_kg);
+        return !(wmax < lo || wmin > hi);
+      }});
+    }}
+
+    tableBody.innerHTML = "";
+    filtered.forEach(r => {{
+      const tr = document.createElement("tr");
+      const inRange = (Number(r.weight_min_kg) <= state.weightKg && state.weightKg <= Number(r.weight_max_kg));
+      const isExact = (Number(r.weight_min_kg) === state.weightKg && Number(r.weight_max_kg) === state.weightKg);
+      if (inRange && (isExact || variant.dose_basis === "fixed_by_weight")) tr.classList.add("activeRow");
+
+      const wLabel = (Number(r.weight_min_kg) === Number(r.weight_max_kg))
+        ? `${{fmtInt(r.weight_min_kg)}} кг`
+        : `${{fmtInt(r.weight_min_kg)}}–${{fmtInt(r.weight_max_kg)}} кг`;
+
+      const tdW = document.createElement("td");
+      tdW.textContent = wLabel;
+      tr.appendChild(tdW);
+
+      const tdM = document.createElement("td");
+      tdM.textContent = (r.mgkg_per_day === null || r.mgkg_per_day === undefined) ? "—" : String(r.mgkg_per_day).replace('.0','');
+      tdM.style.display = showMgkgCol ? "" : "none";
+      tr.appendChild(tdM);
+
+      const tdDose = document.createElement("td");
+      tdDose.textContent = fmtMl(r.dose_ml);
+      tr.appendChild(tdDose);
+
+      const tdF = document.createElement("td");
+      tdF.textContent = String(r.freq_per_day ?? variant.freq_per_day);
+      tr.appendChild(tdF);
+
+      tableBody.appendChild(tr);
+    }});
+  }}
+
+  function updateAll() {{
+    const variant = variantsById[state.variantId];
+    if (!variant) return;
+
+    // clamp weight to variant range
+    const minW = Math.round(Number(variant.weight_min_kg));
+    const maxW = Math.round(Number(variant.weight_max_kg));
+
+    const prev = state.weightKg;
+    state.weightKg = clamp(roundKg(state.weightKg), minW, maxW);
+
+    // update controls
+    setWeightControls(minW, maxW);
+    weightRange.value = String(state.weightKg);
+    weightNumber.value = String(state.weightKg);
+
+    if (prev !== state.weightKg) {{
+      setHint(weightHint, `Вес скорректирован до ${{state.weightKg}} кг (диапазон ${{minW}}–${{maxW}}).`, "warn");
+    }} else {{
+      setHint(weightHint, "", "");
+    }}
+
+    // mgkg availability and default
+    if (variant.mgkg_options && variant.mgkg_options.length > 0) {{
+      const avail = availableMgkgForWeight(variant, state.weightKg);
+      if (!avail.includes(state.mgkg)) {{
+        state.mgkg = avail[0] ?? variant.mgkg_options[0];
+      }}
+    }} else {{
+      state.mgkg = null;
+    }}
+
+    // wheel + sector
+    setWheelRotationForWeight(state.weightKg);
+    highlightSector(state.productId);
+
+    // re-render dependent UI
+    renderProductTabs();
+    renderVariantTiles();
+    renderMgkgChips();
+    renderWindows();
+    renderResult();
+    renderDrawer();
+  }}
+
+  function setProduct(productId) {{
+    state.productId = productId;
+    const list = variantsByProduct[productId] || [];
+    state.variantId = list[0]?.variant_id || null;
+
+    // reset weight default to min of variant
+    if (state.variantId) {{
+      const v = variantsById[state.variantId];
+      state.weightKg = Math.round(Number(v.weight_min_kg));
+      state.mgkg = (v.mgkg_options && v.mgkg_options.length > 0) ? v.mgkg_options[0] : null;
+    }}
+    updateAll();
+    persist();
+  }}
+
+  function setVariant(variantId) {{
+    state.variantId = variantId;
+    const v = variantsById[variantId];
+    const minW = Math.round(Number(v.weight_min_kg));
+    const maxW = Math.round(Number(v.weight_max_kg));
+    state.weightKg = clamp(state.weightKg, minW, maxW);
+    state.mgkg = (v.mgkg_options && v.mgkg_options.length > 0) ? v.mgkg_options[0] : null;
+    updateAll();
+    persist();
+  }}
+
+  // ---------- events ----------
+  weightRange.addEventListener("input", () => {{
+    state.weightKg = roundKg(weightRange.value);
+    updateAll();
+    persist();
+  }});
+  weightNumber.addEventListener("change", () => {{
+    const raw = Number(weightNumber.value);
+    if (!Number.isFinite(raw)) return;
+    const rounded = roundKg(raw);
+    state.weightKg = rounded;
+    if (raw !== rounded) {{
+      setHint(weightHint, `Округлено до ${{rounded}} кг.`, "warn");
+    }}
+    updateAll();
+    persist();
+  }});
+
+  async function copyText(text) {{
+    try {{
+      await navigator.clipboard.writeText(text);
+      return true;
+    }} catch (e) {{
+      // fallback
+      const ta = document.createElement("textarea");
+      ta.value = text;
+      document.body.appendChild(ta);
+      ta.select();
+      try {{
+        document.execCommand("copy");
+        document.body.removeChild(ta);
+        return true;
+      }} catch (err) {{
+        document.body.removeChild(ta);
+        return false;
+      }}
+    }}
+  }}
+
+  function buildCopyString() {{
+    const product = productsById[state.productId];
+    const variant = variantsById[state.variantId];
+    if (!product || !variant) return "";
+
+    const row = findDoseRow(state.variantId, state.weightKg, (variant.mgkg_options && variant.mgkg_options.length>0) ? state.mgkg : null);
+    if (!row) return "";
+
+    const once = Number(row.dose_ml);
+    const f = Number(row.freq_per_day ?? variant.freq_per_day);
+    const dailyMl = once * f;
+
+    const lines = [];
+    lines.push(`Препарат: ${{product.brand_ru}} (${{variant.strength_label_ru}})`);
+    lines.push(`Вес: ${{state.weightKg}} кг`);
+    if (variant.mgkg_options && variant.mgkg_options.length > 0) {{
+      lines.push(`Режим: ${{String(state.mgkg).replace('.0','')}} мг/кг/сут`);
+    }}
+    lines.push(`Доза: ${{(String(Math.round(once*10)/10)).replace('.',',')}} мл × ${{f}} ${{f===1?"раз":"раза"}}/сут`);
+    lines.push(`Суточно: ${{(String(Math.round(dailyMl*10)/10)).replace('.',',')}} мл/сут`);
+    if (variant.therapy_days) {{
+      lines.push(`Курс: ${{variant.therapy_days}} дня`);
+    }}
+    return lines.join("\\n");
+  }}
+
+  copyBtn.addEventListener("click", async () => {{
+    const text = buildCopyString();
+    if (!text) return;
+    const ok = await copyText(text);
+    setToast(ok ? "Скопировано." : "Не удалось скопировать.", !ok);
+  }});
+
+  function setDrawer(open) {{
+    drawer.classList.toggle("open", open);
+  }}
+
+  toggleDrawerBtn.addEventListener("click", () => {{
+    setDrawer(!drawer.classList.contains("open"));
+  }});
+  openDrawerBtn.addEventListener("click", () => setDrawer(true));
+  closeDrawerBtn.addEventListener("click", () => setDrawer(false));
+
+  nearBtn.addEventListener("click", () => {{
+    state.drawerMode = "near";
+    nearBtn.classList.add("active");
+    allBtn.classList.remove("active");
+    renderDrawer();
+  }});
+  allBtn.addEventListener("click", () => {{
+    state.drawerMode = "all";
+    allBtn.classList.add("active");
+    nearBtn.classList.remove("active");
+    renderDrawer();
+  }});
+
+  // ---------- persistence ----------
+  const LS_KEY = "sandoz_dosing_wheel_kz_v1";
+  function persist() {{
+    try {{
+      localStorage.setItem(LS_KEY, JSON.stringify({{
+        productId: state.productId,
+        variantId: state.variantId,
+        weightKg: state.weightKg,
+        mgkg: state.mgkg,
+        drawerMode: state.drawerMode
+      }}));
+    }} catch (_) {{}}
+  }}
+  function restore() {{
+    try {{
+      const raw = localStorage.getItem(LS_KEY);
+      if (!raw) return false;
+      const x = JSON.parse(raw);
+      if (x.productId && productsById[x.productId]) state.productId = x.productId;
+      if (x.variantId && variantsById[x.variantId]) state.variantId = x.variantId;
+      if (Number.isFinite(Number(x.weightKg))) state.weightKg = Number(x.weightKg);
+      if (x.mgkg !== undefined) state.mgkg = x.mgkg;
+      if (x.drawerMode) state.drawerMode = x.drawerMode;
+      return true;
+    }} catch (_) {{
+      return false;
+    }}
+  }}
+
+  // ---------- init ----------
+  (function init() {{
+    buildWheelSvg();
+
+    restore();
+    if (!state.productId) {{
+      state.productId = "azidrat";
+    }}
+    if (!state.variantId) {{
+      const list = variantsByProduct[state.productId] || [];
+      state.variantId = list[0]?.variant_id || null;
+    }}
+    updateAll();
+
+    // Drawer mode buttons
+    if (state.drawerMode === "all") {{
+      allBtn.classList.add("active");
+      nearBtn.classList.remove("active");
+    }}
+
+    window.addEventListener("resize", () => {{
+      buildWheelSvg();
+      updateAll();
+    }});
+  }})();
+  </script>
+</body>
+</html>
+"""
+out_path="/mnt/data/dosing_wheel_kz.html"
+with open(out_path,"w",encoding="utf-8") as f:
+    f.write(html_content)
+out_path, os.path.getsize(out_path)
+
