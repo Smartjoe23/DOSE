@@ -230,62 +230,13 @@
       align-items:center;
       flex-wrap: wrap;
     }
-    input[type="range"]{
-      width: 280px;
-      height: 12px;
-      accent-color: var(--sandoz-blue);
-      -webkit-appearance: none;
-      appearance: none;
-      background: transparent;
-      cursor: pointer;
-    }
     
-    input[type="range"]::-webkit-slider-track {
-      width: 100%;
-      height: 12px;
-      background: linear-gradient(to right, var(--sandoz-blue) 0%, var(--sandoz-light-blue) 100%);
-      border-radius: 6px;
-    }
     
-    input[type="range"]::-webkit-slider-thumb {
-      -webkit-appearance: none;
-      appearance: none;
-      width: 28px;
-      height: 28px;
-      background: white;
-      border: 3px solid var(--sandoz-blue);
-      border-radius: 50%;
-      cursor: grab;
-      box-shadow: 0 3px 8px rgba(0,0,0,0.2);
-      margin-top: -8px;
-    }
+    /* Chrome/Safari */
     
-    input[type="range"]::-webkit-slider-thumb:active {
-      cursor: grabbing;
-      transform: scale(1.1);
-    }
     
-    input[type="range"]::-moz-range-track {
-      width: 100%;
-      height: 12px;
-      background: linear-gradient(to right, var(--sandoz-blue) 0%, var(--sandoz-light-blue) 100%);
-      border-radius: 6px;
-    }
+    /* Firefox */
     
-    input[type="range"]::-moz-range-thumb {
-      width: 28px;
-      height: 28px;
-      background: white;
-      border: 3px solid var(--sandoz-blue);
-      border-radius: 50%;
-      cursor: grab;
-      box-shadow: 0 3px 8px rgba(0,0,0,0.2);
-    }
-    
-    input[type="range"]::-moz-range-thumb:active {
-      cursor: grabbing;
-      transform: scale(1.1);
-    }
     .num{
       width: 110px;
       padding: 10px 10px;
@@ -582,7 +533,7 @@
     .modal{
       width: min(720px, 100%);
       background: var(--card);
-      border-radius: 16px;
+      border-radius: 8px;
       border: 1px solid var(--border);
       box-shadow: var(--shadow);
       padding: 16px;
@@ -592,10 +543,79 @@
     .modal ul{margin: 8px 0 0 18px; color: var(--text);}
     .modal li{margin: 6px 0;}
 
+        /* ========== SLIDER STYLES ========== */
+    input[type="range"] {
+      width: 280px;
+      height: 8px;
+      -webkit-appearance: none;
+      appearance: none;
+      background: transparent;
+      cursor: pointer;
+      outline: none;
+    }
+    
+    /* Track (полоска) */
+    input[type="range"]::-webkit-slider-runnable-track {
+      width: 100%;
+      height: 8px;
+      background: #D9E1E8;
+      border-radius: 4px;
+    }
+    
+    input[type="range"]::-moz-range-track {
+      width: 100%;
+      height: 8px;
+      background: #D9E1E8;
+      border-radius: 4px;
+    }
+    
+    /* Thumb (бегунок) - ПРЯМОУГОЛЬНЫЙ С НЕБОЛЬШИМ СКРУГЛЕНИЕМ */
+    input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 48px;
+      height: 24px;
+      background: #1C59B5;
+      border: 2px solid white;
+      border-radius: 5px;
+      cursor: grab;
+      margin-top: -8px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    }
+    
+    input[type="range"]::-moz-range-thumb {
+      width: 48px;
+      height: 24px;
+      background: #1C59B5;
+      border: 2px solid white;
+      border-radius: 5px;
+      cursor: grab;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    }
+    
+    input[type="range"]::-webkit-slider-thumb:hover {
+      background: #001C4A;
+    }
+    
+    input[type="range"]::-moz-range-thumb:hover {
+      background: #001C4A;
+    }
+    
+    input[type="range"]::-webkit-slider-thumb:active {
+      cursor: grabbing;
+      background: #001C4A;
+    }
+    
+    input[type="range"]::-moz-range-thumb:active {
+      cursor: grabbing;
+      background: #001C4A;
+    }
+    /* ========== END SLIDER STYLES ========== */
+    
+
     @media (max-width: 900px){
       .main{grid-template-columns: 1fr;}
       .wheel-wrap{min-height: 460px;}
-      input[type="range"]{width: min(320px, 100%);}
+      
       .field{min-width: 100%;}
       .segmented button{min-width: 0; flex: 1;}
     }
@@ -616,31 +636,7 @@
     /* ========== MOBILE ADAPTATION ========== */
     
     @media (max-width: 768px) {
-      input[type="range"] {
-        width: 100%;
-        height: 16px;
-      }
       
-      input[type="range"]::-webkit-slider-track {
-        height: 16px;
-        border-radius: 8px;
-      }
-      
-      input[type="range"]::-webkit-slider-thumb {
-        width: 36px;
-        height: 36px;
-        margin-top: -10px;
-      }
-      
-      input[type="range"]::-moz-range-track {
-        height: 16px;
-        border-radius: 8px;
-      }
-      
-      input[type="range"]::-moz-range-thumb {
-        width: 36px;
-        height: 36px;
-      }
     }
     @media (max-width: 768px) {
       .app {
@@ -702,9 +698,7 @@
         gap: 12px;
       }
 
-      input[type="range"] {
-        width: 100%;
-      }
+      
 
       .num {
         width: 100%;
@@ -892,10 +886,7 @@
         min-height: 44px;
       }
 
-      input[type="range"] {
-        height: 44px;
-        padding: 15px 0;
-      }
+      
 
       input[type="number"] {
         min-height: 48px;
@@ -4606,37 +4597,37 @@
         endDrag();
       });
       
-      // Touch events - improved for mobile
+      // Touch events - fixed for mobile
+      let touchMoveHandler = null;
+      let touchEndHandler = null;
+      
       rotor.addEventListener('touchstart', function(e) {
-        if (e.touches.length === 1) {
-          const touch = e.touches[0];
-          startDrag(touch.clientX, touch.clientY);
-          e.preventDefault();
-          e.stopPropagation();
-        }
-      }, { passive: false });
-      
-      document.addEventListener('touchmove', function(e) {
-        if (isDragging && e.touches.length === 1) {
-          const touch = e.touches[0];
-          doDrag(touch.clientX, touch.clientY);
-          e.preventDefault();
-          e.stopPropagation();
-        }
-      }, { passive: false });
-      
-      document.addEventListener('touchend', function(e) {
-        if (isDragging) {
+        if (e.touches.length !== 1) return;
+        
+        const touch = e.touches[0];
+        startDrag(touch.clientX, touch.clientY);
+        
+        // Create handlers with closure
+        touchMoveHandler = function(evt) {
+          if (evt.touches.length !== 1) return;
+          const t = evt.touches[0];
+          doDrag(t.clientX, t.clientY);
+          evt.preventDefault();
+        };
+        
+        touchEndHandler = function(evt) {
           endDrag();
-          e.preventDefault();
-        }
-      });
-      
-      document.addEventListener('touchcancel', function(e) {
-        if (isDragging) {
-          endDrag();
-        }
-      });
+          document.removeEventListener('touchmove', touchMoveHandler);
+          document.removeEventListener('touchend', touchEndHandler);
+          document.removeEventListener('touchcancel', touchEndHandler);
+        };
+        
+        document.addEventListener('touchmove', touchMoveHandler, { passive: false });
+        document.addEventListener('touchend', touchEndHandler);
+        document.addEventListener('touchcancel', touchEndHandler);
+        
+        e.preventDefault();
+      }, { passive: false });
       
       // Mouse wheel scroll
       const wheelWrap = document.querySelector('.wheel-wrap');
@@ -4657,6 +4648,10 @@
       rotor.style.userSelect = 'none';
       rotor.style.webkitUserSelect = 'none';
       rotor.style.touchAction = 'none';
+      rotor.style.webkitTouchCallout = 'none';
+      rotor.style.khtmlUserSelect = 'none';
+      rotor.style.mozUserSelect = 'none';
+      rotor.style.msUserSelect = 'none';
     })();
 
   })();
