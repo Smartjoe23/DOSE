@@ -316,6 +316,10 @@
       overflow: visible;
     }
 
+    .rotor.dragging {
+      transition: none !important;
+    }
+    
     .rotor{
       transform-origin: 50% 50%;
       transition: transform 320ms ease-out;
@@ -4507,8 +4511,6 @@
       let isDragging = false;
       let lastAngle = 0;
       let accumulatedRotation = 0;
-      let rafId = null;
-      let pendingWeight = null;
       
       const wheelWrapEl = document.querySelector('.wheel-wrap');
       if (!wheelWrapEl) return;
@@ -4532,31 +4534,58 @@
         let normalized = ((totalRotation % 360) + 360) % 360;
         const weightRange = DISPLAY_MAX - DISPLAY_MIN;
         let weight = DISPLAY_MIN + (normalized / 360) * weightRange;
-        return Math.max(DISPLAY_MIN, Math.min(DISPLAY_MAX, Math.round(weight)));
+        weight = Math.round(weight);
+        
+        // Дополнительно проверяем границы текущего варианта
+        const v = typeof getSelectedVariant === 'function' ? getSelectedVariant() : null;
+        if (v && v.weight_min_kg && v.weight_max_kg) {
+          weight = Math.max(v.weight_min_kg, Math.min(v.weight_max_kg, weight));
+        }
+        
+        return Math.max(DISPLAY_MIN, Math.min(DISPLAY_MAX, weight));
       }
       
-      // Оптимизированное обновление через RAF
-      function scheduleWeightUpdate(newWeight) {
-        pendingWeight = newWeight;
-        if (!rafId) {
-          rafId = requestAnimationFrame(() => {
-            if (pendingWeight !== null) {
-              setWeight(pendingWeight, "wheel");
-              pendingWeight = null;
-            }
-            rafId = null;
-          });
-        }
+      // Прямое обновление БЕЗ RAF - для максимальной отзывчивости
+      let lastSetWeight = null;
+      function updateWeight(newWeight) {
+        // Пропускаем если вес не изменился
+        if (newWeight === lastSetWeight) return;
+        lastSetWeight = newWeight;
+        
+        // Напрямую вызываем setWeight
+        setWeight(newWeight, "wheel");
       }
       
       function startDrag(clientX, clientY) {
         isDragging = true;
         lastAngle = getMouseAngle(clientX, clientY);
+        
+        // ВАЖНО: синхронизация с ТЕКУЩИМ состоянием при каждом старте
+        // Берем актуальный угол из DOM, а не из переменной
         const transform = rotor.style.transform || 'rotate(0deg)';
         const match = transform.match(/rotate\(([^)]+)deg\)/);
-        accumulatedRotation = match ? parseFloat(match[1]) : 0;
+        const currentRotation = match ? parseFloat(match[1]) : 0;
+        
+        // Проверяем соответствие rotation текущему весу
+        const expectedWeight = state.weight_kg || DISPLAY_MIN;
+        const weightFromRotation = rotationToWeight(currentRotation);
+        
+        // Если расхождение больше 2 кг - пересинхронизируем
+        if (Math.abs(weightFromRotation - expectedWeight) > 2) {
+          // Пересчитываем rotation из текущего веса
+          const weightRange = DISPLAY_MAX - DISPLAY_MIN;
+          const normalized = (expectedWeight - DISPLAY_MIN) / weightRange;
+          accumulatedRotation = normalized * 360;
+          rotor.style.transform = `rotate(${accumulatedRotation}deg)`;
+        } else {
+          accumulatedRotation = currentRotation;
+        }
+        
         wheelWrapEl.style.cursor = 'grabbing';
         rotor.style.cursor = 'grabbing';
+        
+        // КРИТИЧНО: отключаем transition через класс
+        rotor.classList.add('dragging');
       }
       
       function doDrag(clientX, clientY) {
@@ -4566,27 +4595,23 @@
         accumulatedRotation += deltaAngle;
         
         // Используем RAF для плавности
-        scheduleWeightUpdate(rotationToWeight(accumulatedRotation));
+        updateWeight(rotationToWeight(accumulatedRotation));
         
         lastAngle = currentAngle;
       }
       
 
-      
-      // Throttle для touch move (только каждые 16ms = 60fps)
-      let lastTouchTime = 0;
-      function doDragThrottled(clientX, clientY) {
-        const now = Date.now();
-        if (now - lastTouchTime < 16) return; // 60fps max
-        lastTouchTime = now;
-        doDrag(clientX, clientY);
-      }
+
       
       function endDrag() {
         if (isDragging) {
           isDragging = false;
           wheelWrapEl.style.cursor = 'grab';
           rotor.style.cursor = 'grab';
+          
+          // Возвращаем transition через удаление класса
+          rotor.classList.remove('dragging');
+          lastSetWeight = null; // Сброс для следующего драга
         }
       }
       
@@ -4596,8 +4621,14 @@
       document.addEventListener('mouseup', endDrag);
       
       // Touch
+      let touchStartTime = 0;
       wheelWrapEl.addEventListener('touchstart', (e) => {
         if (e.touches.length === 1) {
+          // Защита от double-touch (< 50ms)
+          const now = Date.now();
+          if (now - touchStartTime < 50) return;
+          touchStartTime = now;
+          
           // Немедленный отклик
           startDrag(e.touches[0].clientX, e.touches[0].clientY);
           e.preventDefault();
@@ -4608,7 +4639,7 @@
       
       wheelWrapEl.addEventListener('touchmove', (e) => {
         if (isDragging && e.touches.length === 1) {
-          doDragThrottled(e.touches[0].clientX, e.touches[0].clientY);
+          doDrag(e.touches[0].clientX, e.touches[0].clientY);
           e.preventDefault();
           e.stopPropagation();
         }
