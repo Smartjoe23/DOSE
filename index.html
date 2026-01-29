@@ -4030,8 +4030,17 @@
         if (!avail.includes(state.mgkg_per_day)) state.mgkg_per_day = avail[0] ?? null;
       }
 
+      // Обновляем UI
+      weightRange.value = clamped;
+      weightInput.value = clamped;
+      
       if (before !== clamped) renderAll();
       else renderAll();
+      
+      // Синхронизируем колесо если изменение НЕ от колеса
+      if (from !== "wheel" && typeof window.syncWheelRotation === 'function') {
+        window.syncWheelRotation(clamped);
+      }
     }
 
     // ---------- Wheel + result ----------
@@ -4511,6 +4520,21 @@
       let isDragging = false;
       let lastAngle = 0;
       let accumulatedRotation = 0;
+      
+      // Глобальная синхронизация rotation с весом
+      function syncRotationFromWeight(weight) {
+        if (isDragging) return; // Не трогаем во время драга
+        
+        const weightRange = DISPLAY_MAX - DISPLAY_MIN;
+        const normalized = (weight - DISPLAY_MIN) / weightRange;
+        accumulatedRotation = normalized * 360;
+        
+        if (rotor) {
+          rotor.style.transform = `rotate(${accumulatedRotation}deg)`;
+        }
+      }
+      
+      window.syncWheelRotation = syncRotationFromWeight;
       
       const wheelWrapEl = document.querySelector('.wheel-wrap');
       if (!wheelWrapEl) return;
