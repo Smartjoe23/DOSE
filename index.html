@@ -4502,11 +4502,13 @@
     // ---------- Kickoff ----------
     renderAll();
 
-    // ========== WHEEL INTERACTION - вся область активна ==========
+    // ========== WHEEL INTERACTION - оптимизировано без залипания ==========
     (function() {
       let isDragging = false;
       let lastAngle = 0;
       let accumulatedRotation = 0;
+      let rafId = null;
+      let pendingWeight = null;
       
       const wheelWrapEl = document.querySelector('.wheel-wrap');
       if (!wheelWrapEl) return;
@@ -4533,6 +4535,20 @@
         return Math.max(DISPLAY_MIN, Math.min(DISPLAY_MAX, Math.round(weight)));
       }
       
+      // Оптимизированное обновление через RAF
+      function scheduleWeightUpdate(newWeight) {
+        pendingWeight = newWeight;
+        if (!rafId) {
+          rafId = requestAnimationFrame(() => {
+            if (pendingWeight !== null) {
+              setWeight(pendingWeight, "wheel");
+              pendingWeight = null;
+            }
+            rafId = null;
+          });
+        }
+      }
+      
       function startDrag(clientX, clientY) {
         isDragging = true;
         lastAngle = getMouseAngle(clientX, clientY);
@@ -4548,8 +4564,22 @@
         const currentAngle = getMouseAngle(clientX, clientY);
         let deltaAngle = normalizeAngleDelta(currentAngle - lastAngle);
         accumulatedRotation += deltaAngle;
-        setWeight(rotationToWeight(accumulatedRotation), "wheel");
+        
+        // Используем RAF для плавности
+        scheduleWeightUpdate(rotationToWeight(accumulatedRotation));
+        
         lastAngle = currentAngle;
+      }
+      
+
+      
+      // Throttle для touch move (только каждые 16ms = 60fps)
+      let lastTouchTime = 0;
+      function doDragThrottled(clientX, clientY) {
+        const now = Date.now();
+        if (now - lastTouchTime < 16) return; // 60fps max
+        lastTouchTime = now;
+        doDrag(clientX, clientY);
       }
       
       function endDrag() {
@@ -4578,7 +4608,7 @@
       
       wheelWrapEl.addEventListener('touchmove', (e) => {
         if (isDragging && e.touches.length === 1) {
-          doDrag(e.touches[0].clientX, e.touches[0].clientY);
+          doDragThrottled(e.touches[0].clientX, e.touches[0].clientY);
           e.preventDefault();
           e.stopPropagation();
         }
