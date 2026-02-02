@@ -147,6 +147,34 @@
       font-weight: 900;
     }
     .icon-btn:hover{border-color: var(--sandoz-light-blue)}
+    
+    .lang-switcher {
+      display: flex;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      overflow: hidden;
+      background: var(--card);
+    }
+    .lang-btn {
+      padding: 8px 12px;
+      border: none;
+      background: transparent;
+      cursor: pointer;
+      font-weight: 700;
+      font-size: 13px;
+      color: var(--muted);
+      transition: all 0.2s;
+    }
+    .lang-btn:first-child {
+      border-right: 1px solid var(--border);
+    }
+    .lang-btn.active {
+      background: var(--sandoz-blue);
+      color: white;
+    }
+    .lang-btn:hover:not(.active) {
+      background: rgba(28, 89, 181, 0.1);
+    }
 
     .controls{
       background: var(--card);
@@ -985,10 +1013,12 @@
   <div class="modal-backdrop" id="modalBackdrop" role="dialog" aria-modal="true" aria-label="Информация">
     <div class="modal">
       <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;">
-        <h3 style="margin: 0; font-family: var(--font-display); color: var(--sandoz-dark-blue); font-size: 22px;">📖 Руководство пользователя</h3>
+        <h3 id="infoModalTitle" style="margin: 0; font-family: var(--font-display); color: var(--sandoz-dark-blue); font-size: 22px;">📖 Руководство пользователя</h3>
         <button class="icon-btn" id="closeModal" aria-label="Закрыть">✕</button>
       </div>
-      <div style="max-height: 70vh; overflow-y: auto; padding-right: 10px;">
+      
+      <!-- Russian Info Content -->
+      <div id="infoContentRu" style="max-height: 70vh; overflow-y: auto; padding-right: 10px;">
         <p style="font-size: 14px; line-height: 1.6; color: var(--muted); margin-bottom: 20px;">
           <strong style="color: var(--sandoz-dark-blue);">Интерактивный калькулятор дозирования</strong> суспензионных форм антибиотиков составлен на основе утвержденных инструкций по медицинскому применению лекарственных препаратов (Листок-вкладыш) в Республике Казахстан.
         </p>
@@ -1005,7 +1035,7 @@
         <ul style="list-style: none; padding: 0; margin: 0 0 20px 0;">
           <li style="padding: 8px 12px; background: rgba(28, 89, 181, 0.05); border-radius: 8px; margin-bottom: 6px;">
             <strong style="color: var(--sandoz-blue);">Амоксиклав®</strong><br>
-            <span style="font-size: 12px; color: var(--muted);">3 концентрации • Вес 2-40 кг • 20-70 мг/кг/сутки</span>
+            <span style="font-size: 12px; color: var(--muted);">3 концентрации • Вес 2-40 кг • 20-60 мг/кг/сутки</span>
           </li>
           <li style="padding: 8px 12px; background: rgba(28, 89, 181, 0.05); border-radius: 8px; margin-bottom: 6px;">
             <strong style="color: var(--sandoz-blue);">Оспамокс</strong><br>
@@ -1065,6 +1095,86 @@
           </p>
         </div>
       </div>
+      
+      <!-- Kazakh Info Content -->
+      <div id="infoContentKz" style="display:none; max-height: 70vh; overflow-y: auto; padding-right: 10px;">
+        <p style="font-size: 14px; line-height: 1.6; color: var(--muted); margin-bottom: 20px;">
+          <strong style="color: var(--sandoz-dark-blue);">Интерактивті антибиотик суспензияларының дозалау калькуляторы</strong> Қазақстан Республикасында бекітілген дәрілік препараттардың медициналық қолданылуы жөніндегі нұсқаулықтар (Жапсырма-парақша) негізінде жасалған.
+        </p>
+        
+        <p style="font-size: 13px; line-height: 1.6; color: var(--muted); margin-bottom: 20px; padding: 12px; background: rgba(28, 89, 181, 0.05); border-radius: 8px;">
+          <strong style="color: var(--sandoz-dark-blue);">Өндірушіге шағымдарды қабылдайтын және дәрілік заттың қауіпсіздігін посттіркеуден кейінгі бақылауға жауапты ұйым:</strong><br>
+          «Сандоз Қазақстан» ЖШС, Алматы қ., 050000, Құрманғазы к-сі, 95.<br>
+          Тел.: +7 (727) 258 24 47.<br>
+          Факс: +7 (727) 244 26 51.<br>
+          E-mail: <a href="mailto:drugsafety.cis@novartis.com" style="color: var(--sandoz-blue);">drugsafety.cis@novartis.com</a>
+        </p>
+
+        <h4 style="margin: 20px 0 10px; color: var(--sandoz-dark-blue); font-size: 15px;">💊 Дерекқордағы препараттар</h4>
+        <ul style="list-style: none; padding: 0; margin: 0 0 20px 0;">
+          <li style="padding: 8px 12px; background: rgba(28, 89, 181, 0.05); border-radius: 8px; margin-bottom: 6px;">
+            <strong style="color: var(--sandoz-blue);">Амоксиклав®</strong><br>
+            <span style="font-size: 12px; color: var(--muted);">3 концентрация • Салмақ 2-40 кг • 20-60 мг/кг/тәул.</span>
+          </li>
+          <li style="padding: 8px 12px; background: rgba(28, 89, 181, 0.05); border-radius: 8px; margin-bottom: 6px;">
+            <strong style="color: var(--sandoz-blue);">Оспамокс</strong><br>
+            <span style="font-size: 12px; color: var(--muted);">2 концентрация • Салмақ 2-40 кг • 40-90 мг/кг/тәул. • Тәулігіне 2 рет</span>
+          </li>
+          <li style="padding: 8px 12px; background: rgba(28, 89, 181, 0.05); border-radius: 8px;">
+            <strong style="color: var(--sandoz-blue);">Азидрат</strong><br>
+            <span style="font-size: 12px; color: var(--muted);">2 концентрация • Салмақ 5-45 кг • 10 мг/кг/тәул. • Тәулігіне 1 рет • 3 күн</span>
+          </li>
+        </ul>
+
+        <h4 style="margin: 20px 0 10px; color: var(--sandoz-dark-blue); font-size: 15px;">🎯 Қалай пайдалану керек</h4>
+        <ol style="font-size: 13px; line-height: 1.7; color: var(--text); padding-left: 18px; margin-bottom: 20px;">
+          <li style="margin-bottom: 8px;">Жоғарғы панельден <strong>препаратты</strong> таңдаңыз</li>
+          <li style="margin-bottom: 8px;"><strong>Концентрацияны</strong> (шығару түрін) таңдаңыз</li>
+          <li style="margin-bottom: 8px;"><strong>Дозалау режимін</strong> таңдаңыз (мг/кг/тәул.)</li>
+          <li style="margin-bottom: 8px;"><strong>Пациенттің салмағын</strong> слайдер арқылы немесе қолмен енгізіңіз</li>
+          <li style="margin-bottom: 8px;">Дөңгелек <strong>автоматты түрде бір реттік дозаны</strong> көрсетеді</li>
+          <li>Толық кестені көру үшін <strong>«Карта бойынша тексеру»</strong> батырмасын басыңыз</li>
+        </ol>
+
+        <h4 style="margin: 20px 0 10px; color: var(--sandoz-dark-blue); font-size: 15px;">🔄 Айналмалы дөңгелек</h4>
+        <p style="font-size: 13px; line-height: 1.6; color: var(--text); margin-bottom: 20px;">
+          Бұл дәрілік препараттың бір реттік дозасын расталған медициналық нұсқаулыққа сәйкес визуалды көрсету.
+        </p>
+
+        <h4 style="margin: 20px 0 10px; color: var(--sandoz-dark-blue); font-size: 15px;">⚠️ Маңызды ескертпелер</h4>
+        <ul style="font-size: 12px; line-height: 1.6; color: var(--muted); padding-left: 18px; margin-bottom: 20px;">
+          <li style="margin-bottom: 6px;">Дозалар тек <strong>бекітілген ресми реестрден</strong> алынады</li>
+          <li style="margin-bottom: 6px;">Формула бойынша автоматты есептеу <strong>жүргізілмейді</strong></li>
+          <li style="margin-bottom: 6px;">Егер көрсетілген салмаққа арналған доза болмаса — жүйе «доза жоқ» деп көрсетеді</li>
+        </ul>
+
+        <h4 style="margin: 20px 0 10px; color: var(--sandoz-dark-blue); font-size: 15px;">🏥 Медициналық жауапкершілік</h4>
+        <div style="background: linear-gradient(135deg, rgba(252, 82, 45, 0.1), rgba(213, 134, 44, 0.1)); border-left: 4px solid var(--sandoz-orange); padding: 12px 15px; border-radius: 8px; margin-bottom: 20px;">
+          <p style="font-size: 12px; line-height: 1.5; color: var(--text); margin: 0;">
+            <strong>МАТЕРИАЛ ДЕНСАУЛЫҚ САҚТАУ МАМАНДАРЫНА АРНАЛҒАН.</strong><br>
+            ҚОЛДАНАР АЛДЫНДА ДӘРІЛІК ПРЕПАРАТТЫҢ ТОЛЫҚ МЕДИЦИНАЛЫҚ НҰСҚАУЛЫҒЫМЕН ТАНЫСЫҢЫЗ.<br>
+            ӨЗІН-ӨЗІ ЕМДЕУ ДЕНСАУЛЫҚҚА ҚАУІПТІ БОЛУЫ МҮМКІН.<br><br>
+            Клиникалық шешімдерді қабылдау және препаратты тағайындау үшін жауапкершілік емдеуші дәрігерге жүктеледі. Бұл құрал Қазақстан Республикасында бекітілген дәрілік препараттардың медициналық нұсқаулықтары (Жапсырма-парақша) негізінде әзірленген анықтамалық көмекші материал болып табылады.
+          </p>
+        </div>
+
+        <h4 style="margin: 20px 0 10px; color: var(--sandoz-dark-blue); font-size: 15px;">📊 Техникалық ерекшеліктер</h4>
+        <ul style="font-size: 12px; line-height: 1.6; color: var(--muted); padding-left: 18px; margin-bottom: 20px;">
+          <li style="margin-bottom: 6px;"><strong>Sandoz</strong> фирмалық стиліндегі дизайн</li>
+          <li style="margin-bottom: 6px;">Премиум типография: <strong>Sora + IBM Plex Sans</strong></li>
+          <li style="margin-bottom: 6px;">Корпоративтік түстер және брендтеу</li>
+          <li style="margin-bottom: 6px;">Планшет және мобильді құрылғыларға бейімделген интерфейс</li>
+          <li style="margin-bottom: 6px;">Жүктелгеннен кейін толық <strong>офлайн</strong> жұмыс істейді</li>
+          <li style="margin-bottom: 6px;">Нәтижелерді алмасу буферіне көшіру батырмасы бар</li>
+        </ul>
+
+        <div style="text-align: center; padding: 15px; background: rgba(28, 89, 181, 0.05); border-radius: 10px; margin-top: 25px;">
+          <p style="font-size: 11px; color: var(--muted); margin: 0;">
+            <strong style="color: var(--sandoz-blue);">Sandoz</strong> • Қазақстандағы дозировкалық карталар • 2026
+          </p>
+        </div>
+      </div>
+      
     </div>
   </div>
 
@@ -1072,7 +1182,7 @@
   <div class="drawer" id="drawer" aria-hidden="true">
     <header>
       <div class="brand">
-        <h1>Проверка по карте</h1>
+        <h1 id="drawerTitle">Проверка по карте</h1>
         <div class="sub" id="drawerSub"></div>
       </div>
       <div style="display:flex; gap:10px; align-items:center;">
@@ -1086,11 +1196,11 @@
         <table>
           <thead>
             <tr>
-              <th style="width:120px;">Вес</th>
-              <th style="width:160px;">Режим</th>
-              <th style="width:140px;">Мл / приём</th>
-              <th style="width:120px;">Раз/сут</th>
-              <th>Источник</th>
+              <th id="thWeight" style="width:120px;">Вес</th>
+              <th id="thRegimen" style="width:160px;">Режим</th>
+              <th id="thMlDose" style="width:140px;">Мл / приём</th>
+              <th id="thFreqDay" style="width:120px;">Раз/сут</th>
+              <th id="thSource">Источник</th>
             </tr>
           </thead>
           <tbody id="drawerTbody"></tbody>
@@ -1106,7 +1216,11 @@
         <div class="sub" id="subtitle">Основано на утвержденной инструкции по медицинскому применению лекарственного препарата (Листок-вкладыш)</div>
       </div>
       <div style="display:flex; gap:12px; align-items:center;">
-        <button class="instructions-btn" onclick="window.openInstructions()">Инструкции</button>
+        <div class="lang-switcher">
+          <button class="lang-btn active" data-lang="ru" onclick="setLanguage('ru')">RU</button>
+          <button class="lang-btn" data-lang="kz" onclick="setLanguage('kz')">KZ</button>
+        </div>
+        <button class="instructions-btn" onclick="window.openInstructions()" id="instructionsBtn">Инструкции</button>
         <button class="icon-btn" id="infoBtn" aria-label="Информация">i</button>
       </div>
     </header>
@@ -1114,26 +1228,26 @@
     <section class="controls" aria-label="Управление">
       <div class="row">
         <div class="field">
-          <div class="label">Препарат</div>
+          <div class="label" id="labelProduct">Препарат</div>
           <div class="segmented" id="productSeg" role="group" aria-label="Препарат"></div>
         </div>
 
         <div class="field">
-          <div class="label">Форма / концентрация</div>
+          <div class="label" id="labelVariant">Форма / концентрация</div>
           <div class="tiles" id="variantTiles"></div>
         </div>
 
         <div class="field small" id="mgkgField" style="display:none;">
-          <div class="label">Режим дозирования (мг/кг/сут)</div>
+          <div class="label" id="labelMgkg">Режим дозирования (мг/кг/сут)</div>
           <div class="chips" id="mgkgChips"></div>
         </div>
 
         <div class="field small">
-          <div class="label">Расчет разовой дозы препарата по массе тела</div>
+          <div class="label" id="labelWeight">Расчет разовой дозы препарата по массе тела</div>
           <div class="weight">
             <input type="range" id="weightRange" min="2" max="45" step="1" value="10" aria-label="Вес, кг">
             <input type="number" id="weightInput" class="num" min="2" max="45" step="1" value="10" inputmode="numeric" aria-label="Вес, кг">
-            <div style="font-weight:900; color:var(--muted);">кг</div>
+            <div style="font-weight:900; color:var(--muted);" id="labelKg">кг</div>
           </div>
           <div class="hint" id="weightHint"></div>
         </div>
@@ -1164,23 +1278,23 @@
 
         <div class="kv" aria-live="polite">
           <div class="line">
-            <div class="k">Разовая доза</div>
+            <div class="k" id="labelDose">Разовая доза</div>
             <div class="v" id="doseMl">—</div>
           </div>
           <div class="line">
-            <div class="k">Кратность</div>
+            <div class="k" id="labelFreq">Кратность</div>
             <div class="v small" id="freq">—</div>
           </div>
           <div class="line">
-            <div class="k">Суточно</div>
+            <div class="k" id="labelDaily">Суточно</div>
             <div class="v" id="daily">—</div>
           </div>
           <div class="line" id="courseLine" style="display:none;">
-            <div class="k">Курс</div>
+            <div class="k" id="labelCourse">Курс</div>
             <div class="v small" id="course">—</div>
           </div>
           <div class="line" id="regimenLine" style="display:none;">
-            <div class="k">Режим</div>
+            <div class="k" id="labelRegimen">Режим</div>
             <div class="v small" id="regimen">—</div>
           </div>
         </div>
@@ -1196,7 +1310,7 @@
   </div>
 
   <!-- Embedded registry -->
-  <script id="registryData" type="application/json">{
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script id="registryData" type="application/json">{
   "meta": {
     "source_file": "Доз_карты_КЗ_-_2026.xlsx",
     "generated_date": "2026-01-30",
@@ -5127,6 +5241,222 @@
   (() => {
     "use strict";
 
+    // ---------- Translations ----------
+    const translations = {
+      ru: {
+        // Header
+        title: "Калькулятор дозирования",
+        subtitle: "Основано на утвержденной инструкции по медицинскому применению лекарственного препарата (Листок-вкладыш)",
+        instructionsBtn: "Инструкции",
+        
+        // Controls
+        product: "Препарат",
+        formConcentration: "Форма / концентрация",
+        dosingRegimen: "Режим дозирования (мг/кг/сут)",
+        weightCalc: "Расчет разовой дозы препарата по массе тела",
+        
+        // Result
+        singleDose: "Разовая доза",
+        frequency: "Кратность",
+        dailyVolume: "Суточно",
+        regimen: "Режим",
+        
+        // Buttons
+        copyBtn: "Скопировать назначение",
+        checkCard: "Проверка по карте",
+        
+        // Drawer
+        drawerTitle: "Расчет дозы препарата по массе тела",
+        weightKg: "кг",
+        clickToSelect: "Нажми, чтобы выбрать",
+        
+        // Toast
+        copied: "Скопировано",
+        
+        // Modal titles
+        userGuide: "Руководство пользователя",
+        
+        // Frequency
+        timesPerDay2: "2 раз/сут",
+        timesPerDay3: "3 раз/сут",
+        oncePerDay: "1 раз/сут",
+        
+        // Info modal
+        introText: "Интерактивный калькулятор дозирования",
+        introDesc: "суспензионных форм антибиотиков составлен на основе утвержденных инструкций по медицинскому применению лекарственных препаратов (Листок-вкладыш) в Республике Казахстан.",
+        orgTitle: "Организация, принимающая претензии (предложения) по качеству лекарственных средств от потребителей и ответственная за пострегистрационное наблюдение за безопасностью лекарственного средства:",
+        orgName: "ТОО «Сандоз Казахстан», г. Алматы, 050000, ул. Курмангазы 95.",
+        phone: "Телефон",
+        fax: "Факс",
+        drugsInBase: "Препараты в базе",
+        howToUse: "Как пользоваться",
+        step1: "Выберите <strong>препарат</strong> в верхней панели",
+        step2: "Выберите <strong>концентрацию</strong> (форму выпуска)",
+        step3: "Выберите <strong>режим дозирования</strong> (мг/кг/сутки)",
+        step4: "Установите <strong>вес пациента</strong> слайдером или введите вручную",
+        step5: "Колесо <strong>автоматически покажет дозу</strong> в окошке",
+        rotatingWheel: "Вращающееся колесо",
+        wheelDesc: "Это визуальное отображение разовой дозы препарата в соответствии с утверждённой медицинской инструкцией.",
+        importantNotes: "Важные замечания",
+        note1: "Дозировки берутся только из официального утверждённого реестра",
+        note2: "Автоматический расчёт по формуле не производится",
+        note3: "Если для указанного веса нет дозы — система покажет «доза отсутствует»",
+        medicalResp: "Медицинская ответственность",
+        disclaimer1: "Материал предназначен для медицинских специалистов.",
+        disclaimer2: "Перед применением ознакомьтесь с полной медицинской инструкцией лекарственного препарата.",
+        disclaimer3: "Самолечение может быть опасно для здоровья.",
+        disclaimer4: "Ответственность за принятие клинических решений и назначение препарата несёт лечащий врач.",
+        disclaimer5: "Данный инструмент является справочным вспомогательным материалом, разработанным на основе утверждённых медицинских инструкций лекарственных препаратов (Листок-вкладыш) в Республике Казахстан.",
+        techSpecs: "Технические характеристики",
+        tech1: "Дизайн в фирменном стиле Sandoz",
+        tech2: "Премиальная типографика: <strong>Sora + IBM Plex Sans</strong>",
+        tech3: "Корпоративные цвета и брендинг",
+        tech4: "Интерфейс адаптирован для планшетов и мобильных",
+        tech5: "Полностью работает оффлайн после загрузки",
+        tech6: "Кнопка копирования результатов в буфер обмена",
+        footer: "Sandoz • Дозировочные карты Казахстан • 2026",
+        
+        // Concentrations
+        conc: "концентрации",
+        weight: "Вес",
+        perDay: "раза в день",
+        
+        // Wheel windows
+        clickToSelect: "Нажми, чтобы выбрать",
+        noInCard: "Нет по карте",
+        dose: "Доза",
+        ml: "мл",
+        mgkgday: "мг/кг/сут",
+        timesDay: "×/сут",
+        course3days: "3 дня",
+        
+        // Drawer
+        checkByCard: "Проверка по карте",
+        showAllTable: "Показать всю таблицу",
+        showNearWeight: "Показать рядом с весом",
+        thWeight: "Вес",
+        thRegimen: "Режим",
+        thMlDose: "Мл / приём",
+        thFreqDay: "Раз/сут",
+        thSource: "Источник",
+        weightLabel: "Вес",
+        timesPerDayShort: "раза в сутки",
+        years: "лет",
+        mlSut: "мл/сут",
+        freqPerDay: "раз/сут"
+      },
+      kz: {
+        // Header
+        title: "Дозалау калькуляторы",
+        subtitle: "Дәрілік препараттың медициналық қолданылуы жөніндегі бекітілген нұсқаулыққа (Жапсырма-парақша) негізделген",
+        instructionsBtn: "Нұсқаулықтар",
+        
+        // Controls
+        product: "Дәрілік препарат",
+        formConcentration: "Форма / концентрация",
+        dosingRegimen: "Дозалау режимі (мг/кг/тәул.)",
+        weightCalc: "Дене салмағына қарай дәрілік препараттың бір реттік дозасын есептеу",
+        
+        // Result
+        singleDose: "Бір реттік доза",
+        frequency: "Қабылдау жиілігі",
+        dailyVolume: "Тәуліктік көлем",
+        regimen: "Режим",
+        
+        // Buttons
+        copyBtn: "Тағайындауды көшіру",
+        checkCard: "Карта бойынша тексеру",
+        
+        // Drawer
+        drawerTitle: "Дене салмағы бойынша дәрілік препарат дозасын есептеу",
+        weightKg: "кг",
+        clickToSelect: "Басу арқылы таңдаңыз",
+        
+        // Toast
+        copied: "Көшірілді",
+        
+        // Modal titles
+        userGuide: "Пайдаланушы нұсқаулығы",
+        
+        // Frequency
+        timesPerDay2: "тәулігіне 2 рет",
+        timesPerDay3: "тәулігіне 3 рет",
+        oncePerDay: "тәулігіне 1 рет",
+        
+        // Info modal
+        introText: "Интерактивті антибиотик суспензияларының дозалау калькуляторы",
+        introDesc: "Қазақстан Республикасында бекітілген дәрілік препараттардың медициналық қолданылуы жөніндегі нұсқаулықтар (Жапсырма-парақша) негізінде жасалған.",
+        orgTitle: "Өндірушіге шағымдарды қабылдайтын және дәрілік заттың қауіпсіздігін посттіркеуден кейінгі бақылауға жауапты ұйым:",
+        orgName: "«Сандоз Қазақстан» ЖШС, Алматы қ., 050000, Құрманғазы к-сі, 95.",
+        phone: "Тел.",
+        fax: "Факс",
+        drugsInBase: "Дерекқордағы препараттар",
+        howToUse: "Қалай пайдалану керек",
+        step1: "Жоғарғы панельден <strong>препаратты</strong> таңдаңыз",
+        step2: "<strong>Концентрацияны</strong> (шығару түрін) таңдаңыз",
+        step3: "<strong>Дозалау режимін</strong> таңдаңыз (мг/кг/тәул.)",
+        step4: "<strong>Пациенттің салмағын</strong> слайдер арқылы немесе қолмен енгізіңіз",
+        step5: "Дөңгелек <strong>автоматты түрде бір реттік дозаны</strong> көрсетеді",
+        rotatingWheel: "Айналмалы дөңгелек",
+        wheelDesc: "Бұл дәрілік препараттың бір реттік дозасын расталған медициналық нұсқаулыққа сәйкес визуалды көрсету.",
+        importantNotes: "Маңызды ескертпелер",
+        note1: "Дозалар тек бекітілген ресми реестрден алынады",
+        note2: "Формула бойынша автоматты есептеу жүргізілмейді",
+        note3: "Егер көрсетілген салмаққа арналған доза болмаса — жүйе «доза жоқ» деп көрсетеді",
+        medicalResp: "Медициналық жауапкершілік",
+        disclaimer1: "Материал денсаулық сақтау мамандарына арналған.",
+        disclaimer2: "Қолданар алдында дәрілік препараттың толық медициналық нұсқаулығымен танысыңыз.",
+        disclaimer3: "Өзін-өзі емдеу денсаулыққа қауіпті болуы мүмкін.",
+        disclaimer4: "Клиникалық шешімдерді қабылдау және препаратты тағайындау үшін жауапкершілік емдеуші дәрігерге жүктеледі.",
+        disclaimer5: "Бұл құрал Қазақстан Республикасында бекітілген дәрілік препараттардың медициналық нұсқаулықтары (Жапсырма-парақша) негізінде әзірленген анықтамалық көмекші материал болып табылады.",
+        techSpecs: "Техникалық ерекшеліктер",
+        tech1: "Sandoz фирмалық стиліндегі дизайн",
+        tech2: "Премиум типография: <strong>Sora + IBM Plex Sans</strong>",
+        tech3: "Корпоративтік түстер және брендтеу",
+        tech4: "Планшет және мобильді құрылғыларға бейімделген интерфейс",
+        tech5: "Жүктелгеннен кейін толық офлайн жұмыс істейді",
+        tech6: "Нәтижелерді алмасу буферіне көшіру батырмасы бар",
+        footer: "Sandoz • Қазақстандағы дозировкалық карталар • 2026",
+        
+        // Concentrations
+        conc: "концентрация",
+        weight: "Салмақ",
+        perDay: "рет күніне",
+        
+        // Wheel windows
+        clickToSelect: "Басу арқылы таңдаңыз",
+        noInCard: "Картада жоқ",
+        dose: "Доза",
+        ml: "мл",
+        mgkgday: "мг/кг/тәул",
+        timesDay: "×/тәул",
+        course3days: "3 күн",
+        
+        // Drawer
+        checkByCard: "Карта бойынша тексеру",
+        showAllTable: "Толық кестені көрсету",
+        showNearWeight: "Салмақ бойынша көрсету",
+        thWeight: "Салмақ",
+        thRegimen: "Режим",
+        thMlDose: "Мл / қабылдау",
+        thFreqDay: "Рет/тәул",
+        thSource: "Клиникалық деректер",
+        weightLabel: "Салмақ",
+        timesPerDayShort: "рет тәулігіне",
+        years: "жас",
+        mlSut: "мл/тәул",
+        freqPerDay: "рет/тәул"
+      }
+    };
+    
+    let currentLang = localStorage.getItem('dosing_calc_lang') || 'ru';
+    
+    // Translation helper function
+    function t(key) {
+      const lang = window.currentLangGlobal || currentLang;
+      return translations[lang]?.[key] || translations.ru[key] || key;
+    }
+
     // ---------- Data ----------
     const registry = JSON.parse(document.getElementById("registryData").textContent);
 
@@ -5227,9 +5557,10 @@
     copyBtn.addEventListener("click", async () => {
       const text = buildCopyText();
       if (!text) return;
+      const copiedMsg = window.currentLangTranslations?.copied || "Скопировано";
       try {
         await navigator.clipboard.writeText(text);
-        showToast("Скопировано");
+        showToast(copiedMsg);
       } catch (err) {
         const ta = document.createElement("textarea");
         ta.value = text;
@@ -5237,7 +5568,7 @@
         ta.select();
         document.execCommand("copy");
         document.body.removeChild(ta);
-        showToast("Скопировано");
+        showToast(copiedMsg);
       }
     });
 
@@ -5247,7 +5578,7 @@
 
     toggleAll.addEventListener("click", () => {
       state.showAllTable = !state.showAllTable;
-      toggleAll.textContent = state.showAllTable ? "Показать рядом с весом" : "Показать всю таблицу";
+      toggleAll.textContent = state.showAllTable ? t('showNearWeight') : t('showAllTable');
       renderDrawer();
     });
 
@@ -5307,9 +5638,18 @@
         b.type = "button";
         b.className = "tile";
         b.setAttribute("aria-pressed", v.variant_id === state.variant_id ? "true" : "false");
+        
+        // Translate title for KZ
+        let titleText = v.title_ru || "";
+        if (window.currentLangGlobal === 'kz' && titleText) {
+          titleText = titleText
+            .replace(/Дозировочная карта для препарата/gi, 'Препаратқа арналған дозалау картасы')
+            .replace(/Расчет разовой дозы препарата/gi, 'Препараттың бір реттік дозасын есептеу');
+        }
+        
         b.innerHTML = `
           <div class="t">${escapeHtml(v.strength_label_ru || v.title_ru)}</div>
-          <div class="d">${escapeHtml(shortTitle(v.title_ru || ""))}</div>
+          <div class="d">${escapeHtml(shortTitle(titleText))}</div>
         `;
         b.addEventListener("click", () => setVariant(v.variant_id));
         variantTiles.appendChild(b);
@@ -5428,15 +5768,21 @@
       if (from === "input") {
         const raw = Number(weightInput.value);
         if (!Number.isFinite(raw)) {
-          weightHint.textContent = "Введите число (кг)";
+          weightHint.textContent = window.currentLangGlobal === 'kz' ? "Санды енгізіңіз (кг)" : "Введите число (кг)";
           weightHint.classList.add("warn");
         } else if (Math.round(raw) !== raw) {
-          weightHint.textContent = `Округлено до ${Math.round(raw)} кг`;
+          const roundedMsg = window.currentLangGlobal === 'kz' 
+            ? `${Math.round(raw)} кг дейін дөңгелектелді` 
+            : `Округлено до ${Math.round(raw)} кг`;
+          weightHint.textContent = roundedMsg;
           weightHint.classList.add("warn");
         }
       }
       if (clamped !== w) {
-        weightHint.textContent = `Диапазон для формы: ${Math.round(v.weight_min_kg)}–${Math.round(v.weight_max_kg)} кг`;
+        const rangeMsg = window.currentLangGlobal === 'kz'
+          ? `Форма диапазоны: ${Math.round(v.weight_min_kg)}–${Math.round(v.weight_max_kg)} кг`
+          : `Диапазон для формы: ${Math.round(v.weight_min_kg)}–${Math.round(v.weight_max_kg)} кг`;
+        weightHint.textContent = rangeMsg;
         weightHint.classList.add("warn");
       }
 
@@ -5481,11 +5827,11 @@
           el.className = "window" + (opt === state.mgkg_per_day ? " active" : "") + (disabled ? " disabled" : "");
           el.innerHTML = `
             <div class="w-top">
-              <div class="w-title">${formatMgkg(opt)} мг/кг/сут</div>
-              <div class="w-title">${row ? `${row.freq_per_day}×/сут` : ""}</div>
+              <div class="w-title">${formatMgkg(opt)} ${t('mgkgday')}</div>
+              <div class="w-title">${row ? `${row.freq_per_day}${t('timesDay')}` : ""}</div>
             </div>
-            <div class="w-dose">${row ? formatMl(row.dose_ml) : "—"} <span style="font-size:14px; font-weight:900;">мл</span></div>
-            <div class="w-sub">${disabled ? "Нет по карте" : "Нажми, чтобы выбрать"}</div>
+            <div class="w-dose">${row ? formatMl(row.dose_ml) : "—"} <span style="font-size:14px; font-weight:900;">${t('ml')}</span></div>
+            <div class="w-sub">${disabled ? t('noInCard') : t('clickToSelect')}</div>
           `;
           if (!disabled) el.addEventListener("click", () => setMgkg(opt));
           windowsEl.appendChild(el);
@@ -5498,14 +5844,21 @@
         el.style.minWidth = "220px";
         // Извлекаем возраст из weight_raw если есть
         const ageMatch = row && row.weight_raw ? row.weight_raw.match(/\(([^)]+)\)/) : null;
-        const ageText = ageMatch ? ` · ${ageMatch[1]}` : "";
+        let ageText = "";
+        if (ageMatch) {
+          let ageStr = ageMatch[1];
+          if (window.currentLangGlobal === 'kz') {
+            ageStr = ageStr.replace(/лет|года|год/gi, 'жас');
+          }
+          ageText = ` · ${ageStr}`;
+        }
         el.innerHTML = `
           <div class="w-top">
-            <div class="w-title">Доза</div>
-            <div class="w-title">${(row ? `${row.freq_per_day}×/сут` : "")}</div>
+            <div class="w-title">${t('dose')}</div>
+            <div class="w-title">${(row ? `${row.freq_per_day}${t('timesDay')}` : "")}</div>
           </div>
-          <div class="w-dose">${row ? formatMl(row.dose_ml) : "—"} <span style="font-size:14px; font-weight:900;">мл</span></div>
-          <div class="w-sub">${v.therapy_days ? `${v.therapy_days} дня${ageText}` : ""}</div>
+          <div class="w-dose">${row ? formatMl(row.dose_ml) : "—"} <span style="font-size:14px; font-weight:900;">${t('ml')}</span></div>
+          <div class="w-sub">${v.therapy_days ? `${v.therapy_days} ${t('course3days').split(' ')[1]}${ageText}` : ""}</div>
         `;
         windowsEl.appendChild(el);
       }
@@ -5530,32 +5883,40 @@
         noteEl.innerHTML = `<strong>Нет дозы по карте</strong> для выбранного веса/режима.`;
         copyBtn.disabled = true;
       } else {
-        doseMlEl.textContent = `${formatMl(row.dose_ml)} мл`;
-        freqEl.textContent = `${row.freq_per_day} раз/сут`;
-        dailyEl.textContent = `${formatMl(row.dose_ml * row.freq_per_day)} мл/сут`;
+        doseMlEl.textContent = `${formatMl(row.dose_ml)} ${t('ml')}`;
+        freqEl.textContent = `${row.freq_per_day} ${t('freqPerDay')}`;
+        dailyEl.textContent = `${formatMl(row.dose_ml * row.freq_per_day)} ${t('mlSut')}`;
         // Добавляем возраст если есть в weight_raw
         const ageMatch = row.weight_raw ? row.weight_raw.match(/\(([^)]+)\)/) : null;
-        const ageText = ageMatch ? ` (${ageMatch[1]})` : "";
-        noteEl.textContent = `Расчет дозы препарата по массе тела ${state.weight_kg} кг${ageText}.`;
+        // Переводим "лет" на "жас" если нужно
+        let ageText = "";
+        if (ageMatch) {
+          let ageStr = ageMatch[1];
+          if (window.currentLangGlobal === 'kz') {
+            ageStr = ageStr.replace(/лет|года|год/gi, 'жас');
+          }
+          ageText = ` (${ageStr})`;
+        }
+        noteEl.textContent = `${t('drawerTitle')} ${state.weight_kg} ${t('weightKg')}${ageText}.`;
         copyBtn.disabled = false;
       }
 
       // Course / regimen
       if (v.therapy_days) {
         courseLine.style.display = "flex";
-        courseEl.textContent = `${v.therapy_days} дня`;
+        courseEl.textContent = t('course3days');
       } else {
         courseLine.style.display = "none";
       }
 
       if (v.dose_basis === "mgkg_per_day") {
         regimenLine.style.display = "flex";
-        regimenEl.textContent = `${formatMgkg(state.mgkg_per_day)} мг/кг/сут`;
+        regimenEl.textContent = `${formatMgkg(state.mgkg_per_day)} ${t('mgkgday')}`;
       } else {
         regimenLine.style.display = "none";
       }
 
-      drawerSub.textContent = `${p?.brand_ru ?? ""} · ${v.strength_label_ru ?? ""} · Вес: ${state.weight_kg} кг`;
+      drawerSub.textContent = `${p?.brand_ru ?? ""} · ${v.strength_label_ru ?? ""} · ${t('weightLabel')}: ${state.weight_kg} ${t('weightKg')}`;
     }
 
     // ---------- Drawer ----------
@@ -5564,7 +5925,7 @@
       if (!v) return;
 
       const p = productsById.get(state.product_id);
-      drawerSub.textContent = `${p?.brand_ru ?? ""} · ${v.strength_label_ru ?? ""} · Вес: ${state.weight_kg} кг`;
+      drawerSub.textContent = `${p?.brand_ru ?? ""} · ${v.strength_label_ru ?? ""} · ${t('weightLabel')}: ${state.weight_kg} ${t('weightKg')}`;
 
       const idx = doseIndexByVariant.get(v.variant_id);
       const all = (idx?.allRows || []).slice();
@@ -5591,9 +5952,18 @@
 
       shown.sort((a,b) => (a.weight_min_kg - b.weight_min_kg) || ((a.mgkg_per_day ?? 0) - (b.mgkg_per_day ?? 0)));
 
-      drawerNote.innerHTML = state.showAllTable
-        ? `Показана <strong>вся таблица</strong> для выбранной формы${v.dose_basis === "mgkg_per_day" ? ` (режим: ${formatMgkg(state.mgkg_per_day)} мг/кг/сут)` : ""}.`
-        : `Показаны строки <strong>рядом с весом</strong> (±5 кг)${v.dose_basis === "mgkg_per_day" ? ` · режим: ${formatMgkg(state.mgkg_per_day)} мг/кг/сут` : ""}.`;
+      // Translated drawer note
+      const isKz = window.currentLangGlobal === 'kz';
+      const regimenSuffix = v.dose_basis === "mgkg_per_day" ? ` (${isKz ? 'режим' : 'режим'}: ${formatMgkg(state.mgkg_per_day)} ${t('mgkgday')})` : "";
+      if (state.showAllTable) {
+        drawerNote.innerHTML = isKz 
+          ? `Таңдалған түрге арналған <strong>толық кесте</strong> көрсетілген${regimenSuffix}.`
+          : `Показана <strong>вся таблица</strong> для выбранной формы${regimenSuffix}.`;
+      } else {
+        drawerNote.innerHTML = isKz
+          ? `<strong>Салмаққа жақын</strong> жолдар көрсетілген (±5 кг)${regimenSuffix}.`
+          : `Показаны строки <strong>рядом с весом</strong> (±5 кг)${regimenSuffix}.`;
+      }
 
       drawerTbody.innerHTML = "";
       for (const r of shown) {
@@ -5601,19 +5971,34 @@
         const inRange = (w >= r.weight_min_kg && w <= r.weight_max_kg);
         if (inRange) tr.classList.add("hl");
 
+        // Translate label_raw for KZ
+        let labelText = r.label_raw || "";
+        if (window.currentLangGlobal === 'kz' && labelText) {
+          labelText = labelText
+            .replace(/раза в сутки/gi, 'рет тәулігіне')
+            .replace(/раз в сутки/gi, 'рет тәулігіне')
+            .replace(/раз в день/gi, 'рет күніне')
+            .replace(/раза в день/gi, 'рет күніне')
+            .replace(/азитромицина/gi, 'азитромицин')
+            .replace(/лет\)/gi, 'жас)')
+            .replace(/года\)/gi, 'жас)')
+            .replace(/год\)/gi, 'жас)');
+        }
+
         tr.innerHTML = `
           <td>${formatWeightCell(r)}</td>
-          <td>${v.dose_basis === "mgkg_per_day" ? `${formatMgkg(r.mgkg_per_day)} мг/кг/сут` : "—"}</td>
-          <td><strong>${formatMl(r.dose_ml)}</strong> мл</td>
+          <td>${v.dose_basis === "mgkg_per_day" ? `${formatMgkg(r.mgkg_per_day)} ${t('mgkgday')}` : "—"}</td>
+          <td><strong>${formatMl(r.dose_ml)}</strong> ${t('ml')}</td>
           <td>${r.freq_per_day}</td>
-          <td style="color: var(--muted)">${escapeHtml(r.label_raw || "")}</td>
+          <td style="color: var(--muted)">${escapeHtml(labelText)}</td>
         `;
         drawerTbody.appendChild(tr);
       }
 
       if (shown.length === 0) {
         const tr = document.createElement("tr");
-        tr.innerHTML = `<td colspan="5" style="color: var(--muted); padding: 14px 8px;">Нет строк для отображения.</td>`;
+        const noRowsText = window.currentLangGlobal === 'kz' ? 'Көрсетілетін жолдар жоқ.' : 'Нет строк для отображения.';
+        tr.innerHTML = `<td colspan="5" style="color: var(--muted); padding: 14px 8px;">${noRowsText}</td>`;
         drawerTbody.appendChild(tr);
       }
     }
@@ -5729,13 +6114,25 @@
       const b = Number(r.weight_max_kg);
       // Если в weight_raw есть возраст в скобках - показываем его
       if (r.weight_raw && r.weight_raw.includes('(')) {
-        return escapeHtml(r.weight_raw);
+        let text = r.weight_raw;
+        if (window.currentLangGlobal === 'kz') {
+          text = text
+            .replace(/лет\)/gi, 'жас)')
+            .replace(/года\)/gi, 'жас)')
+            .replace(/год\)/gi, 'жас)');
+        }
+        return escapeHtml(text);
       }
       return (a === b) ? String(a) : `${a}–${b}`;
     }
     function shortTitle(t) {
       const s = String(t || "").trim();
-      return s.replace(/^Расчет\s+разовой\s+дозы\s+препарата\s+/i, "").slice(0, 72);
+      return s
+        .replace(/^Расчет\s+разовой\s+дозы\s+препарата\s+/i, "")
+        .replace(/^Препараттың бір реттік дозасын есептеу\s+/i, "")
+        .replace(/^Дозировочная карта для препарата\s+/i, "")
+        .replace(/^Препаратқа арналған дозалау картасы\s+/i, "")
+        .slice(0, 72);
     }
     function escapeHtml(str) {
       return String(str).replace(/[&<>"']/g, (m) => ({ "&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;" }[m]));
@@ -6115,6 +6512,9 @@
       // Убираем задержку 300ms для Telegram/iOS
       wheelWrapEl.addEventListener('click', function() {}, false);
     })();
+    
+    // Export for language switching
+    window.triggerRenderAll = renderAll;
 
   })();
 
@@ -6138,6 +6538,188 @@
       console.log('Modal closed');
     }
   };
+  
+  // Language switching
+  window.setLanguage = function(lang) {
+    const translations = {
+      ru: {
+        title: "Калькулятор дозирования",
+        subtitle: "Основано на утвержденной инструкции по медицинскому применению лекарственного препарата (Листок-вкладыш)",
+        instructionsBtn: "Инструкции",
+        labelProduct: "Препарат",
+        labelVariant: "Форма / концентрация",
+        labelMgkg: "Режим дозирования (мг/кг/сут)",
+        labelWeight: "Расчет разовой дозы препарата по массе тела",
+        labelKg: "кг",
+        labelDose: "Разовая доза",
+        labelFreq: "Кратность",
+        labelDaily: "Суточно",
+        labelCourse: "Курс",
+        labelRegimen: "Режим",
+        copyBtn: "Скопировать назначение",
+        checkBtn: "Проверка по карте",
+        copied: "Скопировано"
+      },
+      kz: {
+        title: "Дозалау калькуляторы",
+        subtitle: "Дәрілік препараттың медициналық қолданылуы жөніндегі бекітілген нұсқаулыққа (Жапсырма-парақша) негізделген",
+        instructionsBtn: "Нұсқаулықтар",
+        labelProduct: "Дәрілік препарат",
+        labelVariant: "Форма / концентрация",
+        labelMgkg: "Дозалау режимі (мг/кг/тәул.)",
+        labelWeight: "Дене салмағына қарай дәрілік препараттың бір реттік дозасын есептеу",
+        labelKg: "кг",
+        labelDose: "Бір реттік доза",
+        labelFreq: "Қабылдау жиілігі",
+        labelDaily: "Тәуліктік көлем",
+        labelCourse: "Курс",
+        labelRegimen: "Режим",
+        copyBtn: "Тағайындауды көшіру",
+        checkBtn: "Карта бойынша тексеру",
+        copied: "Көшірілді"
+      }
+    };
+    
+    const t = translations[lang];
+    if (!t) return;
+    
+    // Update UI elements
+    const h1 = document.querySelector('header h1');
+    if (h1) h1.textContent = t.title;
+    
+    const subtitle = document.getElementById('subtitle');
+    if (subtitle) subtitle.textContent = t.subtitle;
+    
+    const instructionsBtn = document.getElementById('instructionsBtn');
+    if (instructionsBtn) instructionsBtn.textContent = t.instructionsBtn;
+    
+    // Labels
+    const labelProduct = document.getElementById('labelProduct');
+    if (labelProduct) labelProduct.textContent = t.labelProduct;
+    
+    const labelVariant = document.getElementById('labelVariant');
+    if (labelVariant) labelVariant.textContent = t.labelVariant;
+    
+    const labelMgkg = document.getElementById('labelMgkg');
+    if (labelMgkg) labelMgkg.textContent = t.labelMgkg;
+    
+    const labelWeight = document.getElementById('labelWeight');
+    if (labelWeight) labelWeight.textContent = t.labelWeight;
+    
+    const labelKg = document.getElementById('labelKg');
+    if (labelKg) labelKg.textContent = t.labelKg;
+    
+    const labelDose = document.getElementById('labelDose');
+    if (labelDose) labelDose.textContent = t.labelDose;
+    
+    const labelFreq = document.getElementById('labelFreq');
+    if (labelFreq) labelFreq.textContent = t.labelFreq;
+    
+    const labelDaily = document.getElementById('labelDaily');
+    if (labelDaily) labelDaily.textContent = t.labelDaily;
+    
+    const labelCourse = document.getElementById('labelCourse');
+    if (labelCourse) labelCourse.textContent = t.labelCourse;
+    
+    const labelRegimen = document.getElementById('labelRegimen');
+    if (labelRegimen) labelRegimen.textContent = t.labelRegimen;
+    
+    // Buttons
+    const copyBtn = document.getElementById('copyBtn');
+    if (copyBtn) copyBtn.textContent = t.copyBtn;
+    
+    const checkBtn = document.getElementById('checkBtn');
+    if (checkBtn) checkBtn.textContent = t.checkBtn;
+    
+    // Update language switcher buttons
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+      btn.classList.toggle('active', btn.dataset.lang === lang);
+    });
+    
+    // Save preference
+    localStorage.setItem('dosing_calc_lang', lang);
+    
+    // Store for toast
+    window.currentLangTranslations = t;
+    
+    // Update global currentLang for t() function inside main script
+    window.currentLangGlobal = lang;
+    
+    // Trigger re-render if renderAll exists
+    if (window.triggerRenderAll) {
+      window.triggerRenderAll();
+    }
+    
+    // Toggle instruction languages
+    const instructionsRu = document.getElementById('instructionsContentRu');
+    const instructionsKz = document.getElementById('instructionsContentKz');
+    if (instructionsRu && instructionsKz) {
+      instructionsRu.style.display = lang === 'ru' ? 'block' : 'none';
+      instructionsKz.style.display = lang === 'kz' ? 'block' : 'none';
+    }
+    
+    // Toggle instructions title
+    const instructionsTitle = document.getElementById('instructionsTitle');
+    if (instructionsTitle) {
+      instructionsTitle.textContent = lang === 'kz' 
+        ? 'Препараттарды қолдану бойынша қысқаша нұсқаулықтар' 
+        : 'Краткие инструкции по применению препаратов';
+    }
+    
+    // Toggle info modal content
+    const infoContentRu = document.getElementById('infoContentRu');
+    const infoContentKz = document.getElementById('infoContentKz');
+    if (infoContentRu && infoContentKz) {
+      infoContentRu.style.display = lang === 'ru' ? 'block' : 'none';
+      infoContentKz.style.display = lang === 'kz' ? 'block' : 'none';
+    }
+    
+    // Toggle info modal title
+    const infoModalTitle = document.getElementById('infoModalTitle');
+    if (infoModalTitle) {
+      infoModalTitle.textContent = lang === 'kz' 
+        ? '📖 Пайдаланушы нұсқаулығы' 
+        : '📖 Руководство пользователя';
+    }
+    
+    // Drawer translations
+    const drawerTitleEl = document.getElementById('drawerTitle');
+    if (drawerTitleEl) {
+      drawerTitleEl.textContent = lang === 'kz' ? 'Карта бойынша тексеру' : 'Проверка по карте';
+    }
+    
+    const toggleAllEl = document.getElementById('toggleAll');
+    if (toggleAllEl) {
+      const showAll = toggleAllEl.textContent.includes('всю') || toggleAllEl.textContent.includes('Толық');
+      if (showAll) {
+        toggleAllEl.textContent = lang === 'kz' ? 'Толық кестені көрсету' : 'Показать всю таблицу';
+      } else {
+        toggleAllEl.textContent = lang === 'kz' ? 'Салмақ бойынша көрсету' : 'Показать рядом с весом';
+      }
+    }
+    
+    // Table headers
+    const thWeight = document.getElementById('thWeight');
+    if (thWeight) thWeight.textContent = lang === 'kz' ? 'Салмақ' : 'Вес';
+    
+    const thRegimen = document.getElementById('thRegimen');
+    if (thRegimen) thRegimen.textContent = lang === 'kz' ? 'Режим' : 'Режим';
+    
+    const thMlDose = document.getElementById('thMlDose');
+    if (thMlDose) thMlDose.textContent = lang === 'kz' ? 'Мл / қабылдау' : 'Мл / приём';
+    
+    const thFreqDay = document.getElementById('thFreqDay');
+    if (thFreqDay) thFreqDay.textContent = lang === 'kz' ? 'Рет/тәул' : 'Раз/сут';
+    
+    const thSource = document.getElementById('thSource');
+    if (thSource) thSource.textContent = lang === 'kz' ? 'Клиникалық деректер' : 'Источник';
+  };
+  
+  // Initialize language on load
+  document.addEventListener('DOMContentLoaded', function() {
+    const savedLang = localStorage.getItem('dosing_calc_lang') || 'ru';
+    window.setLanguage(savedLang);
+  });
   </script>
 
   
@@ -6146,11 +6728,12 @@
   <div id="instructionsModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.75); z-index:9999; align-items:center; justify-content:center;" onclick="if(event.target===this) window.closeInstructions()">
     <div style="background:white; max-width:1100px; width:95%; max-height:92vh; overflow-y:auto; border-radius:16px; position:relative; box-shadow:0 10px 40px rgba(0,0,0,0.3);" onclick="event.stopPropagation()">
       <div style="position:sticky; top:0; background:linear-gradient(135deg, #1C59B5 0%, #003DA5 100%); padding:20px 30px; display:flex; justify-content:space-between; align-items:center; border-radius:16px 16px 0 0; z-index:10; box-shadow:0 2px 10px rgba(0,0,0,0.1);">
-        <h2 style="margin:0; color:white; font-size:24px; font-weight:800;">Краткие инструкции по применению препаратов</h2>
+        <h2 id="instructionsTitle" style="margin:0; color:white; font-size:24px; font-weight:800;">Краткие инструкции по применению препаратов</h2>
         <button onclick="window.closeInstructions()" style="background:rgba(255,255,255,0.2); border:none; font-size:28px; cursor:pointer; color:white; line-height:1; padding:4px 12px; width:auto; height:auto; border-radius:8px; transition:0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.3)'" onmouseout="this.style.background='rgba(255,255,255,0.2)'">&times;</button>
       </div>
       
-      <div style="padding:40px; font-size:14px; color:#333;">
+      <!-- Russian Instructions -->
+      <div id="instructionsContentRu" style="padding:40px; font-size:14px; color:#333;">
         
         <!-- Оспамокс -->
         <div style="margin-bottom:60px;">
@@ -6168,6 +6751,7 @@
           <p style="margin:8px 0; line-height:1.7; text-align:justify; color:#333;"><strong style="color:#1C59B5;">Лекарственные взаимодействия:</strong> Совместное применение не рекомендуется: Пробенецид. Пробенецид подавляет тубулярную секрецию препаратов пенициллинового ряда, что приводит к увеличению Т1/2 и концентрации амоксициллина в плазме крови. Препараты, оказывающие бактериостатическое действие (антибиотики тетрациклинового ряда, макролиды, хлорамфеникол), могут нейтрализовать бактерицидный эффект амоксициллина. Одновременное применение аминогликозидов возможно (синергический эффект). Аллопуринол. Совместное применение с аллопуринолом может привести к развитию аллергических кожных реакций. Тетрациклин. Тетрациклин и другие препараты, оказывающие бактериостатическое действие, могут нейтрализовать бактерицидный эффект амоксициллина. Дигоксин. Возможно увеличение всасываемости дигоксина на фоне терапии Оспамокс. Необходима коррекция дозы для дигоксина. Антикоагулянты. Совместное применение амоксициллина и антикоагулянтов может увеличить вероятность кровотечений в связи с удлинением протромбинового времени. Необходима коррекция дозы для антикоагулянтов. При назначении антикоагулянтов вместе с амоксициллином требуется мониторирование показателей свертываемости крови. Метотрексат. Совместное применение метотрексата и амоксициллина может увеличить степень токсичности метотрексата, возможно в результате конкурентного ингибирования тубулярной почечной секреции метотрексата амоксициллином. При назначении метотрексата вместе с амоксициллином требуется мониторирование концентрации метотрексата в сыворотке крови.</p>
           <p style="margin:8px 0; line-height:1.7; text-align:justify; color:#333;"><strong style="color:#1C59B5;">Особые указания:</strong> Беременность и период лактации. Оспамокс применяется во время беременности с осторожностью. При использовании необходимо соблюдать принцип - предполагаемая польза для матери должна превышать потенциальный риск для плода. Оспамокс может применяться в период лактации. При применении в период лактации рекомендуется прервать грудное вскармливание на период лечения. Особенности влияния лекарственного средства на способность управлять транспортным средством или потенциально опасными механизмами. Оспамокс не оказывает влияния на способность управлять транспортным средством или другими потенциально опасными механизмами.</p>
           <p style="margin:8px 0; line-height:1.7; text-align:justify; color:#333;"><strong style="color:#1C59B5;">Условия отпуска из аптек:</strong> По рецепту.</p>
+          <p style="margin:8px 0; line-height:1.7; text-align:justify; color:#333;"><strong style="color:#1C59B5;">Сведения о производителе:</strong> Sandoz GmbH, Австрия. Biochemiestrasse 10, A-6250 Kundl, Austria</p>
         </div>
         
         <!-- Амоксиклав -->
@@ -6182,7 +6766,7 @@
           <p style="margin:8px 0; line-height:1.7; text-align:justify; color:#333;"><strong style="color:#1C59B5;">Лекарственные взаимодействия:</strong> Отмечено увеличение международного нормализованного отношения у пациентов, принимавших аценокумарол или варфарин совместно с амоксициллином. Препараты пенициллиновой группы могут уменьшить выведение метотрексата, что вызывает потенциальное увеличение токсичности. Не рекомендуется одновременное применение пробенецида. У пациентов, принимающих микофенолат мофетил, при совместном применении с препаратом Амоксиклав® концентрация активного метаболита микофеноловой кислоты при назначении начальной дозы снижается приблизительно на 50%.</p>
           <p style="margin:8px 0; line-height:1.7; text-align:justify; color:#333;"><strong style="color:#1C59B5;">Особые указания:</strong> Одновременное применение аллопуринола во время лечения амоксициллином может увеличить вероятность развития кожных аллергических реакций. Беременность. Не рекомендуется использовать амоксициллин/ кислоту клавулановую во время беременности, применение возможно только в случае крайней необходимости по назначению врача. Лактация. Амоксициллин/ кислоту клавулановую разрешается использовать во время кормления грудью только после оценки пользы/риска лечащим врачом. Особенности влияния лекарственного средства на способность управлять транспортным средством или потенциально опасными механизмами. Амоксиклав может вызвать такие нежелательные реакции, как аллергические реакции, судороги, которые могут повлиять на возможность управлять автомобилем и движущимися механизмами.</p>
           <p style="margin:8px 0; line-height:1.7; text-align:justify; color:#333;"><strong style="color:#1C59B5;">Условия отпуска из аптек:</strong> По рецепту врача.</p>
-          <p style="margin:8px 0; line-height:1.7; text-align:justify; color:#333;"><strong style="color:#1C59B5;">Сведения о производителе:</strong> Лек Фармасьютикалс д.д., Словения</p>
+          <p style="margin:8px 0; line-height:1.7; text-align:justify; color:#333;"><strong style="color:#1C59B5;">Сведения о производителе:</strong> Sandoz GmbH, Австрия. Biochemiestrasse 10, A-6250 Kundl, Austria</p>
         </div>
         
         <!-- АЗИДРАТ -->
@@ -6199,20 +6783,86 @@
           <p style="margin:8px 0; line-height:1.7; text-align:justify; color:#333;"><strong style="color:#1C59B5;">Взаимодействия с другими лекарственными препаратами:</strong> Антациды, цетиризин, диданозин, аторвастатин, циметидин, эфавиренз, зидовудин, нелфинавир, индинавир, метилпреднизолон, мидазолам, силденафил, триазолам, карбамазепин, триметоприм/сульфаметоксазол, дигоксин, производные эрготамина, пероральные антикоагулянты типа кумарина, циклоспорин, флуконазол, рифабутин, терфенадин, теофиллин, другие антибиотики, лекарственные средства, удлиняющие интервал QT. Азитромицин не оказывает существенного влияния на цитохром печени Р450. Он не участвует в фармакокинетическом лекарственном взаимодействии, как эритромицин и другие макролиды. Азитромицин не индуцирует или инактивирует цитохром P450 с помощью комплекса цитохром-метаболит.</p>
           <p style="margin:8px 0; line-height:1.7; text-align:justify; color:#333;"><strong style="color:#1C59B5;">Специальные предупреждения:</strong> детям с массой тела 5-45 кг рекомендуется назначать препараты азитромицина в виде суспензии. Отсутствуют данные относительно применения препарата в форме суспензии у детей в возрасте до 6 месяцев. Во время беременности или лактации: данные соответствующих контролируемых клинических испытаний о результатах применения азитромицина у беременных женщин отсутствуют. Безопасность применения азитромицина во время беременности еще не подтверждена. Исходя из этого, азитромицин может назначаться при беременности только в случае, если ожидаемая польза для матери превышает риск для плода. Препарат АЗИДРАТ™ проникает в грудное молоко. Поскольку неизвестно, обладает ли азитромицин неблагоприятным влиянием на ребенка при проникновении через молоко матери, следует прервать кормление грудью на период приема азитромицина. Возможными нежелательными реакциями у новорожденного могут быть диарея, развитие грибковой инфекции слизистых, а также сенситизация организма. Кормление может быть возобновлено через 2 дня после окончания приема азитромицина.</p>
           <p style="margin:8px 0; line-height:1.7; text-align:justify; color:#333;"><strong style="color:#1C59B5;">Условия отпуска из аптек:</strong> по рецепту.</p>
-          <p style="margin:8px 0; line-height:1.7; text-align:justify; color:#333;"><strong style="color:#1C59B5;">Сведения о производителе:</strong> Сандоз С.Р.Л., Румыния. Livezeni Street, 7A, 540472 Тыргу-Муреш. Тел./факс: + 386 1 5802111, + 386 1 5683517. e-mail: <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="bfd6d1d9d091ccded1dbd0c5ffccded1dbd0c591dcd0d2">[email&#160;protected]</a></p>
+          <p style="margin:8px 0; line-height:1.7; text-align:justify; color:#333;"><strong style="color:#1C59B5;">Сведения о производителе:</strong> Сандоз С.Р.Л., Румыния. Livezeni Street, 7A, 540472 Тыргу-Муреш</p>
         </div>
         
         <!-- Предупреждение -->
         <div style="margin-top:40px; padding:20px; background:linear-gradient(135deg, rgba(252, 82, 45, 0.1), rgba(213, 134, 44, 0.1)); border-left:4px solid #FC522D; border-radius:8px;">
           <p style="margin:0; line-height:1.7; text-align:center; color:#333; font-weight:600;">
             МАТЕРИАЛ ПРЕДНАЗНАЧЕН ДЛЯ СПЕЦИАЛИСТОВ ЗДРАВООХРАНЕНИЯ.<br>
-            ПЕРЕД ПРИМЕНЕНИЕМ ОЗНАКОМЬТЕСЬ С ПОЛНОЙ ИНСТРУКЦИЕЙ ПО МЕДИЦИНСКОМУ ПРИМЕНЕНИЮ.<br>
-            САМОЛЕЧЕНИЕ МОЖЕТ БЫТЬ ОПАСНЫМ ДЛЯ ВАШЕГО ЗДОРОВЬЯ.
+            ПЕРЕД ПРИМЕНЕНИЕМ ОЗНАКОМЬТЕСЬ С ПОЛНОЙ ИНСТРУКЦИЕЙ ЛЕКАРСТВЕННОГО ПРЕПАРАТА.<br>
+            САМОЛЕЧЕНИЕ МОЖЕТ БЫТЬ ОПАСНО ДЛЯ ЗДОРОВЬЯ.
           </p>
         </div>
         
       </div>
+      
+      <!-- Kazakh Instructions -->
+      <div id="instructionsContentKz" style="display:none; padding:40px; font-size:14px; color:#333;">
+        
+        <!-- Оспамокс KZ -->
+        <div style="margin-bottom:60px;">
+          <h3 style="color:#1C59B5; font-size:22px; font-weight:800; margin:0 0 20px 0; padding-bottom:10px; border-bottom:3px solid #1C59B5;">Оспамокс®</h3>
+          <p style="margin:8px 0; line-height:1.7; text-align:justify; color:#333;">Оспамокс® Ішке қабылдауға арналған суспензияны дайындауға арналған ұнтақ 125 мг/5 мл және 250 мг/5 мл.</p>
+          <p style="margin:8px 0; line-height:1.7; text-align:justify; color:#333;">ЛП-№009241-РГ-KZ 03.04.2025 ж. бастап, жарамдылық мерзімі шектелмейді</p>
+          <p style="margin:8px 0; line-height:1.7; text-align:justify; color:#333;"><strong style="color:#1C59B5;">Саудалық атауы:</strong> Оспамокс®</p>
+          <p style="margin:8px 0; line-height:1.7; text-align:justify; color:#333;"><strong style="color:#1C59B5;">Халықаралық патенттелмеген атауы:</strong> Амоксициллин</p>
+          <p style="margin:8px 0; line-height:1.7; text-align:justify; color:#333;"><strong style="color:#1C59B5;">Дәрілік түрі:</strong> Ішке қабылдауға арналған суспензияны дайындауға арналған ұнтақ 125 мг/5 мл және 250 мг/5 мл</p>
+          <p style="margin:8px 0; line-height:1.7; text-align:justify; color:#333;"><strong style="color:#1C59B5;">Қолданылуына көрсетілімдер:</strong> Оспамокс келесі жұқпаларды емдеуге арналған: жедел бактериялық синусит, жедел ортаңғы отит, жедел стрептококкты тонзиллит және фарингит, созылмалы бронхиттің өршуі, қауымнан тыс пневмония, жедел цистит, жүктілік кезіндегі симптомсыз бактериурия, жедел пиелонефрит, тиф және паратиф, целлюлитке таралатын тіс абсцесі, протезделген буындардың жұқпалары, Helicobacter Pylori эрадикациясы, лайм ауруы. Оспамокс эндокардиттің алдын алу үшін де қолданылады. Антибактериялық препараттарды дұрыс қолдануға арналған терапиялық ұсынымдарды қатаң сақтау қажет.</p>
+          <p style="margin:8px 0; line-height:1.7; text-align:justify; color:#333;"><strong style="color:#1C59B5;">Қолдану тәсілі және дозалары:</strong> Оспамокс дозасы жасқа, дене салмағына, бүйрек функциясына, аурудың ауырлығына және инфекцияның орналасуына байланысты. Стандартты дозалау: Ересектер және дене салмағы >40 кг балалар: тәуліктік доза 750 мг–3 г, 2–3 қабылдауға бөлінеді. Дене салмағы <40 кг балалар: тәулігіне 40–90 мг/кг, 2–3 қабылдауға бөлу. Суспензияны дайындау: Флакондағы белгіге дейін 56 мл немесе 55 мл салқындатылған қайнатылған су құйып, флаконды жақсылап шайқау керек. Суспензия ақ немесе аздап сарғыш түсті. Әр қолданар алдында шайқау қажет.</p>
+          <p style="margin:8px 0; line-height:1.7; text-align:justify; color:#333;"><strong style="color:#FC522D;">Жанама әсерлері:</strong> Жиі: асқазанның жайсыздануы, жүрек айну, тәбет жоғалуы, метеоризм, диарея, энантема (әсіресе ауыз қуысы шырыштысында), ауыздың құрғауы, дәм сезудің бұзылуы, тері реакциялары (экзантема). Жиі емес: құсу, қышыну, есекжем, қызамықтәрізді бөртпе (емнің 5–11 күні), бауыр трансаминазаларының уақытша жоғарылауы мүмкін.</p>
+          <p style="margin:8px 0; line-height:1.7; text-align:justify; color:#333;"><strong style="color:#FC522D;">Қарсы көрсетілімдер:</strong> Пенициллиндерге немесе қосымша заттарға жоғары сезімталдық, бета-лактамдарға ауыр аллергиялық реакциялар, ішек перистальтикасын тежейтін препараттармен бір мезгілде қолдану, аллергиялық аурулар, бронхиалды астма, поллиноз, инфекциялық мононуклеоз, лимфа жүйесінің қатерлі аурулары, фенилкетонурия, асқазан-ішек жолдары ауруларының анамнезі (әсіресе антибиотикке байланысты колит).</p>
+          <p style="margin:8px 0; line-height:1.7; text-align:justify; color:#333;"><strong style="color:#1C59B5;">Дәрілермен өзара әрекеттесуі:</strong> Пробенецид амоксициллин концентрациясын арттырады, бактериостатикалық антибиотиктер әсерін төмендетеді, аллопуринол тері аллергиясы қаупін арттырады, дигоксин сіңуі артуы мүмкін, антикоагулянттар қан кету қаупін арттыруы мүмкін, метотрексат уыттылық деңгейін арттыруы ықтимал.</p>
+          <p style="margin:8px 0; line-height:1.7; text-align:justify; color:#333;"><strong style="color:#1C59B5;">Ерекше нұсқаулар:</strong> Жүктілік және лактация: Абайлап қолдану. Ана үшін пайдасы ұрыққа төнетін қауіптен жоғары болуы тиіс. Емізу кезінде қолдануға болады, бірақ емдеу кезеңінде емізуді тоқтата тұрған жөн. Көлік немесе механизмдер басқару: Әсер етпейді.</p>
+          <p style="margin:8px 0; line-height:1.7; text-align:justify; color:#333;"><strong style="color:#1C59B5;">Дәріханадан босатылу шарттары:</strong> Рецепт арқылы.</p>
+          <p style="margin:8px 0; line-height:1.7; text-align:justify; color:#333;"><strong style="color:#1C59B5;">Өндіруші туралы мәліметтер:</strong> Sandoz GmbH, Австрия. Biochemiestrasse 10, A-6250 Kundl, Austria</p>
+        </div>
+        
+        <!-- Амоксиклав KZ -->
+        <div style="margin-bottom:60px;">
+          <h3 style="color:#1C59B5; font-size:22px; font-weight:800; margin:0 0 20px 0; padding-bottom:10px; border-bottom:3px solid #1C59B5;">Амоксиклав®</h3>
+          <p style="margin:8px 0; line-height:1.7; text-align:justify; color:#333;">Амоксиклав® Ішке қабылдауға арналған суспензияны дайындауға арналған ұнтақ, 156.25 мг/5 мл және 312.5 мг/5 мл. РК-ЛС-5№004905, РК-ЛС-5№004904 09.12.2016 ж. бастап, жарамдылық мерзімі шектелмейді. 457 мг/5 мл, 8.75 г, РК-ЛС-5№025103 26.07.2021 ж. бастап 26.07.2026 ж. дейін.</p>
+          <p style="margin:8px 0; line-height:1.7; text-align:justify; color:#333;"><strong style="color:#1C59B5;">Саудалық атауы:</strong> Амоксиклав®</p>
+          <p style="margin:8px 0; line-height:1.7; text-align:justify; color:#333;"><strong style="color:#1C59B5;">Қолданылуына көрсетілімдер:</strong> Амоксиклав® келесі жұқпаларды емдеу үшін қолданылады: жедел бактериялық синусит, жедел ортаңғы отит, созылмалы бронхиттің өршуі, қауымнан тыс пневмония, цистит, пиелонефрит, тері және жұмсақ тіндердің жұқпалары (флегмона, жануарлардың тістеуі, ауыр пародонтальды абсцесс, жақ-бет аймағының флегмоналары), сүйек және буын жұқпалары (әсіресе остеомиелит).</p>
+          <p style="margin:8px 0; line-height:1.7; text-align:justify; color:#333;"><strong style="color:#1C59B5;">Қолдану тәсілі және дозалары:</strong> Дене салмағы 40 кг-нан жоғары балалар: Бұл топқа суспензия әдетте тағайындалмайды, таблетка түрінде қабылдау ұсынылады. Дене салмағы 40 кг-нан төмен балалар: Тәуліктік доза 20 мг/5 мг/кг-нан 60 мг/15 мг/кг-ға дейін, үш рет қабылдауға бөлінеді. Балаларда нақты доза дене салмағына қарай жеке есептеледі.</p>
+          <p style="margin:8px 0; line-height:1.7; text-align:justify; color:#333;"><strong style="color:#FC522D;">Жанама әсерлері:</strong> Өте жиі: Диарея. Жиі: Кандидоз (тері және шырышты қабаттар), жүрек айну, құсу.</p>
+          <p style="margin:8px 0; line-height:1.7; text-align:justify; color:#333;"><strong style="color:#FC522D;">Қарсы көрсетілімдер:</strong> Белсенді затқа немесе қосымша компоненттерге жоғары сезімталдық, басқа бета-лактамдарға (цефалоспориндер, карбапенемдер, монобактамдар) ауыр аллергиялық реакциялар, өткенде холестатикалық сарыауру немесе амоксициллин/клавулан қышқылына байланысты бауыр жеткіліксіздігі, 3 айға дейінгі балалар.</p>
+          <p style="margin:8px 0; line-height:1.7; text-align:justify; color:#333;"><strong style="color:#1C59B5;">Дәрілермен өзара әрекеттесуі:</strong> Аценокумарол немесе варфаринмен бірге қолданғанда ХҚҚ (МНО) жоғарылауы мүмкін, пенициллиндер метотрексаттың шығарылуын төмендетуі мүмкін → уыттылық артады, пробенецидпен бір мезгілде қолдану ұсынылмайды, микофенолат мофетилмен бірге қолданғанда белсенді метаболиттің концентрациясы бастапқы дозада ~50% төмендейді.</p>
+          <p style="margin:8px 0; line-height:1.7; text-align:justify; color:#333;"><strong style="color:#1C59B5;">Ерекше нұсқаулар:</strong> Аллопуринолмен бір мезгілде қолдану тері аллергиялық реакцияларының қаупін арттырады. Жүктілік: Амоксициллин/клавулан қышқылын жүктілік кезінде қолдану ұсынылмайды, тек дәрігер көрсеткен ерекше жағдайда ғана. Лактация: Қолдануға болады, бірақ пайда/қауіп бағалауы міндетті. Назар аудару: аллергиялық реакциялар мен құрысулар пайда болуы мүмкін → көлік жүргізуге әсер ету қаупі бар.</p>
+          <p style="margin:8px 0; line-height:1.7; text-align:justify; color:#333;"><strong style="color:#1C59B5;">Дәріханадан босатылу шарттары:</strong> Дәрігердің рецепті бойынша.</p>
+          <p style="margin:8px 0; line-height:1.7; text-align:justify; color:#333;"><strong style="color:#1C59B5;">Өндіруші туралы мәліметтер:</strong> Sandoz GmbH, Австрия. Biochemiestrasse 10, A-6250 Kundl, Austria</p>
+        </div>
+        
+        <!-- АЗИДРАТ KZ -->
+        <div style="margin-bottom:60px;">
+          <h3 style="color:#1C59B5; font-size:22px; font-weight:800; margin:0 0 20px 0; padding-bottom:10px; border-bottom:3px solid #1C59B5;">АЗИДРАТ™</h3>
+          <p style="margin:8px 0; line-height:1.7; text-align:justify; color:#333;">АЗИДРАТ™ Ішке қабылдауға арналған суспензияны дайындауға арналған ұнтақ 100 мг/5 мл, 200 мг/5 мл. РК-ЛС-5№021405, РК-ЛС-5№021394 15.06.2020 ж. бастап. Жарамдылық мерзімі шектелмейді.</p>
+          <p style="margin:8px 0; line-height:1.7; text-align:justify; color:#333;"><strong style="color:#1C59B5;">Саудалық атауы:</strong> АЗИДРАТ™</p>
+          <p style="margin:8px 0; line-height:1.7; text-align:justify; color:#333;"><strong style="color:#1C59B5;">Халықаралық патенттелмеген атауы:</strong> Азитромицин</p>
+          <p style="margin:8px 0; line-height:1.7; text-align:justify; color:#333;"><strong style="color:#1C59B5;">Қолданылуына көрсетілімдер:</strong> Азидрат™ азитромицинге сезімтал микроорганизмдер тудыратын жұқпаларды емдеу үшін қолданылады: Созылмалы бронхиттің өршуі, Қауымнан тыс пневмония (жеңіл және орташа ауырлықта), Жедел бактериялық синусит, Фарингит, Тонзиллит, Жедел бактериялық ортаңғы отит, Тері және жұмсақ тіндердің жеңіл және орташа ауырлықтағы жұқпалары, Chlamydia trachomatis тудыратын асқынбаған уретрит және цервицит. Антибактериялық препараттарды дұрыс қолдану бойынша терапиялық ұсынымдарды қатаң сақтау қажет.</p>
+          <p style="margin:8px 0; line-height:1.7; text-align:justify; color:#333;"><strong style="color:#1C59B5;">Қолдану тәсілі және дозалары:</strong> Дене салмағы 45 кг дейінгі балалар: АЗИДРАТ™ препараты 45 кг-ға дейінгі балаларға арналған. 6 айдан кіші балаларға қатысты деректер жоқ. Балалар үшін доза: 10 мг/кг тәулігіне 1 рет, 3 күн бойы. Дозаны түзету қажет емес: Жеңіл және орташа ауырлықтағы бүйрек жеткіліксіздігі (креатинин клиренсі 10–80 мл/мин). Препаратты қолдану өлшегіш шприц арқылы жүргізіледі.</p>
+          <p style="margin:8px 0; line-height:1.7; text-align:justify; color:#333;"><strong style="color:#1C59B5;">Енгізу тәсілі және жолы:</strong> Суспензияны қабылдағаннан кейін: Ауыз қуысында қалған суспензияны шайып жұту үшін бірнеше жұтым су немесе жеміс шырынын ішу керек. Бұл суспензияның аздап ащы дәмін азайтады. Препаратты қолдану әдісі туралы толық ақпарат алу үшін медицина қызметкеріне жүгіну ұсынылады.</p>
+          <p style="margin:8px 0; line-height:1.7; text-align:justify; color:#333;"><strong style="color:#FC522D;">Жанама әсерлері:</strong> Өте жиі: диарея, іштің ауыруы, жүрек айну, метеоризм, іштің жайсыздануы, сұйық нәжіс. Жиі: бас ауруы, құсу, диспепсия, лейкоциттер санының азаюы, эозинофилдер санының артуы, бикарбонат деңгейінің төмендеуі, базофилдер, моноциттер, нейтрофилдер санының артуы, есту қабілетінің төмендеуі (әлсіреуі), артралгия.</p>
+          <p style="margin:8px 0; line-height:1.7; text-align:justify; color:#333;"><strong style="color:#FC522D;">Қарсы көрсетілімдер:</strong> Азитромицинге, эритромицинге, макролидтерге немесе кетолидтік антибиотиктерге жоғары сезімталдық. Көмекші заттарға жоғары сезімталдық. Бауыр немесе бүйректің ауыр жеткіліксіздігі. Сирек тұқым қуалайтын фруктоза көтере алмаушылық, сахароза-изомальтаза тапшылығы немесе глюкоза-галактоза мальабсорбциясы (сахароза құрамына байланысты). Фенилкетонурия (аспартам құрамына байланысты).</p>
+          <p style="margin:8px 0; line-height:1.7; text-align:justify; color:#333;"><strong style="color:#1C59B5;">Дәрілермен өзара әрекеттесуі:</strong> Азитромицин келесі заттармен әрекеттесуі мүмкін: Антацидтер, Цетиризин, Диданозин, Аторовастатин, Циметидин, Эфавиренз, Зидовудин, Нелфинавир, Индинавир, Метилпреднизолон, Мидазолам, Силденафил, Триазолам, Карбамазепин, Триметоприм/сульфаметоксазол, Дигоксин, Эрготамин туындылары, Кумарин тобындағы пероральды антикоагулянттар, Циклоспорин, Флуконазол, Рифабутин, Терфенадин, Теофиллин, Басқа антибиотиктер, QT аралығын ұзартатын дәрілер. Азитромицин бауырдың цитохром Р450 жүйесіне айтарлықтай әсер етпейді және эритромицин мен басқа макролидтерге тән өзара әрекеттесуді туындатпайды.</p>
+          <p style="margin:8px 0; line-height:1.7; text-align:justify; color:#333;"><strong style="color:#1C59B5;">Арнайы ескертулер:</strong> 5–45 кг балалар: Суспензия түріндегі азитромицин ұсынылады. 6 айға дейінгі балалар: Деректер жоқ. Жүктілік және лактация: Жүктілік кезінде қауіпсіздігі дәлелденбеген, тек ана үшін күтілетін пайдасы ұрыққа төнетін қауіптен жоғары болғанда ғана тағайындалады, азитромицин емшек сүтіне өтеді, емшекпен қоректендіруді препарат қабылдау кезеңінде тоқтату қажет, нәрестеде ықтимал әсерлер: диарея, саңырауқұлақтық инфекция, сезімталдықтың артуы. Емдеу аяқталғаннан кейін 2 күн өткен соң емізуді қайта бастауға болады.</p>
+          <p style="margin:8px 0; line-height:1.7; text-align:justify; color:#333;"><strong style="color:#1C59B5;">Дәріханадан босатылу шарттары:</strong> Рецепт арқылы.</p>
+          <p style="margin:8px 0; line-height:1.7; text-align:justify; color:#333;"><strong style="color:#1C59B5;">Өндіруші туралы мәліметтер:</strong> Сандоз С.Р.Л., Румыния. Livezeni Street, 7A, 540472 Тыргу-Муреш</p>
+        </div>
+        
+        <!-- Предупреждение KZ -->
+        <div style="margin-top:40px; padding:20px; background:linear-gradient(135deg, rgba(252, 82, 45, 0.1), rgba(213, 134, 44, 0.1)); border-left:4px solid #FC522D; border-radius:8px;">
+          <p style="margin:0; line-height:1.7; text-align:center; color:#333; font-weight:600;">
+            МАТЕРИАЛ ДЕНСАУЛЫҚ САҚТАУ МАМАНДАРЫНА АРНАЛҒАН.<br>
+            ҚОЛДАНАР АЛДЫНДА ТОЛЫҚ МЕДИЦИНАЛЫҚ НҰСҚАУЛЫҚПЕН ТАНЫСЫҢЫЗ.<br>
+            ӨЗІН-ӨЗІ ЕМДЕУ ДЕНСАУЛЫҚҚА ҚАУІПТІ БОЛУЫ МҮМКІН.
+          </p>
+        </div>
+        
+      </div>
+      
     </div>
   </div>
+
 </body>
 </html>
