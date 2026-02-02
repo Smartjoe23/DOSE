@@ -1310,7 +1310,7 @@
   </div>
 
   <!-- Embedded registry -->
-  <script id="registryData" type="application/json">{
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script id="registryData" type="application/json">{
   "meta": {
     "source_file": "Доз_карты_КЗ_-_2026.xlsx",
     "generated_date": "2026-01-30",
@@ -5780,7 +5780,7 @@
       }
       if (clamped !== w) {
         const rangeMsg = window.currentLangGlobal === 'kz'
-          ? `Форма диапазоны: ${Math.round(v.weight_min_kg)}–${Math.round(v.weight_max_kg)} кг`
+          ? `Пішін диапазоны: ${Math.round(v.weight_min_kg)}–${Math.round(v.weight_max_kg)} кг`
           : `Диапазон для формы: ${Math.round(v.weight_min_kg)}–${Math.round(v.weight_max_kg)} кг`;
         weightHint.textContent = rangeMsg;
         weightHint.classList.add("warn");
@@ -6850,7 +6850,4 @@
           <p style="margin:8px 0; line-height:1.7; text-align:justify; color:#333;"><strong style="color:#1C59B5;">Өндіруші туралы мәліметтер:</strong> Сандоз С.Р.Л., Румыния. Livezeni Street, 7A, 540472 Тыргу-Муреш</p>
         </div>
         
-        <!-- Предупреждение KZ -->
-        <div style="margin-top:40px; padding:20px; background:linear-gradient(135deg, rgba(252, 82, 45, 0.1), rgba(213, 134, 44, 0.1)); border-left:4px solid #FC522D; border-radius:8px;">
-          <p style="margin:0; line-height:1.7; text-align:center; color:#333; font-weight:600;">
-            МАТЕ�
+        <!-- Пред�
