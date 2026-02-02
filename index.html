@@ -6717,6 +6717,16 @@
   
   // Initialize language on load
   document.addEventListener('DOMContentLoaded', function() {
+    // Версия приложения - при обновлении меняем номер
+    const APP_VERSION = '1.0.1';
+    const savedVersion = localStorage.getItem('dosing_calc_version');
+    
+    // Если версия изменилась - сбрасываем кэш настроек
+    if (savedVersion !== APP_VERSION) {
+      localStorage.removeItem('dosing_calc_lang');
+      localStorage.setItem('dosing_calc_version', APP_VERSION);
+    }
+    
     const savedLang = localStorage.getItem('dosing_calc_lang') || 'ru';
     window.setLanguage(savedLang);
   });
