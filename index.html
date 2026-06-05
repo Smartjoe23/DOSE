@@ -1395,7 +1395,8 @@
   </div>
 
   <!-- Embedded registry -->
-  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script id="registryData" type="application/json">{
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script id="registryData" type="application/json">
+{
   "meta": {
     "source_file": "Доз_карты_КЗ_-_2026.xlsx",
     "generated_date": "2026-01-30",
@@ -1403,7 +1404,8 @@
     "notes": [
       "Все дозы извлечены из Excel; значения '-' интерпретированы как отсутствующие/неприменимые.",
       "Для Амоксиклав и Оспамокс частота приемов указана в таблице.",
-      "Для Азидрат добавлены вычисляемые поля dose_mg_calc."
+      "Для Азидрат добавлены вычисляемые поля dose_mg_calc.",
+      "Восстановлены строки высоких доз (60/90 мг/кг и др.), отсутствовавшие из-за ячеек Excel без текстовой подписи; значения взяты из Excel дословно."
     ]
   },
   "products": [
@@ -1440,25 +1442,25 @@
         60.0
       ],
       "weight_min_kg": 2.0,
-      "weight_max_kg": 39.0,
+      "weight_max_kg": 40.0,
       "coverage_by_mgkg": [
         {
           "mgkg_per_day": 20.0,
           "weight_min_kg": 2.0,
-          "weight_max_kg": 39.0,
-          "rows": 38
+          "weight_max_kg": 40.0,
+          "rows": 39
         },
         {
           "mgkg_per_day": 40.0,
           "weight_min_kg": 2.0,
-          "weight_max_kg": 39.0,
-          "rows": 38
+          "weight_max_kg": 40.0,
+          "rows": 39
         },
         {
           "mgkg_per_day": 60.0,
           "weight_min_kg": 2.0,
-          "weight_max_kg": 6.0,
-          "rows": 5
+          "weight_max_kg": 40.0,
+          "rows": 39
         }
       ],
       "therapy_days": null,
@@ -1477,25 +1479,25 @@
         60.0
       ],
       "weight_min_kg": 3.0,
-      "weight_max_kg": 39.0,
+      "weight_max_kg": 40.0,
       "coverage_by_mgkg": [
         {
           "mgkg_per_day": 20.0,
           "weight_min_kg": 3.0,
-          "weight_max_kg": 39.0,
-          "rows": 37
+          "weight_max_kg": 40.0,
+          "rows": 38
         },
         {
           "mgkg_per_day": 40.0,
           "weight_min_kg": 3.0,
-          "weight_max_kg": 39.0,
-          "rows": 37
+          "weight_max_kg": 40.0,
+          "rows": 38
         },
         {
           "mgkg_per_day": 60.0,
           "weight_min_kg": 3.0,
-          "weight_max_kg": 13.0,
-          "rows": 11
+          "weight_max_kg": 40.0,
+          "rows": 38
         }
       ],
       "therapy_days": null,
@@ -1568,8 +1570,8 @@
         {
           "mgkg_per_day": 90.0,
           "weight_min_kg": 2.0,
-          "weight_max_kg": 15.0,
-          "rows": 14
+          "weight_max_kg": 40.0,
+          "rows": 39
         }
       ],
       "therapy_days": null,
@@ -1594,19 +1596,19 @@
           "mgkg_per_day": 40.0,
           "weight_min_kg": 2.0,
           "weight_max_kg": 40.0,
-          "rows": 23
+          "rows": 39
         },
         {
           "mgkg_per_day": 50.0,
           "weight_min_kg": 2.0,
-          "weight_max_kg": 15.0,
-          "rows": 14
+          "weight_max_kg": 40.0,
+          "rows": 39
         },
         {
           "mgkg_per_day": 90.0,
           "weight_min_kg": 2.0,
-          "weight_max_kg": 10.0,
-          "rows": 9
+          "weight_max_kg": 40.0,
+          "rows": 39
         }
       ],
       "therapy_days": null,
@@ -5318,9 +5320,1620 @@
       "therapy_label": "3-дневная терапия (мл, 10 мг/кг/сутки)",
       "dose_mg_calc": 400.0,
       "dose_mg_from_text": 400.0
+    },
+    {
+      "variant_id": "ospamox_125_5ml",
+      "weight_min_kg": 16.0,
+      "weight_max_kg": 16.0,
+      "dose_ml": 28.8,
+      "freq_per_day": 2,
+      "label_raw": "28.8 мл 2 раза в сутки",
+      "weight_raw": "16",
+      "mgkg_per_day": 90.0
+    },
+    {
+      "variant_id": "ospamox_125_5ml",
+      "weight_min_kg": 17.0,
+      "weight_max_kg": 17.0,
+      "dose_ml": 30.6,
+      "freq_per_day": 2,
+      "label_raw": "30.6 мл 2 раза в сутки",
+      "weight_raw": "17",
+      "mgkg_per_day": 90.0
+    },
+    {
+      "variant_id": "ospamox_125_5ml",
+      "weight_min_kg": 18.0,
+      "weight_max_kg": 18.0,
+      "dose_ml": 32.4,
+      "freq_per_day": 2,
+      "label_raw": "32.4 мл 2 раза в сутки",
+      "weight_raw": "18",
+      "mgkg_per_day": 90.0
+    },
+    {
+      "variant_id": "ospamox_125_5ml",
+      "weight_min_kg": 19.0,
+      "weight_max_kg": 19.0,
+      "dose_ml": 34.2,
+      "freq_per_day": 2,
+      "label_raw": "34.2 мл 2 раза в сутки",
+      "weight_raw": "19",
+      "mgkg_per_day": 90.0
+    },
+    {
+      "variant_id": "ospamox_125_5ml",
+      "weight_min_kg": 20.0,
+      "weight_max_kg": 20.0,
+      "dose_ml": 36.0,
+      "freq_per_day": 2,
+      "label_raw": "36 мл 2 раза в сутки",
+      "weight_raw": "20",
+      "mgkg_per_day": 90.0
+    },
+    {
+      "variant_id": "ospamox_125_5ml",
+      "weight_min_kg": 21.0,
+      "weight_max_kg": 21.0,
+      "dose_ml": 37.8,
+      "freq_per_day": 2,
+      "label_raw": "37.8 мл 2 раза в сутки",
+      "weight_raw": "21",
+      "mgkg_per_day": 90.0
+    },
+    {
+      "variant_id": "ospamox_125_5ml",
+      "weight_min_kg": 22.0,
+      "weight_max_kg": 22.0,
+      "dose_ml": 39.6,
+      "freq_per_day": 2,
+      "label_raw": "39.6 мл 2 раза в сутки",
+      "weight_raw": "22",
+      "mgkg_per_day": 90.0
+    },
+    {
+      "variant_id": "ospamox_125_5ml",
+      "weight_min_kg": 23.0,
+      "weight_max_kg": 23.0,
+      "dose_ml": 41.4,
+      "freq_per_day": 2,
+      "label_raw": "41.4 мл 2 раза в сутки",
+      "weight_raw": "23",
+      "mgkg_per_day": 90.0
+    },
+    {
+      "variant_id": "ospamox_125_5ml",
+      "weight_min_kg": 24.0,
+      "weight_max_kg": 24.0,
+      "dose_ml": 43.2,
+      "freq_per_day": 2,
+      "label_raw": "43.2 мл 2 раза в сутки",
+      "weight_raw": "24",
+      "mgkg_per_day": 90.0
+    },
+    {
+      "variant_id": "ospamox_125_5ml",
+      "weight_min_kg": 25.0,
+      "weight_max_kg": 25.0,
+      "dose_ml": 45.0,
+      "freq_per_day": 2,
+      "label_raw": "45 мл 2 раза в сутки",
+      "weight_raw": "25",
+      "mgkg_per_day": 90.0
+    },
+    {
+      "variant_id": "ospamox_125_5ml",
+      "weight_min_kg": 26.0,
+      "weight_max_kg": 26.0,
+      "dose_ml": 46.8,
+      "freq_per_day": 2,
+      "label_raw": "46.8 мл 2 раза в сутки",
+      "weight_raw": "26",
+      "mgkg_per_day": 90.0
+    },
+    {
+      "variant_id": "ospamox_125_5ml",
+      "weight_min_kg": 27.0,
+      "weight_max_kg": 27.0,
+      "dose_ml": 48.6,
+      "freq_per_day": 2,
+      "label_raw": "48.6 мл 2 раза в сутки",
+      "weight_raw": "27",
+      "mgkg_per_day": 90.0
+    },
+    {
+      "variant_id": "ospamox_125_5ml",
+      "weight_min_kg": 28.0,
+      "weight_max_kg": 28.0,
+      "dose_ml": 50.4,
+      "freq_per_day": 2,
+      "label_raw": "50.4 мл 2 раза в сутки",
+      "weight_raw": "28",
+      "mgkg_per_day": 90.0
+    },
+    {
+      "variant_id": "ospamox_125_5ml",
+      "weight_min_kg": 29.0,
+      "weight_max_kg": 29.0,
+      "dose_ml": 52.2,
+      "freq_per_day": 2,
+      "label_raw": "52.2 мл 2 раза в сутки",
+      "weight_raw": "29",
+      "mgkg_per_day": 90.0
+    },
+    {
+      "variant_id": "ospamox_125_5ml",
+      "weight_min_kg": 30.0,
+      "weight_max_kg": 30.0,
+      "dose_ml": 54.0,
+      "freq_per_day": 2,
+      "label_raw": "54 мл 2 раза в сутки",
+      "weight_raw": "30",
+      "mgkg_per_day": 90.0
+    },
+    {
+      "variant_id": "ospamox_125_5ml",
+      "weight_min_kg": 31.0,
+      "weight_max_kg": 31.0,
+      "dose_ml": 55.8,
+      "freq_per_day": 2,
+      "label_raw": "55.8 мл 2 раза в сутки",
+      "weight_raw": "31",
+      "mgkg_per_day": 90.0
+    },
+    {
+      "variant_id": "ospamox_125_5ml",
+      "weight_min_kg": 32.0,
+      "weight_max_kg": 32.0,
+      "dose_ml": 57.6,
+      "freq_per_day": 2,
+      "label_raw": "57.6 мл 2 раза в сутки",
+      "weight_raw": "32",
+      "mgkg_per_day": 90.0
+    },
+    {
+      "variant_id": "ospamox_125_5ml",
+      "weight_min_kg": 33.0,
+      "weight_max_kg": 33.0,
+      "dose_ml": 59.4,
+      "freq_per_day": 2,
+      "label_raw": "59.4 мл 2 раза в сутки",
+      "weight_raw": "33",
+      "mgkg_per_day": 90.0
+    },
+    {
+      "variant_id": "ospamox_125_5ml",
+      "weight_min_kg": 34.0,
+      "weight_max_kg": 34.0,
+      "dose_ml": 61.2,
+      "freq_per_day": 2,
+      "label_raw": "61.2 мл 2 раза в сутки",
+      "weight_raw": "34",
+      "mgkg_per_day": 90.0
+    },
+    {
+      "variant_id": "ospamox_125_5ml",
+      "weight_min_kg": 35.0,
+      "weight_max_kg": 35.0,
+      "dose_ml": 63.0,
+      "freq_per_day": 2,
+      "label_raw": "63 мл 2 раза в сутки",
+      "weight_raw": "35",
+      "mgkg_per_day": 90.0
+    },
+    {
+      "variant_id": "ospamox_125_5ml",
+      "weight_min_kg": 36.0,
+      "weight_max_kg": 36.0,
+      "dose_ml": 64.8,
+      "freq_per_day": 2,
+      "label_raw": "64.8 мл 2 раза в сутки",
+      "weight_raw": "36",
+      "mgkg_per_day": 90.0
+    },
+    {
+      "variant_id": "ospamox_125_5ml",
+      "weight_min_kg": 37.0,
+      "weight_max_kg": 37.0,
+      "dose_ml": 66.6,
+      "freq_per_day": 2,
+      "label_raw": "66.6 мл 2 раза в сутки",
+      "weight_raw": "37",
+      "mgkg_per_day": 90.0
+    },
+    {
+      "variant_id": "ospamox_125_5ml",
+      "weight_min_kg": 38.0,
+      "weight_max_kg": 38.0,
+      "dose_ml": 68.4,
+      "freq_per_day": 2,
+      "label_raw": "68.4 мл 2 раза в сутки",
+      "weight_raw": "38",
+      "mgkg_per_day": 90.0
+    },
+    {
+      "variant_id": "ospamox_125_5ml",
+      "weight_min_kg": 39.0,
+      "weight_max_kg": 39.0,
+      "dose_ml": 70.2,
+      "freq_per_day": 2,
+      "label_raw": "70.2 мл 2 раза в сутки",
+      "weight_raw": "39",
+      "mgkg_per_day": 90.0
+    },
+    {
+      "variant_id": "ospamox_125_5ml",
+      "weight_min_kg": 40.0,
+      "weight_max_kg": 40.0,
+      "dose_ml": 72.0,
+      "freq_per_day": 2,
+      "label_raw": "72 мл 2 раза в сутки",
+      "weight_raw": "40",
+      "mgkg_per_day": 90.0
+    },
+    {
+      "variant_id": "ospamox_250_5ml",
+      "weight_min_kg": 11.0,
+      "weight_max_kg": 11.0,
+      "dose_ml": 9.9,
+      "freq_per_day": 2,
+      "label_raw": "9.9 мл 2 раза в сутки",
+      "weight_raw": "11",
+      "mgkg_per_day": 90.0
+    },
+    {
+      "variant_id": "ospamox_250_5ml",
+      "weight_min_kg": 12.0,
+      "weight_max_kg": 12.0,
+      "dose_ml": 10.8,
+      "freq_per_day": 2,
+      "label_raw": "10.8 мл 2 раза в сутки",
+      "weight_raw": "12",
+      "mgkg_per_day": 90.0
+    },
+    {
+      "variant_id": "ospamox_250_5ml",
+      "weight_min_kg": 13.0,
+      "weight_max_kg": 13.0,
+      "dose_ml": 11.7,
+      "freq_per_day": 2,
+      "label_raw": "11.7 мл 2 раза в сутки",
+      "weight_raw": "13",
+      "mgkg_per_day": 90.0
+    },
+    {
+      "variant_id": "ospamox_250_5ml",
+      "weight_min_kg": 14.0,
+      "weight_max_kg": 14.0,
+      "dose_ml": 13.0,
+      "freq_per_day": 2,
+      "label_raw": "13 мл 2 раза в сутки",
+      "weight_raw": "14",
+      "mgkg_per_day": 90.0
+    },
+    {
+      "variant_id": "ospamox_250_5ml",
+      "weight_min_kg": 15.0,
+      "weight_max_kg": 15.0,
+      "dose_ml": 13.5,
+      "freq_per_day": 2,
+      "label_raw": "13.5 мл 2 раза в сутки",
+      "weight_raw": "15",
+      "mgkg_per_day": 90.0
+    },
+    {
+      "variant_id": "ospamox_250_5ml",
+      "weight_min_kg": 16.0,
+      "weight_max_kg": 16.0,
+      "dose_ml": 8.0,
+      "freq_per_day": 2,
+      "label_raw": "8 мл 2 раза в сутки",
+      "weight_raw": "16",
+      "mgkg_per_day": 50.0
+    },
+    {
+      "variant_id": "ospamox_250_5ml",
+      "weight_min_kg": 16.0,
+      "weight_max_kg": 16.0,
+      "dose_ml": 14.4,
+      "freq_per_day": 2,
+      "label_raw": "14.4 мл 2 раза в сутки",
+      "weight_raw": "16",
+      "mgkg_per_day": 90.0
+    },
+    {
+      "variant_id": "ospamox_250_5ml",
+      "weight_min_kg": 17.0,
+      "weight_max_kg": 17.0,
+      "dose_ml": 8.5,
+      "freq_per_day": 2,
+      "label_raw": "8.5 мл 2 раза в сутки",
+      "weight_raw": "17",
+      "mgkg_per_day": 50.0
+    },
+    {
+      "variant_id": "ospamox_250_5ml",
+      "weight_min_kg": 17.0,
+      "weight_max_kg": 17.0,
+      "dose_ml": 15.3,
+      "freq_per_day": 2,
+      "label_raw": "15.3 мл 2 раза в сутки",
+      "weight_raw": "17",
+      "mgkg_per_day": 90.0
+    },
+    {
+      "variant_id": "ospamox_250_5ml",
+      "weight_min_kg": 18.0,
+      "weight_max_kg": 18.0,
+      "dose_ml": 9.0,
+      "freq_per_day": 2,
+      "label_raw": "9 мл 2 раза в сутки",
+      "weight_raw": "18",
+      "mgkg_per_day": 50.0
+    },
+    {
+      "variant_id": "ospamox_250_5ml",
+      "weight_min_kg": 18.0,
+      "weight_max_kg": 18.0,
+      "dose_ml": 16.2,
+      "freq_per_day": 2,
+      "label_raw": "16.2 мл 2 раза в сутки",
+      "weight_raw": "18",
+      "mgkg_per_day": 90.0
+    },
+    {
+      "variant_id": "ospamox_250_5ml",
+      "weight_min_kg": 19.0,
+      "weight_max_kg": 19.0,
+      "dose_ml": 9.5,
+      "freq_per_day": 2,
+      "label_raw": "9.5 мл 2 раза в сутки",
+      "weight_raw": "19",
+      "mgkg_per_day": 50.0
+    },
+    {
+      "variant_id": "ospamox_250_5ml",
+      "weight_min_kg": 19.0,
+      "weight_max_kg": 19.0,
+      "dose_ml": 17.1,
+      "freq_per_day": 2,
+      "label_raw": "17.1 мл 2 раза в сутки",
+      "weight_raw": "19",
+      "mgkg_per_day": 90.0
+    },
+    {
+      "variant_id": "ospamox_250_5ml",
+      "weight_min_kg": 20.0,
+      "weight_max_kg": 20.0,
+      "dose_ml": 10.0,
+      "freq_per_day": 2,
+      "label_raw": "10 мл 2 раза в сутки",
+      "weight_raw": "20",
+      "mgkg_per_day": 50.0
+    },
+    {
+      "variant_id": "ospamox_250_5ml",
+      "weight_min_kg": 20.0,
+      "weight_max_kg": 20.0,
+      "dose_ml": 18.0,
+      "freq_per_day": 2,
+      "label_raw": "18 мл 2 раза в сутки",
+      "weight_raw": "20",
+      "mgkg_per_day": 90.0
+    },
+    {
+      "variant_id": "ospamox_250_5ml",
+      "weight_min_kg": 21.0,
+      "weight_max_kg": 21.0,
+      "dose_ml": 8.4,
+      "freq_per_day": 2,
+      "label_raw": "8.4 мл 2 раза в сутки",
+      "weight_raw": "21",
+      "mgkg_per_day": 40.0
+    },
+    {
+      "variant_id": "ospamox_250_5ml",
+      "weight_min_kg": 21.0,
+      "weight_max_kg": 21.0,
+      "dose_ml": 10.5,
+      "freq_per_day": 2,
+      "label_raw": "10.5 мл 2 раза в сутки",
+      "weight_raw": "21",
+      "mgkg_per_day": 50.0
+    },
+    {
+      "variant_id": "ospamox_250_5ml",
+      "weight_min_kg": 21.0,
+      "weight_max_kg": 21.0,
+      "dose_ml": 18.9,
+      "freq_per_day": 2,
+      "label_raw": "18.9 мл 2 раза в сутки",
+      "weight_raw": "21",
+      "mgkg_per_day": 90.0
+    },
+    {
+      "variant_id": "ospamox_250_5ml",
+      "weight_min_kg": 22.0,
+      "weight_max_kg": 22.0,
+      "dose_ml": 8.8,
+      "freq_per_day": 2,
+      "label_raw": "8.8 мл 2 раза в сутки",
+      "weight_raw": "22",
+      "mgkg_per_day": 40.0
+    },
+    {
+      "variant_id": "ospamox_250_5ml",
+      "weight_min_kg": 22.0,
+      "weight_max_kg": 22.0,
+      "dose_ml": 11.0,
+      "freq_per_day": 2,
+      "label_raw": "11 мл 2 раза в сутки",
+      "weight_raw": "22",
+      "mgkg_per_day": 50.0
+    },
+    {
+      "variant_id": "ospamox_250_5ml",
+      "weight_min_kg": 22.0,
+      "weight_max_kg": 22.0,
+      "dose_ml": 19.8,
+      "freq_per_day": 2,
+      "label_raw": "19.8 мл 2 раза в сутки",
+      "weight_raw": "22",
+      "mgkg_per_day": 90.0
+    },
+    {
+      "variant_id": "ospamox_250_5ml",
+      "weight_min_kg": 23.0,
+      "weight_max_kg": 23.0,
+      "dose_ml": 9.2,
+      "freq_per_day": 2,
+      "label_raw": "9.2 мл 2 раза в сутки",
+      "weight_raw": "23",
+      "mgkg_per_day": 40.0
+    },
+    {
+      "variant_id": "ospamox_250_5ml",
+      "weight_min_kg": 23.0,
+      "weight_max_kg": 23.0,
+      "dose_ml": 11.5,
+      "freq_per_day": 2,
+      "label_raw": "11.5 мл 2 раза в сутки",
+      "weight_raw": "23",
+      "mgkg_per_day": 50.0
+    },
+    {
+      "variant_id": "ospamox_250_5ml",
+      "weight_min_kg": 23.0,
+      "weight_max_kg": 23.0,
+      "dose_ml": 20.7,
+      "freq_per_day": 2,
+      "label_raw": "20.7 мл 2 раза в сутки",
+      "weight_raw": "23",
+      "mgkg_per_day": 90.0
+    },
+    {
+      "variant_id": "ospamox_250_5ml",
+      "weight_min_kg": 24.0,
+      "weight_max_kg": 24.0,
+      "dose_ml": 9.6,
+      "freq_per_day": 2,
+      "label_raw": "9.6 мл 2 раза в сутки",
+      "weight_raw": "24",
+      "mgkg_per_day": 40.0
+    },
+    {
+      "variant_id": "ospamox_250_5ml",
+      "weight_min_kg": 24.0,
+      "weight_max_kg": 24.0,
+      "dose_ml": 12.0,
+      "freq_per_day": 2,
+      "label_raw": "12 мл 2 раза в сутки",
+      "weight_raw": "24",
+      "mgkg_per_day": 50.0
+    },
+    {
+      "variant_id": "ospamox_250_5ml",
+      "weight_min_kg": 24.0,
+      "weight_max_kg": 24.0,
+      "dose_ml": 21.6,
+      "freq_per_day": 2,
+      "label_raw": "21.6 мл 2 раза в сутки",
+      "weight_raw": "24",
+      "mgkg_per_day": 90.0
+    },
+    {
+      "variant_id": "ospamox_250_5ml",
+      "weight_min_kg": 25.0,
+      "weight_max_kg": 25.0,
+      "dose_ml": 12.5,
+      "freq_per_day": 2,
+      "label_raw": "12.5 мл 2 раза в сутки",
+      "weight_raw": "25",
+      "mgkg_per_day": 50.0
+    },
+    {
+      "variant_id": "ospamox_250_5ml",
+      "weight_min_kg": 25.0,
+      "weight_max_kg": 25.0,
+      "dose_ml": 22.5,
+      "freq_per_day": 2,
+      "label_raw": "22.5 мл 2 раза в сутки",
+      "weight_raw": "25",
+      "mgkg_per_day": 90.0
+    },
+    {
+      "variant_id": "ospamox_250_5ml",
+      "weight_min_kg": 26.0,
+      "weight_max_kg": 26.0,
+      "dose_ml": 10.4,
+      "freq_per_day": 2,
+      "label_raw": "10.4 мл 2 раза в сутки",
+      "weight_raw": "26",
+      "mgkg_per_day": 40.0
+    },
+    {
+      "variant_id": "ospamox_250_5ml",
+      "weight_min_kg": 26.0,
+      "weight_max_kg": 26.0,
+      "dose_ml": 13.0,
+      "freq_per_day": 2,
+      "label_raw": "13 мл 2 раза в сутки",
+      "weight_raw": "26",
+      "mgkg_per_day": 50.0
+    },
+    {
+      "variant_id": "ospamox_250_5ml",
+      "weight_min_kg": 26.0,
+      "weight_max_kg": 26.0,
+      "dose_ml": 23.4,
+      "freq_per_day": 2,
+      "label_raw": "23.4 мл 2 раза в сутки",
+      "weight_raw": "26",
+      "mgkg_per_day": 90.0
+    },
+    {
+      "variant_id": "ospamox_250_5ml",
+      "weight_min_kg": 27.0,
+      "weight_max_kg": 27.0,
+      "dose_ml": 10.8,
+      "freq_per_day": 2,
+      "label_raw": "10.8 мл 2 раза в сутки",
+      "weight_raw": "27",
+      "mgkg_per_day": 40.0
+    },
+    {
+      "variant_id": "ospamox_250_5ml",
+      "weight_min_kg": 27.0,
+      "weight_max_kg": 27.0,
+      "dose_ml": 13.5,
+      "freq_per_day": 2,
+      "label_raw": "13.5 мл 2 раза в сутки",
+      "weight_raw": "27",
+      "mgkg_per_day": 50.0
+    },
+    {
+      "variant_id": "ospamox_250_5ml",
+      "weight_min_kg": 27.0,
+      "weight_max_kg": 27.0,
+      "dose_ml": 24.3,
+      "freq_per_day": 2,
+      "label_raw": "24.3 мл 2 раза в сутки",
+      "weight_raw": "27",
+      "mgkg_per_day": 90.0
+    },
+    {
+      "variant_id": "ospamox_250_5ml",
+      "weight_min_kg": 28.0,
+      "weight_max_kg": 28.0,
+      "dose_ml": 11.2,
+      "freq_per_day": 2,
+      "label_raw": "11.2 мл 2 раза в сутки",
+      "weight_raw": "28",
+      "mgkg_per_day": 40.0
+    },
+    {
+      "variant_id": "ospamox_250_5ml",
+      "weight_min_kg": 28.0,
+      "weight_max_kg": 28.0,
+      "dose_ml": 14.0,
+      "freq_per_day": 2,
+      "label_raw": "14 мл 2 раза в сутки",
+      "weight_raw": "28",
+      "mgkg_per_day": 50.0
+    },
+    {
+      "variant_id": "ospamox_250_5ml",
+      "weight_min_kg": 28.0,
+      "weight_max_kg": 28.0,
+      "dose_ml": 25.2,
+      "freq_per_day": 2,
+      "label_raw": "25.2 мл 2 раза в сутки",
+      "weight_raw": "28",
+      "mgkg_per_day": 90.0
+    },
+    {
+      "variant_id": "ospamox_250_5ml",
+      "weight_min_kg": 29.0,
+      "weight_max_kg": 29.0,
+      "dose_ml": 11.6,
+      "freq_per_day": 2,
+      "label_raw": "11.6 мл 2 раза в сутки",
+      "weight_raw": "29",
+      "mgkg_per_day": 40.0
+    },
+    {
+      "variant_id": "ospamox_250_5ml",
+      "weight_min_kg": 29.0,
+      "weight_max_kg": 29.0,
+      "dose_ml": 14.5,
+      "freq_per_day": 2,
+      "label_raw": "14.5 мл 2 раза в сутки",
+      "weight_raw": "29",
+      "mgkg_per_day": 50.0
+    },
+    {
+      "variant_id": "ospamox_250_5ml",
+      "weight_min_kg": 29.0,
+      "weight_max_kg": 29.0,
+      "dose_ml": 26.1,
+      "freq_per_day": 2,
+      "label_raw": "26.1 мл 2 раза в сутки",
+      "weight_raw": "29",
+      "mgkg_per_day": 90.0
+    },
+    {
+      "variant_id": "ospamox_250_5ml",
+      "weight_min_kg": 30.0,
+      "weight_max_kg": 30.0,
+      "dose_ml": 15.0,
+      "freq_per_day": 2,
+      "label_raw": "15 мл 2 раза в сутки",
+      "weight_raw": "30",
+      "mgkg_per_day": 50.0
+    },
+    {
+      "variant_id": "ospamox_250_5ml",
+      "weight_min_kg": 30.0,
+      "weight_max_kg": 30.0,
+      "dose_ml": 27.0,
+      "freq_per_day": 2,
+      "label_raw": "27 мл 2 раза в сутки",
+      "weight_raw": "30",
+      "mgkg_per_day": 90.0
+    },
+    {
+      "variant_id": "ospamox_250_5ml",
+      "weight_min_kg": 31.0,
+      "weight_max_kg": 31.0,
+      "dose_ml": 12.4,
+      "freq_per_day": 2,
+      "label_raw": "12.4 мл 2 раза в сутки",
+      "weight_raw": "31",
+      "mgkg_per_day": 40.0
+    },
+    {
+      "variant_id": "ospamox_250_5ml",
+      "weight_min_kg": 31.0,
+      "weight_max_kg": 31.0,
+      "dose_ml": 15.5,
+      "freq_per_day": 2,
+      "label_raw": "15.5 мл 2 раза в сутки",
+      "weight_raw": "31",
+      "mgkg_per_day": 50.0
+    },
+    {
+      "variant_id": "ospamox_250_5ml",
+      "weight_min_kg": 31.0,
+      "weight_max_kg": 31.0,
+      "dose_ml": 27.9,
+      "freq_per_day": 2,
+      "label_raw": "27.9 мл 2 раза в сутки",
+      "weight_raw": "31",
+      "mgkg_per_day": 90.0
+    },
+    {
+      "variant_id": "ospamox_250_5ml",
+      "weight_min_kg": 32.0,
+      "weight_max_kg": 32.0,
+      "dose_ml": 12.8,
+      "freq_per_day": 2,
+      "label_raw": "12.8 мл 2 раза в сутки",
+      "weight_raw": "32",
+      "mgkg_per_day": 40.0
+    },
+    {
+      "variant_id": "ospamox_250_5ml",
+      "weight_min_kg": 32.0,
+      "weight_max_kg": 32.0,
+      "dose_ml": 16.0,
+      "freq_per_day": 2,
+      "label_raw": "16 мл 2 раза в сутки",
+      "weight_raw": "32",
+      "mgkg_per_day": 50.0
+    },
+    {
+      "variant_id": "ospamox_250_5ml",
+      "weight_min_kg": 32.0,
+      "weight_max_kg": 32.0,
+      "dose_ml": 28.8,
+      "freq_per_day": 2,
+      "label_raw": "28.8 мл 2 раза в сутки",
+      "weight_raw": "32",
+      "mgkg_per_day": 90.0
+    },
+    {
+      "variant_id": "ospamox_250_5ml",
+      "weight_min_kg": 33.0,
+      "weight_max_kg": 33.0,
+      "dose_ml": 13.2,
+      "freq_per_day": 2,
+      "label_raw": "13.2 мл 2 раза в сутки",
+      "weight_raw": "33",
+      "mgkg_per_day": 40.0
+    },
+    {
+      "variant_id": "ospamox_250_5ml",
+      "weight_min_kg": 33.0,
+      "weight_max_kg": 33.0,
+      "dose_ml": 16.5,
+      "freq_per_day": 2,
+      "label_raw": "16.5 мл 2 раза в сутки",
+      "weight_raw": "33",
+      "mgkg_per_day": 50.0
+    },
+    {
+      "variant_id": "ospamox_250_5ml",
+      "weight_min_kg": 33.0,
+      "weight_max_kg": 33.0,
+      "dose_ml": 29.7,
+      "freq_per_day": 2,
+      "label_raw": "29.7 мл 2 раза в сутки",
+      "weight_raw": "33",
+      "mgkg_per_day": 90.0
+    },
+    {
+      "variant_id": "ospamox_250_5ml",
+      "weight_min_kg": 34.0,
+      "weight_max_kg": 34.0,
+      "dose_ml": 13.6,
+      "freq_per_day": 2,
+      "label_raw": "13.6 мл 2 раза в сутки",
+      "weight_raw": "34",
+      "mgkg_per_day": 40.0
+    },
+    {
+      "variant_id": "ospamox_250_5ml",
+      "weight_min_kg": 34.0,
+      "weight_max_kg": 34.0,
+      "dose_ml": 17.0,
+      "freq_per_day": 2,
+      "label_raw": "17 мл 2 раза в сутки",
+      "weight_raw": "34",
+      "mgkg_per_day": 50.0
+    },
+    {
+      "variant_id": "ospamox_250_5ml",
+      "weight_min_kg": 34.0,
+      "weight_max_kg": 34.0,
+      "dose_ml": 30.6,
+      "freq_per_day": 2,
+      "label_raw": "30.6 мл 2 раза в сутки",
+      "weight_raw": "34",
+      "mgkg_per_day": 90.0
+    },
+    {
+      "variant_id": "ospamox_250_5ml",
+      "weight_min_kg": 35.0,
+      "weight_max_kg": 35.0,
+      "dose_ml": 17.5,
+      "freq_per_day": 2,
+      "label_raw": "17.5 мл 2 раза в сутки",
+      "weight_raw": "35",
+      "mgkg_per_day": 50.0
+    },
+    {
+      "variant_id": "ospamox_250_5ml",
+      "weight_min_kg": 35.0,
+      "weight_max_kg": 35.0,
+      "dose_ml": 31.5,
+      "freq_per_day": 2,
+      "label_raw": "31.5 мл 2 раза в сутки",
+      "weight_raw": "35",
+      "mgkg_per_day": 90.0
+    },
+    {
+      "variant_id": "ospamox_250_5ml",
+      "weight_min_kg": 36.0,
+      "weight_max_kg": 36.0,
+      "dose_ml": 14.4,
+      "freq_per_day": 2,
+      "label_raw": "14.4 мл 2 раза в сутки",
+      "weight_raw": "36",
+      "mgkg_per_day": 40.0
+    },
+    {
+      "variant_id": "ospamox_250_5ml",
+      "weight_min_kg": 36.0,
+      "weight_max_kg": 36.0,
+      "dose_ml": 18.0,
+      "freq_per_day": 2,
+      "label_raw": "18 мл 2 раза в сутки",
+      "weight_raw": "36",
+      "mgkg_per_day": 50.0
+    },
+    {
+      "variant_id": "ospamox_250_5ml",
+      "weight_min_kg": 36.0,
+      "weight_max_kg": 36.0,
+      "dose_ml": 32.4,
+      "freq_per_day": 2,
+      "label_raw": "32.4 мл 2 раза в сутки",
+      "weight_raw": "36",
+      "mgkg_per_day": 90.0
+    },
+    {
+      "variant_id": "ospamox_250_5ml",
+      "weight_min_kg": 37.0,
+      "weight_max_kg": 37.0,
+      "dose_ml": 14.8,
+      "freq_per_day": 2,
+      "label_raw": "14.8 мл 2 раза в сутки",
+      "weight_raw": "37",
+      "mgkg_per_day": 40.0
+    },
+    {
+      "variant_id": "ospamox_250_5ml",
+      "weight_min_kg": 37.0,
+      "weight_max_kg": 37.0,
+      "dose_ml": 18.5,
+      "freq_per_day": 2,
+      "label_raw": "18.5 мл 2 раза в сутки",
+      "weight_raw": "37",
+      "mgkg_per_day": 50.0
+    },
+    {
+      "variant_id": "ospamox_250_5ml",
+      "weight_min_kg": 37.0,
+      "weight_max_kg": 37.0,
+      "dose_ml": 33.3,
+      "freq_per_day": 2,
+      "label_raw": "33.3 мл 2 раза в сутки",
+      "weight_raw": "37",
+      "mgkg_per_day": 90.0
+    },
+    {
+      "variant_id": "ospamox_250_5ml",
+      "weight_min_kg": 38.0,
+      "weight_max_kg": 38.0,
+      "dose_ml": 15.2,
+      "freq_per_day": 2,
+      "label_raw": "15.2 мл 2 раза в сутки",
+      "weight_raw": "38",
+      "mgkg_per_day": 40.0
+    },
+    {
+      "variant_id": "ospamox_250_5ml",
+      "weight_min_kg": 38.0,
+      "weight_max_kg": 38.0,
+      "dose_ml": 19.0,
+      "freq_per_day": 2,
+      "label_raw": "19 мл 2 раза в сутки",
+      "weight_raw": "38",
+      "mgkg_per_day": 50.0
+    },
+    {
+      "variant_id": "ospamox_250_5ml",
+      "weight_min_kg": 38.0,
+      "weight_max_kg": 38.0,
+      "dose_ml": 34.2,
+      "freq_per_day": 2,
+      "label_raw": "34.2 мл 2 раза в сутки",
+      "weight_raw": "38",
+      "mgkg_per_day": 90.0
+    },
+    {
+      "variant_id": "ospamox_250_5ml",
+      "weight_min_kg": 39.0,
+      "weight_max_kg": 39.0,
+      "dose_ml": 15.6,
+      "freq_per_day": 2,
+      "label_raw": "15.6 мл 2 раза в сутки",
+      "weight_raw": "39",
+      "mgkg_per_day": 40.0
+    },
+    {
+      "variant_id": "ospamox_250_5ml",
+      "weight_min_kg": 39.0,
+      "weight_max_kg": 39.0,
+      "dose_ml": 19.5,
+      "freq_per_day": 2,
+      "label_raw": "19.5 мл 2 раза в сутки",
+      "weight_raw": "39",
+      "mgkg_per_day": 50.0
+    },
+    {
+      "variant_id": "ospamox_250_5ml",
+      "weight_min_kg": 39.0,
+      "weight_max_kg": 39.0,
+      "dose_ml": 35.1,
+      "freq_per_day": 2,
+      "label_raw": "35.1 мл 2 раза в сутки",
+      "weight_raw": "39",
+      "mgkg_per_day": 90.0
+    },
+    {
+      "variant_id": "ospamox_250_5ml",
+      "weight_min_kg": 40.0,
+      "weight_max_kg": 40.0,
+      "dose_ml": 20.0,
+      "freq_per_day": 2,
+      "label_raw": "20 мл 2 раза в сутки",
+      "weight_raw": "40",
+      "mgkg_per_day": 50.0
+    },
+    {
+      "variant_id": "ospamox_250_5ml",
+      "weight_min_kg": 40.0,
+      "weight_max_kg": 40.0,
+      "dose_ml": 36.0,
+      "freq_per_day": 2,
+      "label_raw": "36 мл 2 раза в сутки",
+      "weight_raw": "40",
+      "mgkg_per_day": 90.0
+    },
+    {
+      "variant_id": "amoxiclav_156_25_5ml",
+      "weight_min_kg": 7.0,
+      "weight_max_kg": 7.0,
+      "dose_ml": 5.6,
+      "freq_per_day": 3,
+      "label_raw": "5.6 мл 3 раза в сутки",
+      "weight_raw": "7",
+      "mgkg_per_day": 60.0
+    },
+    {
+      "variant_id": "amoxiclav_156_25_5ml",
+      "weight_min_kg": 8.0,
+      "weight_max_kg": 8.0,
+      "dose_ml": 6.4,
+      "freq_per_day": 3,
+      "label_raw": "6.4 мл 3 раза в сутки",
+      "weight_raw": "8",
+      "mgkg_per_day": 60.0
+    },
+    {
+      "variant_id": "amoxiclav_156_25_5ml",
+      "weight_min_kg": 9.0,
+      "weight_max_kg": 9.0,
+      "dose_ml": 7.2,
+      "freq_per_day": 3,
+      "label_raw": "7.2 мл 3 раза в сутки",
+      "weight_raw": "9",
+      "mgkg_per_day": 60.0
+    },
+    {
+      "variant_id": "amoxiclav_156_25_5ml",
+      "weight_min_kg": 10.0,
+      "weight_max_kg": 10.0,
+      "dose_ml": 8.0,
+      "freq_per_day": 3,
+      "label_raw": "8 мл 3 раза в сутки",
+      "weight_raw": "10",
+      "mgkg_per_day": 60.0
+    },
+    {
+      "variant_id": "amoxiclav_156_25_5ml",
+      "weight_min_kg": 11.0,
+      "weight_max_kg": 11.0,
+      "dose_ml": 8.8,
+      "freq_per_day": 3,
+      "label_raw": "8.8 мл 3 раза в сутки",
+      "weight_raw": "11",
+      "mgkg_per_day": 60.0
+    },
+    {
+      "variant_id": "amoxiclav_156_25_5ml",
+      "weight_min_kg": 12.0,
+      "weight_max_kg": 12.0,
+      "dose_ml": 9.6,
+      "freq_per_day": 3,
+      "label_raw": "9.6 мл 3 раза в сутки",
+      "weight_raw": "12",
+      "mgkg_per_day": 60.0
+    },
+    {
+      "variant_id": "amoxiclav_156_25_5ml",
+      "weight_min_kg": 13.0,
+      "weight_max_kg": 13.0,
+      "dose_ml": 10.4,
+      "freq_per_day": 3,
+      "label_raw": "10.4 мл 3 раза в сутки",
+      "weight_raw": "13",
+      "mgkg_per_day": 60.0
+    },
+    {
+      "variant_id": "amoxiclav_156_25_5ml",
+      "weight_min_kg": 14.0,
+      "weight_max_kg": 14.0,
+      "dose_ml": 11.2,
+      "freq_per_day": 3,
+      "label_raw": "11.2 мл 3 раза в сутки",
+      "weight_raw": "14",
+      "mgkg_per_day": 60.0
+    },
+    {
+      "variant_id": "amoxiclav_156_25_5ml",
+      "weight_min_kg": 15.0,
+      "weight_max_kg": 15.0,
+      "dose_ml": 12.0,
+      "freq_per_day": 3,
+      "label_raw": "12 мл 3 раза в сутки",
+      "weight_raw": "15",
+      "mgkg_per_day": 60.0
+    },
+    {
+      "variant_id": "amoxiclav_156_25_5ml",
+      "weight_min_kg": 16.0,
+      "weight_max_kg": 16.0,
+      "dose_ml": 12.8,
+      "freq_per_day": 3,
+      "label_raw": "12.8 мл 3 раза в сутки",
+      "weight_raw": "16",
+      "mgkg_per_day": 60.0
+    },
+    {
+      "variant_id": "amoxiclav_156_25_5ml",
+      "weight_min_kg": 17.0,
+      "weight_max_kg": 17.0,
+      "dose_ml": 13.6,
+      "freq_per_day": 3,
+      "label_raw": "13.6 мл 3 раза в сутки",
+      "weight_raw": "17",
+      "mgkg_per_day": 60.0
+    },
+    {
+      "variant_id": "amoxiclav_156_25_5ml",
+      "weight_min_kg": 18.0,
+      "weight_max_kg": 18.0,
+      "dose_ml": 14.4,
+      "freq_per_day": 3,
+      "label_raw": "14.4 мл 3 раза в сутки",
+      "weight_raw": "18",
+      "mgkg_per_day": 60.0
+    },
+    {
+      "variant_id": "amoxiclav_156_25_5ml",
+      "weight_min_kg": 19.0,
+      "weight_max_kg": 19.0,
+      "dose_ml": 15.2,
+      "freq_per_day": 3,
+      "label_raw": "15.2 мл 3 раза в сутки",
+      "weight_raw": "19",
+      "mgkg_per_day": 60.0
+    },
+    {
+      "variant_id": "amoxiclav_156_25_5ml",
+      "weight_min_kg": 20.0,
+      "weight_max_kg": 20.0,
+      "dose_ml": 16.0,
+      "freq_per_day": 3,
+      "label_raw": "16 мл 3 раза в сутки",
+      "weight_raw": "20",
+      "mgkg_per_day": 60.0
+    },
+    {
+      "variant_id": "amoxiclav_156_25_5ml",
+      "weight_min_kg": 21.0,
+      "weight_max_kg": 21.0,
+      "dose_ml": 16.8,
+      "freq_per_day": 3,
+      "label_raw": "16.8 мл 3 раза в сутки",
+      "weight_raw": "21",
+      "mgkg_per_day": 60.0
+    },
+    {
+      "variant_id": "amoxiclav_156_25_5ml",
+      "weight_min_kg": 22.0,
+      "weight_max_kg": 22.0,
+      "dose_ml": 17.6,
+      "freq_per_day": 3,
+      "label_raw": "17.6 мл 3 раза в сутки",
+      "weight_raw": "22",
+      "mgkg_per_day": 60.0
+    },
+    {
+      "variant_id": "amoxiclav_156_25_5ml",
+      "weight_min_kg": 23.0,
+      "weight_max_kg": 23.0,
+      "dose_ml": 18.4,
+      "freq_per_day": 3,
+      "label_raw": "18.4 мл 3 раза в сутки",
+      "weight_raw": "23",
+      "mgkg_per_day": 60.0
+    },
+    {
+      "variant_id": "amoxiclav_156_25_5ml",
+      "weight_min_kg": 24.0,
+      "weight_max_kg": 24.0,
+      "dose_ml": 19.2,
+      "freq_per_day": 3,
+      "label_raw": "19.2 мл 3 раза в сутки",
+      "weight_raw": "24",
+      "mgkg_per_day": 60.0
+    },
+    {
+      "variant_id": "amoxiclav_156_25_5ml",
+      "weight_min_kg": 25.0,
+      "weight_max_kg": 25.0,
+      "dose_ml": 20.0,
+      "freq_per_day": 3,
+      "label_raw": "20 мл 3 раза в сутки",
+      "weight_raw": "25",
+      "mgkg_per_day": 60.0
+    },
+    {
+      "variant_id": "amoxiclav_156_25_5ml",
+      "weight_min_kg": 26.0,
+      "weight_max_kg": 26.0,
+      "dose_ml": 20.8,
+      "freq_per_day": 3,
+      "label_raw": "20.8 мл 3 раза в сутки",
+      "weight_raw": "26",
+      "mgkg_per_day": 60.0
+    },
+    {
+      "variant_id": "amoxiclav_156_25_5ml",
+      "weight_min_kg": 27.0,
+      "weight_max_kg": 27.0,
+      "dose_ml": 21.6,
+      "freq_per_day": 3,
+      "label_raw": "21.6 мл 3 раза в сутки",
+      "weight_raw": "27",
+      "mgkg_per_day": 60.0
+    },
+    {
+      "variant_id": "amoxiclav_156_25_5ml",
+      "weight_min_kg": 28.0,
+      "weight_max_kg": 28.0,
+      "dose_ml": 22.4,
+      "freq_per_day": 3,
+      "label_raw": "22.4 мл 3 раза в сутки",
+      "weight_raw": "28",
+      "mgkg_per_day": 60.0
+    },
+    {
+      "variant_id": "amoxiclav_156_25_5ml",
+      "weight_min_kg": 29.0,
+      "weight_max_kg": 29.0,
+      "dose_ml": 23.2,
+      "freq_per_day": 3,
+      "label_raw": "23.2 мл 3 раза в сутки",
+      "weight_raw": "29",
+      "mgkg_per_day": 60.0
+    },
+    {
+      "variant_id": "amoxiclav_156_25_5ml",
+      "weight_min_kg": 30.0,
+      "weight_max_kg": 30.0,
+      "dose_ml": 24.0,
+      "freq_per_day": 3,
+      "label_raw": "24 мл 3 раза в сутки",
+      "weight_raw": "30",
+      "mgkg_per_day": 60.0
+    },
+    {
+      "variant_id": "amoxiclav_156_25_5ml",
+      "weight_min_kg": 31.0,
+      "weight_max_kg": 31.0,
+      "dose_ml": 24.8,
+      "freq_per_day": 3,
+      "label_raw": "24.8 мл 3 раза в сутки",
+      "weight_raw": "31",
+      "mgkg_per_day": 60.0
+    },
+    {
+      "variant_id": "amoxiclav_156_25_5ml",
+      "weight_min_kg": 32.0,
+      "weight_max_kg": 32.0,
+      "dose_ml": 25.6,
+      "freq_per_day": 3,
+      "label_raw": "25.6 мл 3 раза в сутки",
+      "weight_raw": "32",
+      "mgkg_per_day": 60.0
+    },
+    {
+      "variant_id": "amoxiclav_156_25_5ml",
+      "weight_min_kg": 33.0,
+      "weight_max_kg": 33.0,
+      "dose_ml": 26.4,
+      "freq_per_day": 3,
+      "label_raw": "26.4 мл 3 раза в сутки",
+      "weight_raw": "33",
+      "mgkg_per_day": 60.0
+    },
+    {
+      "variant_id": "amoxiclav_156_25_5ml",
+      "weight_min_kg": 34.0,
+      "weight_max_kg": 34.0,
+      "dose_ml": 27.2,
+      "freq_per_day": 3,
+      "label_raw": "27.2 мл 3 раза в сутки",
+      "weight_raw": "34",
+      "mgkg_per_day": 60.0
+    },
+    {
+      "variant_id": "amoxiclav_156_25_5ml",
+      "weight_min_kg": 35.0,
+      "weight_max_kg": 35.0,
+      "dose_ml": 28.0,
+      "freq_per_day": 3,
+      "label_raw": "28 мл 3 раза в сутки",
+      "weight_raw": "35",
+      "mgkg_per_day": 60.0
+    },
+    {
+      "variant_id": "amoxiclav_156_25_5ml",
+      "weight_min_kg": 36.0,
+      "weight_max_kg": 36.0,
+      "dose_ml": 28.8,
+      "freq_per_day": 3,
+      "label_raw": "28.8 мл 3 раза в сутки",
+      "weight_raw": "36",
+      "mgkg_per_day": 60.0
+    },
+    {
+      "variant_id": "amoxiclav_156_25_5ml",
+      "weight_min_kg": 37.0,
+      "weight_max_kg": 37.0,
+      "dose_ml": 29.6,
+      "freq_per_day": 3,
+      "label_raw": "29.6 мл 3 раза в сутки",
+      "weight_raw": "37",
+      "mgkg_per_day": 60.0
+    },
+    {
+      "variant_id": "amoxiclav_156_25_5ml",
+      "weight_min_kg": 38.0,
+      "weight_max_kg": 38.0,
+      "dose_ml": 30.4,
+      "freq_per_day": 3,
+      "label_raw": "30.4 мл 3 раза в сутки",
+      "weight_raw": "38",
+      "mgkg_per_day": 60.0
+    },
+    {
+      "variant_id": "amoxiclav_156_25_5ml",
+      "weight_min_kg": 39.0,
+      "weight_max_kg": 39.0,
+      "dose_ml": 31.2,
+      "freq_per_day": 3,
+      "label_raw": "31.2 мл 3 раза в сутки",
+      "weight_raw": "39",
+      "mgkg_per_day": 60.0
+    },
+    {
+      "variant_id": "amoxiclav_156_25_5ml",
+      "weight_min_kg": 40.0,
+      "weight_max_kg": 40.0,
+      "dose_ml": 10.7,
+      "freq_per_day": 3,
+      "label_raw": "10.7 мл 3 раза в сутки",
+      "weight_raw": "40",
+      "mgkg_per_day": 20.0
+    },
+    {
+      "variant_id": "amoxiclav_156_25_5ml",
+      "weight_min_kg": 40.0,
+      "weight_max_kg": 40.0,
+      "dose_ml": 21.3,
+      "freq_per_day": 3,
+      "label_raw": "21.3 мл 3 раза в сутки",
+      "weight_raw": "40",
+      "mgkg_per_day": 40.0
+    },
+    {
+      "variant_id": "amoxiclav_156_25_5ml",
+      "weight_min_kg": 40.0,
+      "weight_max_kg": 40.0,
+      "dose_ml": 32.0,
+      "freq_per_day": 3,
+      "label_raw": "32 мл 3 раза в сутки",
+      "weight_raw": "40",
+      "mgkg_per_day": 60.0
+    },
+    {
+      "variant_id": "amoxiclav_312_5_5ml",
+      "weight_min_kg": 14.0,
+      "weight_max_kg": 14.0,
+      "dose_ml": 5.6,
+      "freq_per_day": 3,
+      "label_raw": "5.6 мл 3 раза в сутки",
+      "weight_raw": "14",
+      "mgkg_per_day": 60.0
+    },
+    {
+      "variant_id": "amoxiclav_312_5_5ml",
+      "weight_min_kg": 15.0,
+      "weight_max_kg": 15.0,
+      "dose_ml": 6.0,
+      "freq_per_day": 3,
+      "label_raw": "6 мл 3 раза в сутки",
+      "weight_raw": "15",
+      "mgkg_per_day": 60.0
+    },
+    {
+      "variant_id": "amoxiclav_312_5_5ml",
+      "weight_min_kg": 16.0,
+      "weight_max_kg": 16.0,
+      "dose_ml": 6.4,
+      "freq_per_day": 3,
+      "label_raw": "6.4 мл 3 раза в сутки",
+      "weight_raw": "16",
+      "mgkg_per_day": 60.0
+    },
+    {
+      "variant_id": "amoxiclav_312_5_5ml",
+      "weight_min_kg": 17.0,
+      "weight_max_kg": 17.0,
+      "dose_ml": 6.8,
+      "freq_per_day": 3,
+      "label_raw": "6.8 мл 3 раза в сутки",
+      "weight_raw": "17",
+      "mgkg_per_day": 60.0
+    },
+    {
+      "variant_id": "amoxiclav_312_5_5ml",
+      "weight_min_kg": 18.0,
+      "weight_max_kg": 18.0,
+      "dose_ml": 7.2,
+      "freq_per_day": 3,
+      "label_raw": "7.2 мл 3 раза в сутки",
+      "weight_raw": "18",
+      "mgkg_per_day": 60.0
+    },
+    {
+      "variant_id": "amoxiclav_312_5_5ml",
+      "weight_min_kg": 19.0,
+      "weight_max_kg": 19.0,
+      "dose_ml": 7.6,
+      "freq_per_day": 3,
+      "label_raw": "7.6 мл 3 раза в сутки",
+      "weight_raw": "19",
+      "mgkg_per_day": 60.0
+    },
+    {
+      "variant_id": "amoxiclav_312_5_5ml",
+      "weight_min_kg": 20.0,
+      "weight_max_kg": 20.0,
+      "dose_ml": 8.0,
+      "freq_per_day": 3,
+      "label_raw": "8 мл 3 раза в сутки",
+      "weight_raw": "20",
+      "mgkg_per_day": 60.0
+    },
+    {
+      "variant_id": "amoxiclav_312_5_5ml",
+      "weight_min_kg": 21.0,
+      "weight_max_kg": 21.0,
+      "dose_ml": 8.4,
+      "freq_per_day": 3,
+      "label_raw": "8.4 мл 3 раза в сутки",
+      "weight_raw": "21",
+      "mgkg_per_day": 60.0
+    },
+    {
+      "variant_id": "amoxiclav_312_5_5ml",
+      "weight_min_kg": 22.0,
+      "weight_max_kg": 22.0,
+      "dose_ml": 8.8,
+      "freq_per_day": 3,
+      "label_raw": "8.8 мл 3 раза в сутки",
+      "weight_raw": "22",
+      "mgkg_per_day": 60.0
+    },
+    {
+      "variant_id": "amoxiclav_312_5_5ml",
+      "weight_min_kg": 23.0,
+      "weight_max_kg": 23.0,
+      "dose_ml": 9.2,
+      "freq_per_day": 3,
+      "label_raw": "9.2 мл 3 раза в сутки",
+      "weight_raw": "23",
+      "mgkg_per_day": 60.0
+    },
+    {
+      "variant_id": "amoxiclav_312_5_5ml",
+      "weight_min_kg": 24.0,
+      "weight_max_kg": 24.0,
+      "dose_ml": 9.6,
+      "freq_per_day": 3,
+      "label_raw": "9.6 мл 3 раза в сутки",
+      "weight_raw": "24",
+      "mgkg_per_day": 60.0
+    },
+    {
+      "variant_id": "amoxiclav_312_5_5ml",
+      "weight_min_kg": 25.0,
+      "weight_max_kg": 25.0,
+      "dose_ml": 10.0,
+      "freq_per_day": 3,
+      "label_raw": "10 мл 3 раза в сутки",
+      "weight_raw": "25",
+      "mgkg_per_day": 60.0
+    },
+    {
+      "variant_id": "amoxiclav_312_5_5ml",
+      "weight_min_kg": 26.0,
+      "weight_max_kg": 26.0,
+      "dose_ml": 10.4,
+      "freq_per_day": 3,
+      "label_raw": "10.4 мл 3 раза в сутки",
+      "weight_raw": "26",
+      "mgkg_per_day": 60.0
+    },
+    {
+      "variant_id": "amoxiclav_312_5_5ml",
+      "weight_min_kg": 27.0,
+      "weight_max_kg": 27.0,
+      "dose_ml": 10.8,
+      "freq_per_day": 3,
+      "label_raw": "10.8 мл 3 раза в сутки",
+      "weight_raw": "27",
+      "mgkg_per_day": 60.0
+    },
+    {
+      "variant_id": "amoxiclav_312_5_5ml",
+      "weight_min_kg": 28.0,
+      "weight_max_kg": 28.0,
+      "dose_ml": 11.2,
+      "freq_per_day": 3,
+      "label_raw": "11.2 мл 3 раза в сутки",
+      "weight_raw": "28",
+      "mgkg_per_day": 60.0
+    },
+    {
+      "variant_id": "amoxiclav_312_5_5ml",
+      "weight_min_kg": 29.0,
+      "weight_max_kg": 29.0,
+      "dose_ml": 11.6,
+      "freq_per_day": 3,
+      "label_raw": "11.6 мл 3 раза в сутки",
+      "weight_raw": "29",
+      "mgkg_per_day": 60.0
+    },
+    {
+      "variant_id": "amoxiclav_312_5_5ml",
+      "weight_min_kg": 30.0,
+      "weight_max_kg": 30.0,
+      "dose_ml": 12.0,
+      "freq_per_day": 3,
+      "label_raw": "12 мл 3 раза в сутки",
+      "weight_raw": "30",
+      "mgkg_per_day": 60.0
+    },
+    {
+      "variant_id": "amoxiclav_312_5_5ml",
+      "weight_min_kg": 31.0,
+      "weight_max_kg": 31.0,
+      "dose_ml": 12.4,
+      "freq_per_day": 3,
+      "label_raw": "12.4 мл 3 раза в сутки",
+      "weight_raw": "31",
+      "mgkg_per_day": 60.0
+    },
+    {
+      "variant_id": "amoxiclav_312_5_5ml",
+      "weight_min_kg": 32.0,
+      "weight_max_kg": 32.0,
+      "dose_ml": 12.8,
+      "freq_per_day": 3,
+      "label_raw": "12.8 мл 3 раза в сутки",
+      "weight_raw": "32",
+      "mgkg_per_day": 60.0
+    },
+    {
+      "variant_id": "amoxiclav_312_5_5ml",
+      "weight_min_kg": 33.0,
+      "weight_max_kg": 33.0,
+      "dose_ml": 13.2,
+      "freq_per_day": 3,
+      "label_raw": "13.2 мл 3 раза в сутки",
+      "weight_raw": "33",
+      "mgkg_per_day": 60.0
+    },
+    {
+      "variant_id": "amoxiclav_312_5_5ml",
+      "weight_min_kg": 34.0,
+      "weight_max_kg": 34.0,
+      "dose_ml": 13.6,
+      "freq_per_day": 3,
+      "label_raw": "13.6 мл 3 раза в сутки",
+      "weight_raw": "34",
+      "mgkg_per_day": 60.0
+    },
+    {
+      "variant_id": "amoxiclav_312_5_5ml",
+      "weight_min_kg": 35.0,
+      "weight_max_kg": 35.0,
+      "dose_ml": 14.0,
+      "freq_per_day": 3,
+      "label_raw": "14 мл 3 раза в сутки",
+      "weight_raw": "35",
+      "mgkg_per_day": 60.0
+    },
+    {
+      "variant_id": "amoxiclav_312_5_5ml",
+      "weight_min_kg": 36.0,
+      "weight_max_kg": 36.0,
+      "dose_ml": 14.4,
+      "freq_per_day": 3,
+      "label_raw": "14.4 мл 3 раза в сутки",
+      "weight_raw": "36",
+      "mgkg_per_day": 60.0
+    },
+    {
+      "variant_id": "amoxiclav_312_5_5ml",
+      "weight_min_kg": 37.0,
+      "weight_max_kg": 37.0,
+      "dose_ml": 14.8,
+      "freq_per_day": 3,
+      "label_raw": "14.8 мл 3 раза в сутки",
+      "weight_raw": "37",
+      "mgkg_per_day": 60.0
+    },
+    {
+      "variant_id": "amoxiclav_312_5_5ml",
+      "weight_min_kg": 38.0,
+      "weight_max_kg": 38.0,
+      "dose_ml": 15.2,
+      "freq_per_day": 3,
+      "label_raw": "15.2 мл 3 раза в сутки",
+      "weight_raw": "38",
+      "mgkg_per_day": 60.0
+    },
+    {
+      "variant_id": "amoxiclav_312_5_5ml",
+      "weight_min_kg": 39.0,
+      "weight_max_kg": 39.0,
+      "dose_ml": 15.6,
+      "freq_per_day": 3,
+      "label_raw": "15.6 мл 3 раза в сутки",
+      "weight_raw": "39",
+      "mgkg_per_day": 60.0
+    },
+    {
+      "variant_id": "amoxiclav_312_5_5ml",
+      "weight_min_kg": 40.0,
+      "weight_max_kg": 40.0,
+      "dose_ml": 5.3,
+      "freq_per_day": 3,
+      "label_raw": "5.3 мл 3 раза в сутки",
+      "weight_raw": "40",
+      "mgkg_per_day": 20.0
+    },
+    {
+      "variant_id": "amoxiclav_312_5_5ml",
+      "weight_min_kg": 40.0,
+      "weight_max_kg": 40.0,
+      "dose_ml": 10.7,
+      "freq_per_day": 3,
+      "label_raw": "10.7 мл 3 раза в сутки",
+      "weight_raw": "40",
+      "mgkg_per_day": 40.0
+    },
+    {
+      "variant_id": "amoxiclav_312_5_5ml",
+      "weight_min_kg": 40.0,
+      "weight_max_kg": 40.0,
+      "dose_ml": 16.0,
+      "freq_per_day": 3,
+      "label_raw": "16 мл 3 раза в сутки",
+      "weight_raw": "40",
+      "mgkg_per_day": 60.0
     }
   ]
-}</script>
+}
+  </script>
 
   <script>
   (() => {
@@ -5428,7 +7041,17 @@
         timesPerDayShort: "раза в сутки",
         years: "лет",
         mlSut: "мл/сут",
-        freqPerDay: "раз/сут"
+        freqPerDay: "раз/сут",
+        noDoseInCard: "Нет дозы по карте",
+        noDoseInCardSuffix: "для выбранного веса/режима.",
+        copyProduct: "Препарат",
+        copyWeight: "Вес",
+        copyRegimen: "Режим",
+        copyDose: "Доза",
+        copyDaily: "Суточно",
+        copyCourse: "Курс",
+        copyTimes: "раз/сут",
+        copyDays: "дня"
       },
       kz: {
         // Header
@@ -5530,7 +7153,17 @@
         timesPerDayShort: "рет тәулігіне",
         years: "жас",
         mlSut: "мл/тәул",
-        freqPerDay: "рет/тәул"
+        freqPerDay: "рет/тәул",
+        noDoseInCard: "Картада доза жоқ",
+        noDoseInCardSuffix: "таңдалған салмақ/режим үшін.",
+        copyProduct: "Препарат",
+        copyWeight: "Салмақ",
+        copyRegimen: "Режим",
+        copyDose: "Доза",
+        copyDaily: "Тәулігіне",
+        copyCourse: "Курс",
+        copyTimes: "рет/тәул",
+        copyDays: "күн"
       }
     };
     
@@ -5965,7 +7598,7 @@
         doseMlEl.textContent = "—";
         freqEl.textContent = "—";
         dailyEl.textContent = "—";
-        noteEl.innerHTML = `<strong>Нет дозы по карте</strong> для выбранного веса/режима.`;
+        noteEl.innerHTML = `<strong>${t('noDoseInCard')}</strong> ${t('noDoseInCardSuffix')}`;
         copyBtn.disabled = true;
       } else {
         doseMlEl.textContent = `${formatMl(row.dose_ml)} ${t('ml')}`;
@@ -6124,12 +7757,12 @@
       if (!row) return "";
 
       const lines = [];
-      lines.push(`Препарат: ${p.brand_ru} (${v.strength_label_ru || v.title_ru})`);
-      lines.push(`Вес: ${state.weight_kg} кг`);
-      if (v.dose_basis === "mgkg_per_day" && state.mgkg_per_day != null) lines.push(`Режим: ${formatMgkg(state.mgkg_per_day)} мг/кг/сут`);
-      lines.push(`Доза: ${formatMl(row.dose_ml)} мл × ${row.freq_per_day} раз/сут`);
-      lines.push(`Суточно: ${formatMl(row.dose_ml * row.freq_per_day)} мл/сут`);
-      if (v.therapy_days) lines.push(`Курс: ${v.therapy_days} дня`);
+      lines.push(`${t('copyProduct')}: ${p.brand_ru} (${v.strength_label_ru || v.title_ru})`);
+      lines.push(`${t('copyWeight')}: ${state.weight_kg} ${t('weightKg')}`);
+      if (v.dose_basis === "mgkg_per_day" && state.mgkg_per_day != null) lines.push(`${t('copyRegimen')}: ${formatMgkg(state.mgkg_per_day)} ${t('mgkgday')}`);
+      lines.push(`${t('copyDose')}: ${formatMl(row.dose_ml)} ${t('ml')} × ${row.freq_per_day} ${t('copyTimes')}`);
+      lines.push(`${t('copyDaily')}: ${formatMl(row.dose_ml * row.freq_per_day)} ${t('mlSut')}`);
+      if (v.therapy_days) lines.push(`${t('copyCourse')}: ${v.therapy_days} ${t('copyDays')}`);
       return lines.join("\n");
     }
 
