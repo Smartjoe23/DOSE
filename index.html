@@ -1008,7 +1008,21 @@
   </style>
 </head>
 <body class="touch-device">
-  
+
+  <!-- Version cache-reset: must run synchronously BEFORE the HCP gate check below -->
+  <script>
+    (function() {
+      var APP_VERSION = '1.1.0';
+      try {
+        if (localStorage.getItem('dosing_calc_version') !== APP_VERSION) {
+          localStorage.removeItem('dosing_calc_lang');
+          localStorage.removeItem('hcp_confirmed');
+          localStorage.setItem('dosing_calc_version', APP_VERSION);
+        }
+      } catch (e) {}
+    })();
+  </script>
+
   <!-- HCP Confirmation Modal -->
   <div id="hcpModal" style="display:flex; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6); z-index:99999; align-items:center; justify-content:center; padding:20px;">
     <div style="background:white; border-radius:20px; padding:50px 40px; max-width:600px; width:100%; box-shadow:0 20px 60px rgba(0,0,0,0.3); text-align:center;">
@@ -8435,17 +8449,7 @@
   
   // Initialize language on load
   document.addEventListener('DOMContentLoaded', function() {
-    // Версия приложения - при обновлении меняем номер
-    const APP_VERSION = '1.1.0';
-    const savedVersion = localStorage.getItem('dosing_calc_version');
-    
-    // Если версия изменилась - сбрасываем кэш настроек
-    if (savedVersion !== APP_VERSION) {
-      localStorage.removeItem('dosing_calc_lang');
-      localStorage.removeItem('hcp_confirmed');
-      localStorage.setItem('dosing_calc_version', APP_VERSION);
-    }
-    
+    // Версия и сброс кэша обрабатываются синхронным скриптом в начале <body>
     const savedLang = localStorage.getItem('dosing_calc_lang') || 'ru';
     window.setLanguage(savedLang);
   });
