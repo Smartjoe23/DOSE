@@ -1015,11 +1015,14 @@
       var APP_VERSION = '1.1.0';
       try {
         if (localStorage.getItem('dosing_calc_version') !== APP_VERSION) {
+          // Сбрасываем только язык. Подтверждение HCP НЕ трогаем — оно постоянное.
           localStorage.removeItem('dosing_calc_lang');
-          localStorage.removeItem('hcp_confirmed');
           localStorage.setItem('dosing_calc_version', APP_VERSION);
         }
       } catch (e) {}
+      // Если уже подтверждали раньше — прячем гейт сразу (без мелькания).
+      window.__hcpConfirmed = false;
+      try { window.__hcpConfirmed = (localStorage.getItem('hcp_confirmed') === 'true'); } catch (e) {}
     })();
   </script>
 
@@ -1099,12 +1102,15 @@
       }
     };
     
-    // Check on load
-    document.addEventListener('DOMContentLoaded', function() {
-      if (localStorage.getItem('hcp_confirmed') === 'true') {
-        document.getElementById('hcpModal').style.display = 'none';
+    // Если ранее подтверждали — прячем окно немедленно (синхронно, без мелькания).
+    (function() {
+      var confirmed = false;
+      try { confirmed = (localStorage.getItem('hcp_confirmed') === 'true'); } catch (e) {}
+      if (confirmed) {
+        var m = document.getElementById('hcpModal');
+        if (m) m.style.display = 'none';
       }
-    });
+    })();
   </script>
 
   <div class="toast" id="toast">Скопировано</div>
