@@ -1146,9 +1146,13 @@
             <strong style="color: var(--sandoz-blue);">Оспамокс</strong><br>
             <span style="font-size: 12px; color: var(--muted);">2 концентрации • Вес 2-40 кг • 40-90 мг/кг/сутки • 2 раза в день</span>
           </li>
-          <li style="padding: 8px 12px; background: rgba(28, 89, 181, 0.05); border-radius: 8px;">
+          <li style="padding: 8px 12px; background: rgba(28, 89, 181, 0.05); border-radius: 8px; margin-bottom: 6px;">
             <strong style="color: var(--sandoz-blue);">Азидрат</strong><br>
             <span style="font-size: 12px; color: var(--muted);">2 концентрации • Вес 5-45 кг • 10 мг/кг/сутки • 1 раз в день • 3 дня</span>
+          </li>
+          <li style="padding: 8px 12px; background: rgba(28, 89, 181, 0.05); border-radius: 8px;">
+            <strong style="color: var(--sandoz-blue);">Зиннат®</strong><br>
+            <span style="font-size: 12px; color: var(--muted);">1 концентрация • Вес 4-40 кг • 10-15 мг/кг/сутки • 2 раза в сутки</span>
           </li>
         </ul>
 
@@ -1224,9 +1228,13 @@
             <strong style="color: var(--sandoz-blue);">Оспамокс</strong><br>
             <span style="font-size: 12px; color: var(--muted);">2 концентрация • Салмақ 2-40 кг • 40-90 мг/кг/тәул. • Тәулігіне 2 рет</span>
           </li>
-          <li style="padding: 8px 12px; background: rgba(28, 89, 181, 0.05); border-radius: 8px;">
+          <li style="padding: 8px 12px; background: rgba(28, 89, 181, 0.05); border-radius: 8px; margin-bottom: 6px;">
             <strong style="color: var(--sandoz-blue);">Азидрат</strong><br>
             <span style="font-size: 12px; color: var(--muted);">2 концентрация • Салмақ 5-45 кг • 10 мг/кг/тәул. • Тәулігіне 1 рет • 3 күн</span>
+          </li>
+          <li style="padding: 8px 12px; background: rgba(28, 89, 181, 0.05); border-radius: 8px;">
+            <strong style="color: var(--sandoz-blue);">Зиннат®</strong><br>
+            <span style="font-size: 12px; color: var(--muted);">1 концентрация • Салмақ 4-40 кг • 10-15 мг/кг/тәул. • Тәулігіне 2 рет</span>
           </li>
         </ul>
 
@@ -1343,6 +1351,7 @@
         <div class="field small" id="mgkgField" style="display:none;">
           <div class="label" id="labelMgkg">Режим дозирования (мг/кг/сут)</div>
           <div class="chips" id="mgkgChips"></div>
+          <div id="mgkgNote" style="display:none; font-size:11px; line-height:1.4; color:var(--muted); margin-top:6px;"></div>
         </div>
 
         <div class="field small">
@@ -1423,7 +1432,8 @@
       "Все дозы извлечены из Excel; значения '-' интерпретированы как отсутствующие/неприменимые.",
       "Для Амоксиклав и Оспамокс частота приемов указана в таблице.",
       "Для Азидрат добавлены вычисляемые поля dose_mg_calc.",
-      "Восстановлены строки высоких доз (60/90 мг/кг и др.), отсутствовавшие из-за ячеек Excel без текстовой подписи; значения взяты из Excel дословно."
+      "Восстановлены строки высоких доз (60/90 мг/кг и др.), отсутствовавшие из-за ячеек Excel без текстовой подписи; значения взяты из Excel дословно.",
+      "Добавлен Зиннат® 125 мг/5 мл (цефуроксим): 74 строки (веса 4–40 кг × режимы 10 и 15 мг/кг/сутки), значения из Excel дословно."
     ]
   },
   "products": [
@@ -1443,6 +1453,12 @@
       "product_id": "azidrat",
       "brand_ru": "Азидрат",
       "inn_ru": "азитромицин",
+      "market": "KZ"
+    },
+    {
+      "product_id": "zinnat",
+      "brand_ru": "Зиннат",
+      "inn_ru": "цефуроксим",
       "market": "KZ"
     }
   ],
@@ -1659,6 +1675,44 @@
       "coverage_by_mgkg": [],
       "therapy_days": 3,
       "target_mgkg_per_day": 10
+    },
+    {
+      "variant_id": "zinnat_125_5ml",
+      "product_id": "zinnat",
+      "title_ru": "Расчет разовой дозы препарата Зиннат 125 мг/5 мл",
+      "strength_label_ru": "125 мг/5 мл",
+      "dose_basis": "mgkg_per_day",
+      "freq_per_day": 2,
+      "mgkg_options": [
+        10.0,
+        15.0
+      ],
+      "mgkg_labels_ru": {
+        "10": "при большинстве инфекций",
+        "15": "при среднем отите и тяжелых инфекциях"
+      },
+      "mgkg_labels_kz": {
+        "10": "көптеген инфекцияларда",
+        "15": "ортаңғы отит және ауыр инфекцияларда"
+      },
+      "weight_min_kg": 4.0,
+      "weight_max_kg": 40.0,
+      "coverage_by_mgkg": [
+        {
+          "mgkg_per_day": 10.0,
+          "weight_min_kg": 4.0,
+          "weight_max_kg": 40.0,
+          "rows": 37
+        },
+        {
+          "mgkg_per_day": 15.0,
+          "weight_min_kg": 4.0,
+          "weight_max_kg": 40.0,
+          "rows": 37
+        }
+      ],
+      "therapy_days": null,
+      "target_mgkg_per_day": null
     }
   ],
   "dose_rows": [
@@ -6948,6 +7002,746 @@
       "label_raw": "16 мл 3 раза в сутки",
       "weight_raw": "40",
       "mgkg_per_day": 60.0
+    },
+    {
+      "variant_id": "zinnat_125_5ml",
+      "weight_min_kg": 4.0,
+      "weight_max_kg": 4.0,
+      "dose_ml": 1.6,
+      "freq_per_day": 2,
+      "label_raw": "1.6 мл 2 раза в сутки",
+      "weight_raw": "4",
+      "mgkg_per_day": 10.0
+    },
+    {
+      "variant_id": "zinnat_125_5ml",
+      "weight_min_kg": 4.0,
+      "weight_max_kg": 4.0,
+      "dose_ml": 2.4,
+      "freq_per_day": 2,
+      "label_raw": "2.4 мл 2 раза в сутки",
+      "weight_raw": "4",
+      "mgkg_per_day": 15.0
+    },
+    {
+      "variant_id": "zinnat_125_5ml",
+      "weight_min_kg": 5.0,
+      "weight_max_kg": 5.0,
+      "dose_ml": 2.0,
+      "freq_per_day": 2,
+      "label_raw": "2 мл 2 раза в сутки",
+      "weight_raw": "5",
+      "mgkg_per_day": 10.0
+    },
+    {
+      "variant_id": "zinnat_125_5ml",
+      "weight_min_kg": 5.0,
+      "weight_max_kg": 5.0,
+      "dose_ml": 3.0,
+      "freq_per_day": 2,
+      "label_raw": "3 мл 2 раза в сутки",
+      "weight_raw": "5",
+      "mgkg_per_day": 15.0
+    },
+    {
+      "variant_id": "zinnat_125_5ml",
+      "weight_min_kg": 6.0,
+      "weight_max_kg": 6.0,
+      "dose_ml": 2.4,
+      "freq_per_day": 2,
+      "label_raw": "2.4 мл 2 раза в сутки",
+      "weight_raw": "6",
+      "mgkg_per_day": 10.0
+    },
+    {
+      "variant_id": "zinnat_125_5ml",
+      "weight_min_kg": 6.0,
+      "weight_max_kg": 6.0,
+      "dose_ml": 3.6,
+      "freq_per_day": 2,
+      "label_raw": "3.6 мл 2 раза в сутки",
+      "weight_raw": "6",
+      "mgkg_per_day": 15.0
+    },
+    {
+      "variant_id": "zinnat_125_5ml",
+      "weight_min_kg": 7.0,
+      "weight_max_kg": 7.0,
+      "dose_ml": 2.8,
+      "freq_per_day": 2,
+      "label_raw": "2.8 мл 2 раза в сутки",
+      "weight_raw": "7",
+      "mgkg_per_day": 10.0
+    },
+    {
+      "variant_id": "zinnat_125_5ml",
+      "weight_min_kg": 7.0,
+      "weight_max_kg": 7.0,
+      "dose_ml": 4.2,
+      "freq_per_day": 2,
+      "label_raw": "4.2 мл 2 раза в сутки",
+      "weight_raw": "7",
+      "mgkg_per_day": 15.0
+    },
+    {
+      "variant_id": "zinnat_125_5ml",
+      "weight_min_kg": 8.0,
+      "weight_max_kg": 8.0,
+      "dose_ml": 3.2,
+      "freq_per_day": 2,
+      "label_raw": "3.2 мл 2 раза в сутки",
+      "weight_raw": "8",
+      "mgkg_per_day": 10.0
+    },
+    {
+      "variant_id": "zinnat_125_5ml",
+      "weight_min_kg": 8.0,
+      "weight_max_kg": 8.0,
+      "dose_ml": 4.8,
+      "freq_per_day": 2,
+      "label_raw": "4.8 мл 2 раза в сутки",
+      "weight_raw": "8",
+      "mgkg_per_day": 15.0
+    },
+    {
+      "variant_id": "zinnat_125_5ml",
+      "weight_min_kg": 9.0,
+      "weight_max_kg": 9.0,
+      "dose_ml": 3.6,
+      "freq_per_day": 2,
+      "label_raw": "3.6 мл 2 раза в сутки",
+      "weight_raw": "9",
+      "mgkg_per_day": 10.0
+    },
+    {
+      "variant_id": "zinnat_125_5ml",
+      "weight_min_kg": 9.0,
+      "weight_max_kg": 9.0,
+      "dose_ml": 5.4,
+      "freq_per_day": 2,
+      "label_raw": "5.4 мл 2 раза в сутки",
+      "weight_raw": "9",
+      "mgkg_per_day": 15.0
+    },
+    {
+      "variant_id": "zinnat_125_5ml",
+      "weight_min_kg": 10.0,
+      "weight_max_kg": 10.0,
+      "dose_ml": 4.0,
+      "freq_per_day": 2,
+      "label_raw": "4 мл 2 раза в сутки",
+      "weight_raw": "10",
+      "mgkg_per_day": 10.0
+    },
+    {
+      "variant_id": "zinnat_125_5ml",
+      "weight_min_kg": 10.0,
+      "weight_max_kg": 10.0,
+      "dose_ml": 6.0,
+      "freq_per_day": 2,
+      "label_raw": "6 мл 2 раза в сутки",
+      "weight_raw": "10",
+      "mgkg_per_day": 15.0
+    },
+    {
+      "variant_id": "zinnat_125_5ml",
+      "weight_min_kg": 11.0,
+      "weight_max_kg": 11.0,
+      "dose_ml": 4.4,
+      "freq_per_day": 2,
+      "label_raw": "4.4 мл 2 раза в сутки",
+      "weight_raw": "11",
+      "mgkg_per_day": 10.0
+    },
+    {
+      "variant_id": "zinnat_125_5ml",
+      "weight_min_kg": 11.0,
+      "weight_max_kg": 11.0,
+      "dose_ml": 6.6,
+      "freq_per_day": 2,
+      "label_raw": "6.6 мл 2 раза в сутки",
+      "weight_raw": "11",
+      "mgkg_per_day": 15.0
+    },
+    {
+      "variant_id": "zinnat_125_5ml",
+      "weight_min_kg": 12.0,
+      "weight_max_kg": 12.0,
+      "dose_ml": 4.8,
+      "freq_per_day": 2,
+      "label_raw": "4.8 мл 2 раза в сутки",
+      "weight_raw": "12",
+      "mgkg_per_day": 10.0
+    },
+    {
+      "variant_id": "zinnat_125_5ml",
+      "weight_min_kg": 12.0,
+      "weight_max_kg": 12.0,
+      "dose_ml": 7.2,
+      "freq_per_day": 2,
+      "label_raw": "7.2 мл 2 раза в сутки",
+      "weight_raw": "12",
+      "mgkg_per_day": 15.0
+    },
+    {
+      "variant_id": "zinnat_125_5ml",
+      "weight_min_kg": 13.0,
+      "weight_max_kg": 13.0,
+      "dose_ml": 5.2,
+      "freq_per_day": 2,
+      "label_raw": "5.2 мл 2 раза в сутки",
+      "weight_raw": "13",
+      "mgkg_per_day": 10.0
+    },
+    {
+      "variant_id": "zinnat_125_5ml",
+      "weight_min_kg": 13.0,
+      "weight_max_kg": 13.0,
+      "dose_ml": 7.8,
+      "freq_per_day": 2,
+      "label_raw": "7.8 мл 2 раза в сутки",
+      "weight_raw": "13",
+      "mgkg_per_day": 15.0
+    },
+    {
+      "variant_id": "zinnat_125_5ml",
+      "weight_min_kg": 14.0,
+      "weight_max_kg": 14.0,
+      "dose_ml": 5.6,
+      "freq_per_day": 2,
+      "label_raw": "5.6 мл 2 раза в сутки",
+      "weight_raw": "14",
+      "mgkg_per_day": 10.0
+    },
+    {
+      "variant_id": "zinnat_125_5ml",
+      "weight_min_kg": 14.0,
+      "weight_max_kg": 14.0,
+      "dose_ml": 8.4,
+      "freq_per_day": 2,
+      "label_raw": "8.4 мл 2 раза в сутки",
+      "weight_raw": "14",
+      "mgkg_per_day": 15.0
+    },
+    {
+      "variant_id": "zinnat_125_5ml",
+      "weight_min_kg": 15.0,
+      "weight_max_kg": 15.0,
+      "dose_ml": 6.0,
+      "freq_per_day": 2,
+      "label_raw": "6 мл 2 раза в сутки",
+      "weight_raw": "15",
+      "mgkg_per_day": 10.0
+    },
+    {
+      "variant_id": "zinnat_125_5ml",
+      "weight_min_kg": 15.0,
+      "weight_max_kg": 15.0,
+      "dose_ml": 9.0,
+      "freq_per_day": 2,
+      "label_raw": "9 мл 2 раза в сутки",
+      "weight_raw": "15",
+      "mgkg_per_day": 15.0
+    },
+    {
+      "variant_id": "zinnat_125_5ml",
+      "weight_min_kg": 16.0,
+      "weight_max_kg": 16.0,
+      "dose_ml": 6.4,
+      "freq_per_day": 2,
+      "label_raw": "6.4 мл 2 раза в сутки",
+      "weight_raw": "16",
+      "mgkg_per_day": 10.0
+    },
+    {
+      "variant_id": "zinnat_125_5ml",
+      "weight_min_kg": 16.0,
+      "weight_max_kg": 16.0,
+      "dose_ml": 9.6,
+      "freq_per_day": 2,
+      "label_raw": "9.6 мл 2 раза в сутки",
+      "weight_raw": "16",
+      "mgkg_per_day": 15.0
+    },
+    {
+      "variant_id": "zinnat_125_5ml",
+      "weight_min_kg": 17.0,
+      "weight_max_kg": 17.0,
+      "dose_ml": 6.8,
+      "freq_per_day": 2,
+      "label_raw": "6.8 мл 2 раза в сутки",
+      "weight_raw": "17",
+      "mgkg_per_day": 10.0
+    },
+    {
+      "variant_id": "zinnat_125_5ml",
+      "weight_min_kg": 17.0,
+      "weight_max_kg": 17.0,
+      "dose_ml": 10.2,
+      "freq_per_day": 2,
+      "label_raw": "10.2 мл 2 раза в сутки",
+      "weight_raw": "17",
+      "mgkg_per_day": 15.0
+    },
+    {
+      "variant_id": "zinnat_125_5ml",
+      "weight_min_kg": 18.0,
+      "weight_max_kg": 18.0,
+      "dose_ml": 7.2,
+      "freq_per_day": 2,
+      "label_raw": "7.2 мл 2 раза в сутки",
+      "weight_raw": "18",
+      "mgkg_per_day": 10.0
+    },
+    {
+      "variant_id": "zinnat_125_5ml",
+      "weight_min_kg": 18.0,
+      "weight_max_kg": 18.0,
+      "dose_ml": 10.8,
+      "freq_per_day": 2,
+      "label_raw": "10.8 мл 2 раза в сутки",
+      "weight_raw": "18",
+      "mgkg_per_day": 15.0
+    },
+    {
+      "variant_id": "zinnat_125_5ml",
+      "weight_min_kg": 19.0,
+      "weight_max_kg": 19.0,
+      "dose_ml": 7.6,
+      "freq_per_day": 2,
+      "label_raw": "7.6 мл 2 раза в сутки",
+      "weight_raw": "19",
+      "mgkg_per_day": 10.0
+    },
+    {
+      "variant_id": "zinnat_125_5ml",
+      "weight_min_kg": 19.0,
+      "weight_max_kg": 19.0,
+      "dose_ml": 11.4,
+      "freq_per_day": 2,
+      "label_raw": "11.4 мл 2 раза в сутки",
+      "weight_raw": "19",
+      "mgkg_per_day": 15.0
+    },
+    {
+      "variant_id": "zinnat_125_5ml",
+      "weight_min_kg": 20.0,
+      "weight_max_kg": 20.0,
+      "dose_ml": 8.0,
+      "freq_per_day": 2,
+      "label_raw": "8 мл 2 раза в сутки",
+      "weight_raw": "20",
+      "mgkg_per_day": 10.0
+    },
+    {
+      "variant_id": "zinnat_125_5ml",
+      "weight_min_kg": 20.0,
+      "weight_max_kg": 20.0,
+      "dose_ml": 12.0,
+      "freq_per_day": 2,
+      "label_raw": "12 мл 2 раза в сутки",
+      "weight_raw": "20",
+      "mgkg_per_day": 15.0
+    },
+    {
+      "variant_id": "zinnat_125_5ml",
+      "weight_min_kg": 21.0,
+      "weight_max_kg": 21.0,
+      "dose_ml": 8.4,
+      "freq_per_day": 2,
+      "label_raw": "8.4 мл 2 раза в сутки",
+      "weight_raw": "21",
+      "mgkg_per_day": 10.0
+    },
+    {
+      "variant_id": "zinnat_125_5ml",
+      "weight_min_kg": 21.0,
+      "weight_max_kg": 21.0,
+      "dose_ml": 12.6,
+      "freq_per_day": 2,
+      "label_raw": "12.6 мл 2 раза в сутки",
+      "weight_raw": "21",
+      "mgkg_per_day": 15.0
+    },
+    {
+      "variant_id": "zinnat_125_5ml",
+      "weight_min_kg": 22.0,
+      "weight_max_kg": 22.0,
+      "dose_ml": 8.8,
+      "freq_per_day": 2,
+      "label_raw": "8.8 мл 2 раза в сутки",
+      "weight_raw": "22",
+      "mgkg_per_day": 10.0
+    },
+    {
+      "variant_id": "zinnat_125_5ml",
+      "weight_min_kg": 22.0,
+      "weight_max_kg": 22.0,
+      "dose_ml": 13.2,
+      "freq_per_day": 2,
+      "label_raw": "13.2 мл 2 раза в сутки",
+      "weight_raw": "22",
+      "mgkg_per_day": 15.0
+    },
+    {
+      "variant_id": "zinnat_125_5ml",
+      "weight_min_kg": 23.0,
+      "weight_max_kg": 23.0,
+      "dose_ml": 9.2,
+      "freq_per_day": 2,
+      "label_raw": "9.2 мл 2 раза в сутки",
+      "weight_raw": "23",
+      "mgkg_per_day": 10.0
+    },
+    {
+      "variant_id": "zinnat_125_5ml",
+      "weight_min_kg": 23.0,
+      "weight_max_kg": 23.0,
+      "dose_ml": 13.8,
+      "freq_per_day": 2,
+      "label_raw": "13.8 мл 2 раза в сутки",
+      "weight_raw": "23",
+      "mgkg_per_day": 15.0
+    },
+    {
+      "variant_id": "zinnat_125_5ml",
+      "weight_min_kg": 24.0,
+      "weight_max_kg": 24.0,
+      "dose_ml": 9.6,
+      "freq_per_day": 2,
+      "label_raw": "9.6 мл 2 раза в сутки",
+      "weight_raw": "24",
+      "mgkg_per_day": 10.0
+    },
+    {
+      "variant_id": "zinnat_125_5ml",
+      "weight_min_kg": 24.0,
+      "weight_max_kg": 24.0,
+      "dose_ml": 14.4,
+      "freq_per_day": 2,
+      "label_raw": "14.4 мл 2 раза в сутки",
+      "weight_raw": "24",
+      "mgkg_per_day": 15.0
+    },
+    {
+      "variant_id": "zinnat_125_5ml",
+      "weight_min_kg": 25.0,
+      "weight_max_kg": 25.0,
+      "dose_ml": 10.0,
+      "freq_per_day": 2,
+      "label_raw": "10 мл 2 раза в сутки",
+      "weight_raw": "25",
+      "mgkg_per_day": 10.0
+    },
+    {
+      "variant_id": "zinnat_125_5ml",
+      "weight_min_kg": 25.0,
+      "weight_max_kg": 25.0,
+      "dose_ml": 15.0,
+      "freq_per_day": 2,
+      "label_raw": "15 мл 2 раза в сутки",
+      "weight_raw": "25",
+      "mgkg_per_day": 15.0
+    },
+    {
+      "variant_id": "zinnat_125_5ml",
+      "weight_min_kg": 26.0,
+      "weight_max_kg": 26.0,
+      "dose_ml": 10.4,
+      "freq_per_day": 2,
+      "label_raw": "10.4 мл 2 раза в сутки",
+      "weight_raw": "26",
+      "mgkg_per_day": 10.0
+    },
+    {
+      "variant_id": "zinnat_125_5ml",
+      "weight_min_kg": 26.0,
+      "weight_max_kg": 26.0,
+      "dose_ml": 15.6,
+      "freq_per_day": 2,
+      "label_raw": "15.6 мл 2 раза в сутки",
+      "weight_raw": "26",
+      "mgkg_per_day": 15.0
+    },
+    {
+      "variant_id": "zinnat_125_5ml",
+      "weight_min_kg": 27.0,
+      "weight_max_kg": 27.0,
+      "dose_ml": 10.8,
+      "freq_per_day": 2,
+      "label_raw": "10.8 мл 2 раза в сутки",
+      "weight_raw": "27",
+      "mgkg_per_day": 10.0
+    },
+    {
+      "variant_id": "zinnat_125_5ml",
+      "weight_min_kg": 27.0,
+      "weight_max_kg": 27.0,
+      "dose_ml": 16.2,
+      "freq_per_day": 2,
+      "label_raw": "16.2 мл 2 раза в сутки",
+      "weight_raw": "27",
+      "mgkg_per_day": 15.0
+    },
+    {
+      "variant_id": "zinnat_125_5ml",
+      "weight_min_kg": 28.0,
+      "weight_max_kg": 28.0,
+      "dose_ml": 11.2,
+      "freq_per_day": 2,
+      "label_raw": "11.2 мл 2 раза в сутки",
+      "weight_raw": "28",
+      "mgkg_per_day": 10.0
+    },
+    {
+      "variant_id": "zinnat_125_5ml",
+      "weight_min_kg": 28.0,
+      "weight_max_kg": 28.0,
+      "dose_ml": 16.8,
+      "freq_per_day": 2,
+      "label_raw": "16.8 мл 2 раза в сутки",
+      "weight_raw": "28",
+      "mgkg_per_day": 15.0
+    },
+    {
+      "variant_id": "zinnat_125_5ml",
+      "weight_min_kg": 29.0,
+      "weight_max_kg": 29.0,
+      "dose_ml": 11.6,
+      "freq_per_day": 2,
+      "label_raw": "11.6 мл 2 раза в сутки",
+      "weight_raw": "29",
+      "mgkg_per_day": 10.0
+    },
+    {
+      "variant_id": "zinnat_125_5ml",
+      "weight_min_kg": 29.0,
+      "weight_max_kg": 29.0,
+      "dose_ml": 17.4,
+      "freq_per_day": 2,
+      "label_raw": "17.4 мл 2 раза в сутки",
+      "weight_raw": "29",
+      "mgkg_per_day": 15.0
+    },
+    {
+      "variant_id": "zinnat_125_5ml",
+      "weight_min_kg": 30.0,
+      "weight_max_kg": 30.0,
+      "dose_ml": 12.0,
+      "freq_per_day": 2,
+      "label_raw": "12 мл 2 раза в сутки",
+      "weight_raw": "30",
+      "mgkg_per_day": 10.0
+    },
+    {
+      "variant_id": "zinnat_125_5ml",
+      "weight_min_kg": 30.0,
+      "weight_max_kg": 30.0,
+      "dose_ml": 18.0,
+      "freq_per_day": 2,
+      "label_raw": "18 мл 2 раза в сутки",
+      "weight_raw": "30",
+      "mgkg_per_day": 15.0
+    },
+    {
+      "variant_id": "zinnat_125_5ml",
+      "weight_min_kg": 31.0,
+      "weight_max_kg": 31.0,
+      "dose_ml": 12.4,
+      "freq_per_day": 2,
+      "label_raw": "12.4 мл 2 раза в сутки",
+      "weight_raw": "31",
+      "mgkg_per_day": 10.0
+    },
+    {
+      "variant_id": "zinnat_125_5ml",
+      "weight_min_kg": 31.0,
+      "weight_max_kg": 31.0,
+      "dose_ml": 18.6,
+      "freq_per_day": 2,
+      "label_raw": "18.6 мл 2 раза в сутки",
+      "weight_raw": "31",
+      "mgkg_per_day": 15.0
+    },
+    {
+      "variant_id": "zinnat_125_5ml",
+      "weight_min_kg": 32.0,
+      "weight_max_kg": 32.0,
+      "dose_ml": 12.8,
+      "freq_per_day": 2,
+      "label_raw": "12.8 мл 2 раза в сутки",
+      "weight_raw": "32",
+      "mgkg_per_day": 10.0
+    },
+    {
+      "variant_id": "zinnat_125_5ml",
+      "weight_min_kg": 32.0,
+      "weight_max_kg": 32.0,
+      "dose_ml": 19.2,
+      "freq_per_day": 2,
+      "label_raw": "19.2 мл 2 раза в сутки",
+      "weight_raw": "32",
+      "mgkg_per_day": 15.0
+    },
+    {
+      "variant_id": "zinnat_125_5ml",
+      "weight_min_kg": 33.0,
+      "weight_max_kg": 33.0,
+      "dose_ml": 13.2,
+      "freq_per_day": 2,
+      "label_raw": "13.2 мл 2 раза в сутки",
+      "weight_raw": "33",
+      "mgkg_per_day": 10.0
+    },
+    {
+      "variant_id": "zinnat_125_5ml",
+      "weight_min_kg": 33.0,
+      "weight_max_kg": 33.0,
+      "dose_ml": 19.8,
+      "freq_per_day": 2,
+      "label_raw": "19.8 мл 2 раза в сутки",
+      "weight_raw": "33",
+      "mgkg_per_day": 15.0
+    },
+    {
+      "variant_id": "zinnat_125_5ml",
+      "weight_min_kg": 34.0,
+      "weight_max_kg": 34.0,
+      "dose_ml": 13.6,
+      "freq_per_day": 2,
+      "label_raw": "13.6 мл 2 раза в сутки",
+      "weight_raw": "34",
+      "mgkg_per_day": 10.0
+    },
+    {
+      "variant_id": "zinnat_125_5ml",
+      "weight_min_kg": 34.0,
+      "weight_max_kg": 34.0,
+      "dose_ml": 20.4,
+      "freq_per_day": 2,
+      "label_raw": "20.4 мл 2 раза в сутки",
+      "weight_raw": "34",
+      "mgkg_per_day": 15.0
+    },
+    {
+      "variant_id": "zinnat_125_5ml",
+      "weight_min_kg": 35.0,
+      "weight_max_kg": 35.0,
+      "dose_ml": 14.0,
+      "freq_per_day": 2,
+      "label_raw": "14 мл 2 раза в сутки",
+      "weight_raw": "35",
+      "mgkg_per_day": 10.0
+    },
+    {
+      "variant_id": "zinnat_125_5ml",
+      "weight_min_kg": 35.0,
+      "weight_max_kg": 35.0,
+      "dose_ml": 21.0,
+      "freq_per_day": 2,
+      "label_raw": "21 мл 2 раза в сутки",
+      "weight_raw": "35",
+      "mgkg_per_day": 15.0
+    },
+    {
+      "variant_id": "zinnat_125_5ml",
+      "weight_min_kg": 36.0,
+      "weight_max_kg": 36.0,
+      "dose_ml": 14.4,
+      "freq_per_day": 2,
+      "label_raw": "14.4 мл 2 раза в сутки",
+      "weight_raw": "36",
+      "mgkg_per_day": 10.0
+    },
+    {
+      "variant_id": "zinnat_125_5ml",
+      "weight_min_kg": 36.0,
+      "weight_max_kg": 36.0,
+      "dose_ml": 21.6,
+      "freq_per_day": 2,
+      "label_raw": "21.6 мл 2 раза в сутки",
+      "weight_raw": "36",
+      "mgkg_per_day": 15.0
+    },
+    {
+      "variant_id": "zinnat_125_5ml",
+      "weight_min_kg": 37.0,
+      "weight_max_kg": 37.0,
+      "dose_ml": 14.8,
+      "freq_per_day": 2,
+      "label_raw": "14.8 мл 2 раза в сутки",
+      "weight_raw": "37",
+      "mgkg_per_day": 10.0
+    },
+    {
+      "variant_id": "zinnat_125_5ml",
+      "weight_min_kg": 37.0,
+      "weight_max_kg": 37.0,
+      "dose_ml": 22.2,
+      "freq_per_day": 2,
+      "label_raw": "22.2 мл 2 раза в сутки",
+      "weight_raw": "37",
+      "mgkg_per_day": 15.0
+    },
+    {
+      "variant_id": "zinnat_125_5ml",
+      "weight_min_kg": 38.0,
+      "weight_max_kg": 38.0,
+      "dose_ml": 15.2,
+      "freq_per_day": 2,
+      "label_raw": "15.2 мл 2 раза в сутки",
+      "weight_raw": "38",
+      "mgkg_per_day": 10.0
+    },
+    {
+      "variant_id": "zinnat_125_5ml",
+      "weight_min_kg": 38.0,
+      "weight_max_kg": 38.0,
+      "dose_ml": 22.8,
+      "freq_per_day": 2,
+      "label_raw": "22.8 мл 2 раза в сутки",
+      "weight_raw": "38",
+      "mgkg_per_day": 15.0
+    },
+    {
+      "variant_id": "zinnat_125_5ml",
+      "weight_min_kg": 39.0,
+      "weight_max_kg": 39.0,
+      "dose_ml": 15.6,
+      "freq_per_day": 2,
+      "label_raw": "15.6 мл 2 раза в сутки",
+      "weight_raw": "39",
+      "mgkg_per_day": 10.0
+    },
+    {
+      "variant_id": "zinnat_125_5ml",
+      "weight_min_kg": 39.0,
+      "weight_max_kg": 39.0,
+      "dose_ml": 23.4,
+      "freq_per_day": 2,
+      "label_raw": "23.4 мл 2 раза в сутки",
+      "weight_raw": "39",
+      "mgkg_per_day": 15.0
+    },
+    {
+      "variant_id": "zinnat_125_5ml",
+      "weight_min_kg": 40.0,
+      "weight_max_kg": 40.0,
+      "dose_ml": 16.0,
+      "freq_per_day": 2,
+      "label_raw": "16 мл 2 раза в сутки",
+      "weight_raw": "40",
+      "mgkg_per_day": 10.0
+    },
+    {
+      "variant_id": "zinnat_125_5ml",
+      "weight_min_kg": 40.0,
+      "weight_max_kg": 40.0,
+      "dose_ml": 24.0,
+      "freq_per_day": 2,
+      "label_raw": "24 мл 2 раза в сутки",
+      "weight_raw": "40",
+      "mgkg_per_day": 15.0
     }
   ]
 }
@@ -7224,6 +8018,7 @@
     const variantTiles = document.getElementById("variantTiles");
     const mgkgField = document.getElementById("mgkgField");
     const mgkgChips = document.getElementById("mgkgChips");
+    const mgkgNote = document.getElementById("mgkgNote");
 
     const weightRange = document.getElementById("weightRange");
     const weightInput = document.getElementById("weightInput");
@@ -7332,6 +8127,16 @@
       const v = getSelectedVariant();
       if (!v) return;
 
+      // Во время перетаскивания колеса — облегчённый путь: обновляем только то, что меняется
+      // при изменении веса (окна дозы + карточку результата), без тяжёлых перестроений и записи в localStorage.
+      // Это убирает рывки/«залипание».
+      if (window.__wheelDragging) {
+        renderWheel(v);
+        renderResult(v);
+        if (drawer.classList.contains("open")) renderDrawer();
+        return;
+      }
+
       // segmented pressed states
       [...productSeg.children].forEach(btn => {
         const id = btn.dataset.productId;
@@ -7402,6 +8207,10 @@
 
       mgkgField.style.display = "grid";
 
+      const isKz = window.currentLangGlobal === 'kz';
+      const labels = isKz ? v.mgkg_labels_kz : v.mgkg_labels_ru;
+      const noAvailMsg = isKz ? "Карта бойынша бұл салмаққа жоқ" : "Нет по карте для этого веса";
+
       const avail = new Set(getAvailableMgkg(v, state.weight_kg));
 
       for (const opt of v.mgkg_options) {
@@ -7411,9 +8220,22 @@
         btn.textContent = String(opt).replace(/\.0$/, "");
         btn.setAttribute("aria-pressed", (opt === state.mgkg_per_day) ? "true" : "false");
         btn.disabled = !avail.has(opt);
-        btn.title = btn.disabled ? "Нет по карте для этого веса" : "";
+        const descr = labels ? labels[String(formatMgkg(opt))] : null;
+        btn.title = btn.disabled ? noAvailMsg : (descr || "");
         btn.addEventListener("click", () => setMgkg(opt));
         mgkgChips.appendChild(btn);
+      }
+
+      // Clinical description of the selected regimen (if the variant provides one)
+      if (mgkgNote) {
+        const selDescr = labels ? labels[String(formatMgkg(state.mgkg_per_day))] : null;
+        if (selDescr) {
+          mgkgNote.textContent = `${formatMgkg(state.mgkg_per_day)} ${t('mgkgday')} — ${selDescr}`;
+          mgkgNote.style.display = "block";
+        } else {
+          mgkgNote.textContent = "";
+          mgkgNote.style.display = "none";
+        }
       }
 
       regimenLine.style.display = "flex";
@@ -7545,8 +8367,14 @@
       badgeVariant.textContent = v.strength_label_ru ?? "—";
 
       // rotate decorative disc
-      const angle = weightToAngleDeg(state.weight_kg, DISPLAY_MIN, DISPLAY_MAX);
-      rotor.style.transform = `rotate(${angle}deg)`;
+      // Во время перетаскивания углом управляет сам обработчик drag (плавно, за пальцем),
+      // поэтому здесь transform не трогаем — иначе диск «залипает», защёлкиваясь на целый кг.
+      if (!window.__wheelDragging) {
+        const angle = weightToAngleDeg(state.weight_kg, DISPLAY_MIN, DISPLAY_MAX);
+        // Указатель зафиксирован сверху, вращается диск: чтобы метка выбранного веса встала под указатель,
+        // поворачиваем диск на -angle (метки нарисованы на -90 + angle).
+        rotor.style.transform = `rotate(${-angle}deg)`;
+      }
 
       // windows
       windowsEl.innerHTML = "";
@@ -8080,12 +8908,14 @@
       function syncRotationFromWeight(weight) {
         if (isDragging) return; // Не трогаем во время драга
         
-        const weightRange = DISPLAY_MAX - DISPLAY_MIN;
-        const normalized = (weight - DISPLAY_MIN) / weightRange;
+        // Та же конвенция, что у шкалы/меток и weightToAngleDeg (деление на count = range+1),
+        // иначе ротор и метки расходятся и окно показывает дозу для соседнего веса.
+        const count = DISPLAY_MAX - DISPLAY_MIN + 1;
+        const normalized = (clamp(weight, DISPLAY_MIN, DISPLAY_MAX) - DISPLAY_MIN) / count;
         accumulatedRotation = normalized * 360;
         
         if (rotor) {
-          rotor.style.transform = `rotate(${accumulatedRotation}deg)`;
+          rotor.style.transform = `rotate(${-accumulatedRotation}deg)`;
         }
       }
       
@@ -8111,8 +8941,9 @@
       
       function rotationToWeight(totalRotation) {
         let normalized = ((totalRotation % 360) + 360) % 360;
-        const weightRange = DISPLAY_MAX - DISPLAY_MIN;
-        let weight = DISPLAY_MIN + (normalized / 360) * weightRange;
+        // Та же конвенция, что у шкалы/меток (count = range+1) — согласовано с weightToAngleDeg.
+        const count = DISPLAY_MAX - DISPLAY_MIN + 1;
+        let weight = DISPLAY_MIN + (normalized / 360) * count;
         weight = Math.round(weight);
         
         // Дополнительно проверяем границы текущего варианта
@@ -8142,13 +8973,14 @@
         // ВАЖНО: renderWheel использует rotate(-angle), поэтому синхронизируем
         // напрямую из state.weight_kg, а не из DOM transform
         const expectedWeight = state.weight_kg || DISPLAY_MIN;
-        const weightRange = DISPLAY_MAX - DISPLAY_MIN;
-        const normalized = (expectedWeight - DISPLAY_MIN) / weightRange;
+        const count = DISPLAY_MAX - DISPLAY_MIN + 1;
+        const normalized = (clamp(expectedWeight, DISPLAY_MIN, DISPLAY_MAX) - DISPLAY_MIN) / count;
         accumulatedRotation = normalized * 360;
         
-        // Устанавливаем положительный угол (drag работает с положительными)
-        rotor.style.transform = `rotate(${accumulatedRotation}deg)`;
+        // Визуально диск повёрнут на -accumulatedRotation (указатель сверху).
+        rotor.style.transform = `rotate(${-accumulatedRotation}deg)`;
         
+        window.__wheelDragging = true;
         wheelWrapEl.style.cursor = 'grabbing';
         rotor.style.cursor = 'grabbing';
         
@@ -8160,9 +8992,19 @@
         if (!isDragging) return;
         const currentAngle = getMouseAngle(clientX, clientY);
         let deltaAngle = normalizeAngleDelta(currentAngle - lastAngle);
-        accumulatedRotation += deltaAngle;
+        // Диск визуально повёрнут на -accumulatedRotation, поэтому для следования за курсором вычитаем дельту.
+        accumulatedRotation -= deltaAngle;
         
-        // Используем RAF для плавности
+        // Ограничиваем угол допустимым диапазоном, чтобы диск не «перескакивал» через шов 2↔45 кг
+        // (иначе прокрутка ниже 2 кг прыгала бы на 45 и наоборот).
+        const maxRotation = ((DISPLAY_MAX - DISPLAY_MIN) / (DISPLAY_MAX - DISPLAY_MIN + 1)) * 360;
+        if (accumulatedRotation < 0) accumulatedRotation = 0;
+        if (accumulatedRotation > maxRotation) accumulatedRotation = maxRotation;
+        
+        // Плавное следование за пальцем: крутим диск на непрерывный угол (без защёлкивания на целый кг).
+        rotor.style.transform = `rotate(${-accumulatedRotation}deg)`;
+        
+        // Вес обновляем по округлённому значению (окна/результат), transform при этом не перетирается.
         updateWeight(rotationToWeight(accumulatedRotation));
         
         lastAngle = currentAngle;
@@ -8174,12 +9016,21 @@
       function endDrag() {
         if (isDragging) {
           isDragging = false;
+          window.__wheelDragging = false;
           wheelWrapEl.style.cursor = 'grab';
           rotor.style.cursor = 'grab';
           
           // Возвращаем transition через удаление класса
           rotor.classList.remove('dragging');
           lastSetWeight = null; // Сброс для следующего драга
+          
+          // Доводим диск до точного положения выбранного (округлённого) веса — с плавной анимацией
+          // (transition уже вернулся). Метка выбранного веса встаёт ровно под указатель.
+          const finalAngle = weightToAngleDeg(state.weight_kg, DISPLAY_MIN, DISPLAY_MAX);
+          rotor.style.transform = `rotate(${-finalAngle}deg)`;
+          
+          // Полное обновление UI один раз в конце (чипы, вкладки, запись состояния).
+          renderAll();
         }
       }
       
@@ -8490,7 +9341,7 @@
         <!-- Амоксиклав -->
         <div style="margin-bottom:60px;">
           <h3 style="color:#1C59B5; font-size:22px; font-weight:800; margin:0 0 20px 0; padding-bottom:10px; border-bottom:3px solid #1C59B5;">Амоксиклав®</h3>
-          <p style="margin:8px 0; line-height:1.7; text-align:justify; color:#333;">Амоксиклав® Порошок для приготовления суспензии для приема внутрь, 156.25 мг/5 мл и 312.5 мг/5 мл РК-ЛС-5№004905, РК-ЛС-5№004904 от 09.12.2016 г без ограничения срока действия. 457 мг/5 мл, 8.75 г, РК-ЛС-5№025103 от 26.07.2021 до 26.07.2026 г.</p>
+          <p style="margin:8px 0; line-height:1.7; text-align:justify; color:#333;">Амоксиклав® Порошок для приготовления суспензии для приема внутрь, 156.25 мг/5 мл и 312.5 мг/5 мл РК-ЛС-5№025102, РК-ЛС-5№025101 от 17.08.2026 г без ограничения срока действия. 457 мг/5 мл РК-ЛС-5№025103 от 07.09.2026г. без ограничения срока действия</p>
           <p style="margin:8px 0; line-height:1.7; text-align:justify; color:#333;"><strong style="color:#1C59B5;">Торговое название:</strong> Амоксиклав®</p>
           <p style="margin:8px 0; line-height:1.7; text-align:justify; color:#333;"><strong style="color:#1C59B5;">Показания:</strong> Острый бактериальный синусит, острый средний отит, обострение хронического бронхита, внебольничная пневмония, цистит, пиелонефрит, инфекции кожи и мягких тканей (в том числе флегмона, укусы животных, пародонтальный абсцесс тяжелой формы, флегмоны челюстно-лицевой области), инфекции костей и суставов (в частности остеомиелит).</p>
           <p style="margin:8px 0; line-height:1.7; text-align:justify; color:#333;"><strong style="color:#1C59B5;">Способ применения и дозы:</strong> Дети весом более 40 кг. Обычно суспензия не назначается детям весом более 40 кг, данной группе пациентов рекомендуется назначать препарат в таблетках. Дети весом менее 40 кг: Дозировка от 20 мг/5 мг/кг в сутки до 60 мг/15 мг/кг в сутки, разделенная на три приема. У детей точные дозы рассчитываются на основании массы тела.</p>
@@ -8505,7 +9356,7 @@
         <!-- АЗИДРАТ -->
         <div style="margin-bottom:60px;">
           <h3 style="color:#1C59B5; font-size:22px; font-weight:800; margin:0 0 20px 0; padding-bottom:10px; border-bottom:3px solid #1C59B5;">АЗИДРАТ™</h3>
-          <p style="margin:8px 0; line-height:1.7; text-align:justify; color:#333;">АЗИДРАТ™ порошок для приготовления суспензии для приема внутрь 100 мг/5 мл, 200 мг/5 мл, РК-ЛС-5№021405, РК-ЛС-5№021394 от 15.06.2020. Без ограничения срока действия.</p>
+          <p style="margin:8px 0; line-height:1.7; text-align:justify; color:#333;">АЗИДРАТ™ порошок для приготовления суспензии для приема внутрь 100 мг/5 мл, 200 мг/5 мл, ЛП- №012122-PГ-KZ от 12.12.2025 г. Без ограничения срока действия.</p>
           <p style="margin:8px 0; line-height:1.7; text-align:justify; color:#333;"><strong style="color:#1C59B5;">Торговое наименование:</strong> АЗИДРАТ™</p>
           <p style="margin:8px 0; line-height:1.7; text-align:justify; color:#333;"><strong style="color:#1C59B5;">Международное непатентованное название:</strong> Азитромицин</p>
           <p style="margin:8px 0; line-height:1.7; text-align:justify; color:#333;"><strong style="color:#1C59B5;">Показания к применению:</strong> лечение инфекционных заболеваний, вызванных микроорганизмами чувствительными к азитромицину: обострение хронического бронхита, внебольничная пневмония (от легкой до умеренно тяжелой формы), острый бактериальный синусит, фарингит, тонзиллит, острый бактериальный средний отит, инфекции кожи и мягких тканей от легкой до умеренно тяжелой формы, неосложненный уретрит и цервицит, вызванный Chlamydia trachomatis. Предъявляемые терапевтические рекомендации, относительно надлежащего использования антибактериальных лекарственных препаратов, должны соблюдаться неукоснительно.</p>
@@ -8518,7 +9369,21 @@
           <p style="margin:8px 0; line-height:1.7; text-align:justify; color:#333;"><strong style="color:#1C59B5;">Условия отпуска из аптек:</strong> по рецепту.</p>
           <p style="margin:8px 0; line-height:1.7; text-align:justify; color:#333;"><strong style="color:#1C59B5;">Сведения о производителе:</strong> Сандоз С.Р.Л., Румыния. Livezeni Street, 7A, 540472 Тыргу-Муреш</p>
         </div>
-        
+
+        <!-- ЗИННАТ -->
+        <div style="margin-bottom:35px;">
+          <h3 style="color:#1C59B5; font-size:22px; font-weight:800; margin:0 0 20px 0; padding-bottom:10px; border-bottom:3px solid #1C59B5;">Зиннат®</h3>
+          <p style="margin:8px 0; line-height:1.7; text-align:justify; color:#333;">Зиннат®, гранулы для приготовления суспензии для приема внутрь, 125 мг/5 мл, РК-ЛС-5№004693 от 13.07.2016 г. Без ограничения срока действия</p>
+          <p style="margin:8px 0; line-height:1.7; text-align:justify; color:#333;"><strong style="color:#1C59B5;">Международное непатентованное название:</strong> Цефуроксим</p>
+          <p style="margin:8px 0; line-height:1.7; text-align:justify; color:#333;"><strong style="color:#1C59B5;">Показания к применению:</strong> лечение инфекционно-воспалительных заболеваний, вызванных чувствительными к препарату микроорганизмами: острый стрептококковый тонзиллит и фарингит; острый бактериальный синусит; острый средний отит; обострение хронического бронхита; цистит; пиелонефрит; инфекции кожи и мягких тканей (например, фурункулез, пиодермия, импетиго), не сопровождающиеся осложнениями; ранние стадии болезни Лайма; Необходимо рассмотреть официальные рекомендации по надлежащему использованию антибактериальных веществ.</p>
+          <p style="margin:8px 0; line-height:1.7; text-align:justify; color:#333;"><strong style="color:#1C59B5;">Побочные действия:</strong> Часто: усиленный рост устойчивых микроорганизмов рода Candida; эозинофилия; головная боль, головокружение; желудочно-кишечные расстройства, включая диарею, тошноту, боль в области живота; временное повышение активности ферментов печени (АЛТ, АСТ, ЛДГ).</p>
+          <p style="margin:8px 0; line-height:1.7; text-align:justify; color:#333;"><strong style="color:#1C59B5;">Противопоказания:</strong> известная гиперчувствительность к цефалоспориновым антибиотикам, к цефуроксиму или к любому компоненту препарата; тяжелые реакции гиперчувствительности в анамнезе (например, анафилактические реакции) на бета-лактамные антибактериальные средства любого типа (пенициллины, монобактамы и карбапенемы); детский возраст до 3 месяцев; фенилкетонурия.</p>
+          <p style="margin:8px 0; line-height:1.7; text-align:justify; color:#333;"><strong style="color:#1C59B5;">Взаимодействия с другими лекарственными препаратами:</strong> препараты, которые снижают кислотность желудочного сока, могут уменьшить биодоступность препарата Зиннат® и могут препятствовать ускорению абсорбции после приема пищи. Как и другие антибиотики, препарат Зиннат® может влиять на кишечную флору, тем самым приводя к снижению реабсорбции эстрогенов и снижению эффективности комбинированных пероральных контрацептивов. Цефуроксим выводится путем клубочковой фильтрации и канальцевой секреции. Не рекомендуется одновременный прием пробеницида.</p>
+          <p style="margin:8px 0; line-height:1.7; text-align:justify; color:#333;"><strong style="color:#1C59B5;">Специальные предупреждения:</strong> Применение в педиатрии: опыта лечения детей до 3-месячного возраста нет. Во время беременности или лактации: тератогенного и эмбриотоксического действия не наблюдается, но, как и в случае с другими препаратами, препарат Зиннат® должен применяться с осторожностью в ранние месяцы беременности. Применение возможно только в случаях, когда предполагаемая польза от терапии для матери превышает потенциальный риск для плода. Цефуроксим необходимо использовать для лечения в период лактации только после оценки соотношения положительного влияния и рисков лечащим врачом.</p>
+          <p style="margin:8px 0; line-height:1.7; text-align:justify; color:#333;"><strong style="color:#1C59B5;">Условия отпуска из аптек:</strong> по рецепту.</p>
+          <p style="margin:8px 0; line-height:1.7; text-align:justify; color:#333;"><strong style="color:#1C59B5;">Сведения о производителе:</strong> Сандоз ГмбХ, Австрия Biochemiestrasse 10, A-6250 Kundl, Austria</p>
+        </div>
+
         <!-- Предупреждение -->
         <div style="margin-top:40px; padding:20px; background:linear-gradient(135deg, rgba(252, 82, 45, 0.1), rgba(213, 134, 44, 0.1)); border-left:4px solid #FC522D; border-radius:8px;">
           <p style="margin:0; line-height:1.7; text-align:center; color:#333; font-weight:600;">
@@ -8554,7 +9419,7 @@
         <!-- Амоксиклав KZ -->
         <div style="margin-bottom:60px;">
           <h3 style="color:#1C59B5; font-size:22px; font-weight:800; margin:0 0 20px 0; padding-bottom:10px; border-bottom:3px solid #1C59B5;">Амоксиклав®</h3>
-          <p style="margin:8px 0; line-height:1.7; text-align:justify; color:#333;">Амоксиклав® Ішке қабылдауға арналған суспензияны дайындауға арналған ұнтақ, 156.25 мг/5 мл және 312.5 мг/5 мл. РК-ЛС-5№004905, РК-ЛС-5№004904 09.12.2016 ж. бастап, жарамдылық мерзімі шектелмейді. 457 мг/5 мл, 8.75 г, РК-ЛС-5№025103 26.07.2021 ж. бастап 26.07.2026 ж. дейін.</p>
+          <p style="margin:8px 0; line-height:1.7; text-align:justify; color:#333;">Амоксиклав® Ішке қабылдауға арналған суспензияны дайындауға арналған ұнтақ, 156.25 мг/5 мл және 312.5 мг/5 мл, РК-ЛС-5№025102, РК-ЛС-5№025101, 17.08.2026 ж., қолданылу мерзімі шектелмеген. 457 мг/5 мл, РК-ЛС-5№025103, 07.09.2026 ж., қолданылу мерзімі шектелмеген.</p>
           <p style="margin:8px 0; line-height:1.7; text-align:justify; color:#333;"><strong style="color:#1C59B5;">Саудалық атауы:</strong> Амоксиклав®</p>
           <p style="margin:8px 0; line-height:1.7; text-align:justify; color:#333;"><strong style="color:#1C59B5;">Қолданылуына көрсетілімдер:</strong> Амоксиклав® келесі жұқпаларды емдеу үшін қолданылады: жедел бактериялық синусит, жедел ортаңғы отит, созылмалы бронхиттің өршуі, қауымнан тыс пневмония, цистит, пиелонефрит, тері және жұмсақ тіндердің жұқпалары (флегмона, жануарлардың тістеуі, ауыр пародонтальды абсцесс, жақ-бет аймағының флегмоналары), сүйек және буын жұқпалары (әсіресе остеомиелит).</p>
           <p style="margin:8px 0; line-height:1.7; text-align:justify; color:#333;"><strong style="color:#1C59B5;">Қолдану тәсілі және дозалары:</strong> Дене салмағы 40 кг-нан жоғары балалар: Бұл топқа суспензия әдетте тағайындалмайды, таблетка түрінде қабылдау ұсынылады. Дене салмағы 40 кг-нан төмен балалар: Тәуліктік доза 20 мг/5 мг/кг-нан 60 мг/15 мг/кг-ға дейін, үш рет қабылдауға бөлінеді. Балаларда нақты доза дене салмағына қарай жеке есептеледі.</p>
@@ -8569,7 +9434,7 @@
         <!-- АЗИДРАТ KZ -->
         <div style="margin-bottom:60px;">
           <h3 style="color:#1C59B5; font-size:22px; font-weight:800; margin:0 0 20px 0; padding-bottom:10px; border-bottom:3px solid #1C59B5;">АЗИДРАТ™</h3>
-          <p style="margin:8px 0; line-height:1.7; text-align:justify; color:#333;">АЗИДРАТ™ Ішке қабылдауға арналған суспензияны дайындауға арналған ұнтақ 100 мг/5 мл, 200 мг/5 мл. РК-ЛС-5№021405, РК-ЛС-5№021394 15.06.2020 ж. бастап. Жарамдылық мерзімі шектелмейді.</p>
+          <p style="margin:8px 0; line-height:1.7; text-align:justify; color:#333;">АЗИДРАТ™ ішке қабылдауға арналған суспензия дайындауға арналған ұнтақ 100 мг/5 мл, 200 мг/5 мл, ЛП-№012122-РГ-KZ, 12.12.2025 ж. Қолданылу мерзімі шектелмеген.</p>
           <p style="margin:8px 0; line-height:1.7; text-align:justify; color:#333;"><strong style="color:#1C59B5;">Саудалық атауы:</strong> АЗИДРАТ™</p>
           <p style="margin:8px 0; line-height:1.7; text-align:justify; color:#333;"><strong style="color:#1C59B5;">Халықаралық патенттелмеген атауы:</strong> Азитромицин</p>
           <p style="margin:8px 0; line-height:1.7; text-align:justify; color:#333;"><strong style="color:#1C59B5;">Қолданылуына көрсетілімдер:</strong> Азидрат™ азитромицинге сезімтал микроорганизмдер тудыратын жұқпаларды емдеу үшін қолданылады: Созылмалы бронхиттің өршуі, Қауымнан тыс пневмония (жеңіл және орташа ауырлықта), Жедел бактериялық синусит, Фарингит, Тонзиллит, Жедел бактериялық ортаңғы отит, Тері және жұмсақ тіндердің жеңіл және орташа ауырлықтағы жұқпалары, Chlamydia trachomatis тудыратын асқынбаған уретрит және цервицит. Антибактериялық препараттарды дұрыс қолдану бойынша терапиялық ұсынымдарды қатаң сақтау қажет.</p>
@@ -8582,7 +9447,21 @@
           <p style="margin:8px 0; line-height:1.7; text-align:justify; color:#333;"><strong style="color:#1C59B5;">Дәріханадан босатылу шарттары:</strong> Рецепт арқылы.</p>
           <p style="margin:8px 0; line-height:1.7; text-align:justify; color:#333;"><strong style="color:#1C59B5;">Өндіруші туралы мәліметтер:</strong> Сандоз С.Р.Л., Румыния. Livezeni Street, 7A, 540472 Тыргу-Муреш</p>
         </div>
-        
+
+        <!-- ЗИННАТ KZ -->
+        <div style="margin-bottom:35px;">
+          <h3 style="color:#1C59B5; font-size:22px; font-weight:800; margin:0 0 20px 0; padding-bottom:10px; border-bottom:3px solid #1C59B5;">Зиннат®</h3>
+          <p style="margin:8px 0; line-height:1.7; text-align:justify; color:#333;">Зиннат®, ішке қабылдауға арналған суспензия дайындауға арналған түйіршіктер, 125 мг/5 мл, РК-ЛС-5№004693, 13.07.2016 ж. Қолданылу мерзімі шектелмеген.</p>
+          <p style="margin:8px 0; line-height:1.7; text-align:justify; color:#333;"><strong style="color:#1C59B5;">Халықаралық патенттелмеген атауы:</strong> Цефуроксим</p>
+          <p style="margin:8px 0; line-height:1.7; text-align:justify; color:#333;"><strong style="color:#1C59B5;">Қолданылуы:</strong> препаратқа сезімтал микроорганизмдер туындатқан инфекциялық-қабыну ауруларын емдеу: жедел стрептококкты тонзиллит және фарингит; жедел бактериялық синусит; жедел ортаңғы отит; созылмалы бронхиттің өршуі; цистит; пиелонефрит; асқынулармен қатар жүрмейтін тері және жұмсақ тіндер инфекциялары (мысалы, фурункулез, пиодермия, импетиго); Лайм ауруының ерте сатылары. Бактерияға қарсы заттарды тиісінше қолдану жөніндегі ресми ұсынымдарды ескеру қажет.</p>
+          <p style="margin:8px 0; line-height:1.7; text-align:justify; color:#333;"><strong style="color:#1C59B5;">Жағымсыз әсерлері:</strong> Жиі: Candida тектес төзімді микроорганизмдердің шамадан тыс өсуі; эозинофилия; бас ауыруы, бас айналуы; асқазан-ішек жолының бұзылыстары, оның ішінде диарея, жүрек айнуы, іштің ауыруы; бауыр ферменттері белсенділігінің уақытша жоғарылауы (АЛТ, АСТ, ЛДГ).</p>
+          <p style="margin:8px 0; line-height:1.7; text-align:justify; color:#333;"><strong style="color:#1C59B5;">Қолдануға болмайтын жағдайлар:</strong> цефалоспориндік антибиотиктерге, цефуроксимге немесе препараттың кез келген компонентіне белгілі аса жоғары сезімталдық; анамнезде кез келген типтегі бета-лактамды бактерияға қарсы дәрілерге (пенициллиндер, монобактамдар және карбапенемдер) ауыр аса жоғары сезімталдық реакциялары (мысалы, анафилаксиялық реакциялар); 3 айға дейінгі балалар; фенилкетонурия.</p>
+          <p style="margin:8px 0; line-height:1.7; text-align:justify; color:#333;"><strong style="color:#1C59B5;">Басқа дәрілік препараттармен өзара әрекеттесуі:</strong> асқазан сөлінің қышқылдығын төмендететін препараттар Зиннат® препаратының биожетімділігін азайтуы және тамақтан кейін сіңуінің жеделдеуіне кедергі келтіруі мүмкін. Басқа антибиотиктер сияқты, Зиннат® препараты ішек флорасына әсер етуі мүмкін, соның салдарынан эстрогендердің қайта сіңуі төмендеп, біріктірілген пероральді контрацептивтердің тиімділігі азаюы мүмкін. Цефуроксим шумақтық сүзілу және өзекшелік секреция арқылы шығарылады. Пробенецидті бір мезгілде қабылдау ұсынылмайды.</p>
+          <p style="margin:8px 0; line-height:1.7; text-align:justify; color:#333;"><strong style="color:#1C59B5;">Арнайы ескертулер:</strong> Педиатрияда қолдану: 3 айға дейінгі балаларды емдеу тәжірибесі жоқ. Жүктілік немесе лактация кезінде: тератогендік және эмбриоуытты әсер байқалмаған, бірақ басқа препараттар сияқты Зиннат® препаратын жүктіліктің алғашқы айларында сақтықпен қолдану керек. Ем ана үшін болжамды пайда ұрық үшін ықтимал қауіптен жоғары болған жағдайларда ғана қолдануға болады. Цефуроксимді лактация кезеңінде емдеу үшін емдеуші дәрігер пайда мен қауіп арақатынасын бағалағаннан кейін ғана қолдану қажет.</p>
+          <p style="margin:8px 0; line-height:1.7; text-align:justify; color:#333;"><strong style="color:#1C59B5;">Дәріханалардан босатылу шарттары:</strong> рецепт бойынша.</p>
+          <p style="margin:8px 0; line-height:1.7; text-align:justify; color:#333;"><strong style="color:#1C59B5;">Өндіруші туралы мәліметтер:</strong> Сандоз ГмбХ, Австрия, Biochemiestrasse 10, A-6250 Kundl, Austria</p>
+        </div>
+
         <!-- Предупреждение KZ -->
         <div style="margin-top:40px; padding:20px; background:linear-gradient(135deg, rgba(252, 82, 45, 0.1), rgba(213, 134, 44, 0.1)); border-left:4px solid #FC522D; border-radius:8px;">
           <p style="margin:0; line-height:1.7; text-align:center; color:#333; font-weight:600;">
